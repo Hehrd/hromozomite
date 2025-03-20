@@ -5,7 +5,7 @@ const IndexElements = () => {
   return (
     <div className="tabs-container">
       <div className="tab-box">Money Spent</div>
-      <div className="tab-box">Friends Leaderboard</div>
+      <div className="tab-box">Transactions</div>
       <div className="tab-box">Money Saved This Month</div>
     </div>
   );
