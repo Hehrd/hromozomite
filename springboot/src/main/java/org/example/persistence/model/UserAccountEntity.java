@@ -2,15 +2,13 @@ package org.example.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "user_account")
+@Table(name = "user_account_table")
 @Data
+@NoArgsConstructor
 public class UserAccountEntity extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column
     private String username;
 

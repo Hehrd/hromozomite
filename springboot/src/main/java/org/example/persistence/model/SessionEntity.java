@@ -10,9 +10,9 @@ import lombok.Data;
 @Data
 public class SessionEntity extends BaseEntity {
 
-    @Column
-    String sessionString;
+    @Column(unique = true)
+    private String sessionString;
 
-    @Column(nullable = false)
+    @Column
     private Long expirationDateInMillis;
 }
