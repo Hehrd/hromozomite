@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { ThemeContext } from '../contexts/themeContext'; // Adjust the path as needed
+import { AppContext } from '../contexts/appContext';  // Path to the unified AppContext
 import './loginPage.css';
 
 const Login = () => {
@@ -7,17 +7,22 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Get the current theme from the context
-  const { theme } = useContext(ThemeContext);
+  // Get both theme and logIn function from the context
+  const { theme, logIn } = useContext(AppContext);  // Access theme and logIn from AppContext
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    // Simple validation
     if (!email || !password) {
       setError('Please fill in both fields.');
       return;
     }
+
+    // Simulate a successful login
     console.log('Logging in with:', { email, password });
-    setError('');
+    logIn();  // Set the user as logged in
+    setError('');  // Clear any previous error messages
   };
 
   return (

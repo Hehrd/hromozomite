@@ -1,12 +1,27 @@
 import React from "react";
-import "./indexElements.css"; // Import CSS
+import "./indexElements.css";
+import MoneySpentChart from "./moneySpentChart.jsx";
 
 const IndexElements = () => {
   return (
     <div className="tabs-container">
-      <div className="tab-box">Money Spent</div>
-      <div className="tab-box">Transactions</div>
-      <div className="tab-box">Money Saved This Month</div>
+      {/* Money Spent */}
+      <div className="tab-box">
+        <h2>Money Spent</h2>
+        <MoneySpentChart /> {/* Line chart inside */}
+      </div>
+
+      {/* Friends Leaderboard */}
+      <div className="tab-box">
+        <h2>Transactions today</h2>
+        <p>Coming Soon...</p>
+      </div>
+
+      {/* Money Saved */}
+      <div className="tab-box">
+        <h2>Money Saved This Month</h2>
+        <p>Coming Soon...</p>
+      </div>
     </div>
   );
 };
