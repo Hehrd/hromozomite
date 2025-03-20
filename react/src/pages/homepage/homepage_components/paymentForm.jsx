@@ -53,7 +53,7 @@ const PaymentForm = () => {
 
     // Send JSON data to Spring Boot backend
     try {
-      const response = await fetch("http://localhost:8080/userData/payments", {
+      const response = await fetch("http://localhost:6969/userData/payments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
