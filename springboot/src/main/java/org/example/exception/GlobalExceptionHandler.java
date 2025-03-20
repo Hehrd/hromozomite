@@ -35,4 +35,11 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body("Invalid values!");
     }
+
+    @ExceptionHandler({NoPaymentsFound.class})
+    public ResponseEntity<String> handleNoPaymentsFound() {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("No payments found!");
+    }
 }
