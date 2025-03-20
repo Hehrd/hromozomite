@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AppContext } from './AppContext'; // Make sure the path is correct
+import { AppContext } from './appContext.jsx'; // Make sure the path is correct
 
 const AppProvider = ({ children }) => {
   // User login state (false by default)
