@@ -13,6 +13,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Ensure the full viewport is used for the root container */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -23,11 +30,10 @@ a:hover {
 }
 
 body {
-  margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  /* min-height is not necessary here since we set height: 100% above */
 }
 
 h1 {

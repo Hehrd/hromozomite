@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import LoginCss from './loginPage.css';
+import './loginPage.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +21,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <h2>Log in</h2>
       <form onSubmit={handleLogin} className="login-form">
         {error && <p className="error-message">{error}</p>}
         <div className="form-group">
