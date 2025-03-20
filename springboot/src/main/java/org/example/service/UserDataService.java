@@ -26,9 +26,10 @@ public class UserDataService {
 
     public void setPayments(PaymentsDTO paymentsDTO, String sessionString) throws UserNotFoundException {
         PaymentsEntity paymentsEntity = new PaymentsEntity();
-        paymentsEntity.setPayments(paymentsDTO.getPayments());
+//        paymentsEntity.setPayments(paymentsDTO.getPayments());
         paymentsEntity.setCurrency(paymentsDTO.getCurrency());
         paymentsEntity.setDate(paymentsDTO.getDate());
+        paymentsRepository.save(paymentsEntity);
     }
 
     public void setGoal(GoalDTO goalDTO, String sessionString) throws UserNotFoundException {

@@ -24,13 +24,13 @@ public class PaymentStatisticsService {
 
         Map<String, Integer> weeklySpending = new HashMap<>();
         List<PaymentsEntity> payments = paymentsRepository.findByDateAfter(startOfLastWeek).orElseThrow(() -> new RuntimeException());
-        for (PaymentsEntity payment : payments) {
-            if (payment.getDate().isAfter(startOfLastWeek) && payment.getDate().isBefore(today)) {
-                payment.getPayments().forEach((description, amount) -> {
-                    weeklySpending.merge(description, amount, Integer::sum);
-                });
-            }
-        }
+//        for (PaymentsEntity payment : payments) {
+//            if (payment.getDate().isAfter(startOfLastWeek) && payment.getDate().isBefore(today)) {
+//                payment.getPayments().forEach((description, amount) -> {
+//                    weeklySpending.merge(description, amount, Integer::sum);
+//                });
+//            }
+//        }
 
         return weeklySpending;
     }

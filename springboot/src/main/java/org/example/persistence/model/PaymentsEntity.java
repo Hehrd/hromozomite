@@ -13,11 +13,11 @@ import java.util.Map;
 @Data
 public class PaymentsEntity extends BaseEntity{
 
-    @ElementCollection
-    @CollectionTable(name = "payments_mapping", joinColumns = @JoinColumn(name = "entity_id"))
-    @MapKeyColumn(name = "payment_key") // Column for the map's keys
-    @Column(name = "payment_value") // Column for the map's values
-    private Map<String, Integer> payments;
+//    @ElementCollection
+//    @CollectionTable(name = "payments_mapping", joinColumns = @JoinColumn(name = "entity_id"))
+//    @MapKeyColumn(name = "payment_key") // Column for the map's keys
+//    @Column(name = "payment_value") // Column for the map's values
+//    private Map<String, Integer> payments;
 
     @Column
     private String currency;
