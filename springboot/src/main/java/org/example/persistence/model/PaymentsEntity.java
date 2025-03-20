@@ -8,14 +8,11 @@ import java.util.Date;
 import java.util.Map;
 
 //@Entity
-//@Data
-public class PaymentsEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Data
+public class PaymentsEntity extends BaseEntity{
 
     //@Column
-    private Map<String, Integer> p;
+    private Map<String, Integer> payments;
 
     @Column
     private Date date;

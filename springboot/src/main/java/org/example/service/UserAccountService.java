@@ -35,7 +35,10 @@ public class UserAccountService {
         }
 
     }
-    public void logout(){
-        SessionEntity sessionEntity = sessionRepository.findBySessionString("").orElse(null);
+    public void logout(String sessionString){
+        SessionEntity sessionEntity = sessionRepository.findBySessionString(sessionString).orElse(null);
+        if (sessionEntity != null) {
+            sessionRepository.delete(sessionEntity);
+        }
     }
 }
