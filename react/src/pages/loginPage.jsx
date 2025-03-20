@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AppContext } from '../contexts/appContext';  // Path to the unified AppContext
+import { AppContext } from '../contexts/appContext.jsx';  // Path to the unified AppContext
 import './loginPage.css';
 
 const Login = () => {
