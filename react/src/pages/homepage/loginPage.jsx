@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'; 
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import { AppContext } from '../contexts/appContext.jsx';  // Path to the unified AppContext
+import { AppContext } from '../../contexts/appContext.jsx';  // Path to the unified AppContext
 import './loginPage.css';
 
 const Login = () => {
