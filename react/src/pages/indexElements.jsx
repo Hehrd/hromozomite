@@ -13,7 +13,7 @@ const IndexElements = () => {
 
       {/* Friends Leaderboard */}
       <div className="tab-box">
-        <h2>Friends Leaderboard</h2>
+        <h2>Transactions today</h2>
         <p>Coming Soon...</p>
       </div>
 
