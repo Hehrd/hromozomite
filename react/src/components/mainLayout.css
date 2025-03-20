@@ -114,6 +114,11 @@ html {
     border: none;
     cursor: pointer;
     margin-left: 1rem;
+    outline: none;
+}
+.profile-btn:focus {
+  outline: none;
+  box-shadow: none; /* Prevent any highlight */
 }
 
 .profile-icon {
@@ -136,34 +141,50 @@ html {
 /* -------------------------------------------------------
    6. Dropdown Menu
 --------------------------------------------------------- */
+/* -------------------------------------------------------
+   Dropdown Menu Swipe Animation
+--------------------------------------------------------- */
 .dropdown-menu {
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background-color: var(--dropdown-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    padding: 5px 0;
-    z-index: 2000;
-    transition: background-color 0.2s ease-in-out;
+  position: absolute;
+  top: 60px;
+  right: 0px;
+  background-color: var(--dropdown-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px; /* Slightly larger border radius for a smoother look */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Increased shadow for better visibility */
+  display: flex;
+  flex-direction: column;
+  z-index: 2000;
+  opacity: 0;
+  transform: translateY(0px) translateX(20px); /* Start from bottom-left */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  width: 200px; /* Increased width */
+  padding: 10px 0; /* Added padding for better spacing */
 }
 
+/* Show dropdown with animation */
+.show-dropdown {
+  opacity: 1;
+  transform: translateY(0) translateX(0); /* Move into position */
+}
+
+/* Dropdown Items */
 .dropdown-menu .dropdown-item {
-    padding: 8px 12px;
-    background: none;
-    text-align: left;
-    cursor: pointer;
-    width: 100%;
-    color: var(--navbar-text);
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  padding: 12px 20px; /* Increased padding for larger clickable area */
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  color: var(--navbar-text);
+  font-size: 1.2rem; /* Slightly larger font size for better readability */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
+/* Hover Effect */
 .dropdown-menu .dropdown-item:hover {
-    background-color: var(--dropdown-hover-bg);
+  background-color: var(--dropdown-hover-bg);
 }
+
 
 /* -------------------------------------------------------
    7. Hero / Main Layout Styling
