@@ -19,5 +19,9 @@ public class UserAccountEntity extends BaseEntity {
 
     @Column
     private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "sessionId", referencedColumnName = "id", nullable = true)
+    private SessionEntity session;
 }
 

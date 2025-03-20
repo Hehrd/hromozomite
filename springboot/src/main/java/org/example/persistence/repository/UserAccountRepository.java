@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface UserAccountRepository extends BaseRepository<UserAccountEntity> {
     Optional<UserAccountEntity> findByEmailAndPassword(String username, String password);
+    Optional<UserAccountEntity> findBySession_SessionString(String sessionString);
 }
 
