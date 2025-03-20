@@ -1,0 +1,196 @@
+/* -------------------------
+   Dark Theme Defaults (for register page)
+-------------------------- */
+:root {
+  --bg-color: #121212;            /* Background color for dark mode */
+  --text-color: #ffffff;          /* Text color for dark mode */
+  --form-bg: #1e1e1e;             /* Form background for dark mode */
+  --border-color: #333333;        /* Border color for dark mode */
+  --accent-color: #6200ea;        /* Accent color for dark mode */
+  --hover-accent: #7e35ff;        /* Hover accent for dark mode */
+  --active-accent: #5a00c8;       /* Active accent for dark mode */
+}
+
+/* -------------------------
+   Light Mode Overrides
+-------------------------- */
+body.light-mode {
+  --bg-color: #ffffff;            /* Background color for light mode */
+  --text-color: #000000;          /* Text color for light mode */
+  --form-bg: #f5f5f5;             /* Form background for light mode */
+  --border-color: #ccc;           /* Border color for light mode */
+  --accent-color: #0055ff;        /* Accent color for light mode */
+  --hover-accent: #3388ff;        /* Hover accent for light mode */
+  --active-accent: #0044cc;       /* Active accent for light mode */
+}
+
+/* -------------------------
+   CSS Reset
+-------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 100%;
+}
+
+/* -------------------------
+   Base Setup for Body
+-------------------------- */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  min-height: 100%;
+}
+
+/* -------------------------
+   Register Page Container
+-------------------------- */
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  background-color: var(--bg-color);
+}
+
+/* -------------------------
+   Register Form Styling
+-------------------------- */
+.register-form {
+  background-color: var(--form-bg);
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 0.3em 1em rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* -------------------------
+   Form Heading
+-------------------------- */
+.register-container h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--text-color);
+}
+
+/* -------------------------
+   Form Group Styling
+-------------------------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* -------------------------
+   Labels
+-------------------------- */
+.form-group label {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* -------------------------
+   Input Fields
+-------------------------- */
+.form-group input {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);      /* Border color based on theme */
+  border-radius: 4px;
+  background-color: var(--form-bg);           /* Background color based on theme */
+  color: var(--text-color);                   /* Text color based on theme */
+  font-size: 1rem;
+  transition: border 0.3s, background-color 0.3s;
+}
+
+/* Fixing email input to ensure consistency */
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"] {
+  background-color: var(--form-bg); /* Ensure consistency in background across all inputs */
+}
+
+/* Focus state for input fields */
+.form-group input:focus {
+  border: 2px solid var(--accent-color);      /* Accent color for focused input */
+  outline: none;
+  background-color: var(--form-bg);           /* Keep background on focus */
+}
+
+/* -------------------------
+   Register Button Styling
+-------------------------- */
+.register-button {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-button:hover {
+  background-color: var(--hover-accent);
+}
+
+.register-button:active {
+  background-color: var(--active-accent);
+}
+
+/* -------------------------
+   Additional Link Styling (if applicable)
+-------------------------- */
+.register-link {
+  text-align: center;
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.register-link a:hover {
+  color: var(--hover-accent);
+  text-decoration: underline;
+}
+
+/* -------------------------
+   Fix for Autofill Inputs
+-------------------------- */
+.form-group input:-webkit-autofill {
+  background-color: var(--form-bg) !important;  /* Ensure the autofill background matches the theme */
+  color: var(--text-color) !important;           /* Ensure the autofill text color matches the theme */
+  transition: background-color 5000s ease-in-out 0s;  /* Prevent autofill background color from changing */
+}
+
+/* For Firefox Autofill Styling */
+.form-group input:-moz-placeholder {
+  background-color: var(--form-bg) !important;  /* Firefox autofill background */
+  color: var(--text-color) !important;           /* Firefox autofill text color */
+}
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+.form-group input:-webkit-input-placeholder {
+  background-color: var(--form-bg) !important;  /* Webkit autofill background */
+  color: var(--text-color) !important;           /* Webkit autofill text color */
+}
