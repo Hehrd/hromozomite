@@ -15,7 +15,7 @@ public class PaymentsEntity {
     private Long id;
 
     //@Column
-    private Map<String, Integer> p;
+    private Map<String, Integer> payments;
 
     @Column
     private Date date;
