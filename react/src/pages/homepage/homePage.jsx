@@ -1,6 +1,6 @@
 import React from "react";
-import PaymentForm from "./PaymentForm";
-import IndexElements from "./indexElements"; // Import tab element
+import PaymentForm from "./homepage_components/paymentForm.jsx";
+import IndexElements from "./homepage_components/indexElements.jsx"; // Import tab element
 
 const HomePage = () => {
   return (

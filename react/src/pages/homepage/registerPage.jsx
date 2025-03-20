@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AppContext } from '../contexts/AppContext'; // Path to the unified AppContext
+import { AppContext } from '../../contexts/appContext.jsx'; // Path to the unified AppContext
 import './registerPage.css';  // Import the CSS file here
 
 const Register = () => {
@@ -21,17 +21,43 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { username, email, password } = formData;
-
+  
     // Validate form data
     if (!username || !email || !password) {
       setError('Please fill in all fields.');
       return;
     }
-
-    // Simulate successful registration (you can replace this with actual logic)
-    console.log('Registered user:', formData);
-    setError('');  // Clear any errors after successful registration
-    // You can redirect the user to the login page or homepage, if needed
+  
+    // Prepare the data to be sent in the request body
+    const registerData = {
+      username: username,
+      email: email,
+      password: password,
+    };
+  
+    // Send the registration request to the backend
+    fetch('http://localhost:6969/useraccount/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(registerData),  // Send form data as JSON
+    })
+      .then((response) => response.text())  // Expect a text response
+      .then((data) => {
+        if (data === 'Registration successful') {  // Check if the response text matches the success message
+          // Simulate successful registration
+          console.log('Registration successful:', data);
+          setError('');  // Clear any previous error messages
+          // Optionally, redirect to login or home page after successful registration
+        } else {
+          setError(data || 'Registration failed. Please try again.');
+        }
+      })
+      .catch((error) => {
+        setError('An error occurred. Please try again.');
+        console.error('Error during registration:', error);
+      });
   };
 
   return (
@@ -51,8 +77,8 @@ const Register = () => {
             placeholder="Enter your username"
             required
             autoComplete="off"  // Disable autofill
-            autocorrect="off"
-            autocapitalize="off"
+            autoCorrect="off"
+            autoCapitalize="off"
           />
         </div>
 
@@ -67,8 +93,8 @@ const Register = () => {
             placeholder="Enter your email"
             required
             autoComplete="off"  // Disable autofill
-            autocorrect="off"
-            autocapitalize="off"
+            autoCorrect="off"
+            autoCapitalize="off"
           />
         </div>
 
@@ -83,8 +109,8 @@ const Register = () => {
             placeholder="Enter your password"
             required
             autoComplete="off"  // Disable autofill
-            autocorrect="off"
-            autocapitalize="off"
+            autoCorrect="off"
+            autoCapitalize="off"
           />
         </div>
 
