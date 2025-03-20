@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react'; 
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
 import { AppContext } from '../contexts/appContext';  // Path to the unified AppContext
 import './loginPage.css';
@@ -30,16 +30,16 @@ const Login = () => {
     };
   
     // Send the request to the backend
-    fetch('/useraccount/login', {
+    fetch('http://localhost:6969/useraccount/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(loginData),  // Send email and password as JSON
     })
-      .then((response) => response.json())
+      .then((response) => response.text())  // Expect a text response instead of JSON
       .then((data) => {
-        if (data.success) {
+        if (data === 'Login successful') {  // Check if the response text matches the success message
           // Simulate a successful login
           console.log('Login successful:', data);
           logIn();  // Call the logIn function from context to update app state
@@ -48,7 +48,7 @@ const Login = () => {
           // Redirect to the homepage or dashboard after login
           navigate('/dashboard');  // Replace '/dashboard' with your desired path
         } else {
-          setError(data.message || 'Login failed. Please try again.');
+          setError(data || 'Login failed. Please try again.');
         }
       })
       .catch((error) => {
