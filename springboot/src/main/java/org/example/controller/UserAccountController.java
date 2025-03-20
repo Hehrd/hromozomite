@@ -41,4 +41,12 @@ public class UserAccountController {
                 .status(HttpStatus.CREATED)
                 .body("User registered successfully!");
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    ResponseEntity<String> logout(@CookieValue(value = "SESSION_STRING") String sessionString) {
+        userAccountService.logout(sessionString);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Logged out successfully!");  
+    }
 }
