@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import ReactDOM from "react-dom";
 import { Link, Outlet } from "react-router-dom";
-import { AppContext } from "../contexts/AppContext";
+import { AppContext } from "../contexts/appContext.jsx";
 import "./mainLayout.css";
 
 const DropdownMenu = ({ children, show }) => {

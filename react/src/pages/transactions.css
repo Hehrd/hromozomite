@@ -1,0 +1,167 @@
+/* TransactionTable.css */
+
+/* Set the entire page background to a dark color */
+body {
+  background-color: #111; /* Dark background */
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #161b22; /* Dark background for table */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table headers and cells */
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #444c56;
+}
+
+th {
+  background-color: #21262d;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer; /* Make header clickable */
+}
+
+/* Styling for rows */
+tr:nth-child(even) {
+  background-color: #2d333b;
+}
+
+tr:hover {
+  background-color: #444c56;
+}
+
+tr td {
+  font-size: 1rem;
+}
+
+/* Styling for the category dropdown inside the Category cell */
+th select {
+  background-color: #2d333b;
+  color: white;
+  border: 1px solid #444c56;
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 0.9rem;
+  width: 100%;
+  margin-top: 5px;
+  transition: background-color 0.3s ease;
+}
+
+th select:hover {
+  background-color: #444c56;
+}
+
+th select:focus {
+  outline: none;
+  border-color: #28a745; /* Green border when focused */
+}
+
+/* Make the dropdown look more integrated */
+th {
+  position: relative;
+}
+
+th select {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+}
+
+/* Arrow styles for sorting */
+th .arrow {
+  font-size: 1.5rem; /* Larger arrow for visibility */
+  color: #28a745; /* Green for ascending order */
+  margin-left: 10px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+th .up::after {
+  content: "↑"; /* Up arrow */
+}
+
+th .down::after {
+  content: "↓"; /* Down arrow */
+}
+
+/* Sorting arrow when Date or Amount is sorted */
+th.sort-ascending .arrow {
+  color: #28a745; /* Green color for ascending */
+}
+
+th.sort-descending .arrow {
+  color: #ff6f61; /* Red color for descending */
+  transform: rotate(180deg); /* Rotate to show downward arrow */
+}
+
+/* Styling for buttons */
+button {
+  padding: 12px 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design for Smaller Screens */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  .payment-container {
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .payment-inputs {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .payment-inputs .description-input,
+  .payment-inputs .small-input,
+  .payment-inputs select {
+    width: 100%;
+    text-align: left;
+  }
+
+  .payment-container button {
+    width: 100%;
+  }
+}

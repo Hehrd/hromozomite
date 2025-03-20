@@ -5,6 +5,7 @@ import Register from './pages/registerPage';
 import Login from './pages/loginPage';
 import HomePage from './pages/homePage';
 import MainLayout from './components/mainLayout.jsx'; 
+import TransactionPage from './pages/transactions.jsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           
           <Route element={<MainLayout />}> 
             <Route path="/" element={<HomePage />} />
+            <Route path="/transactions" element={<TransactionPage />} />
           </Route>
 
         </Routes>

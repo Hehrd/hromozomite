@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -21,7 +21,7 @@ const MoneySpentChart = () => {
     datasets: [
       {
         label: "Total Money Spent ($)",
-        data: [50, 30, 70, 40, 90, 20, 60], // Example data
+        data: [50, 69, 70, 40, 90, 20, 60], // Example data
         borderColor: "rgba(75, 192, 192, 1)",
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderWidth: 2,
