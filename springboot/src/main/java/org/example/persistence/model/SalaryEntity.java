@@ -1,17 +1,17 @@
 package org.example.persistence.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
-//@Entity
+@Entity
 @Table(name = "salary_table")
-public class SalaryEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Data
+public class SalaryEntity extends BaseEntity{
 
     @Column
-    private int salary;
+    private int amount;
 
-    @JoinColumn
-    private UserAccountEntity userAccount;
+    @OneToOne
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private UserAccountEntity user;
 }

@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import "./PaymentForm.css"; // Import CSS
 
 const PaymentForm = () => {
   const [paymentData, setPaymentData] = useState({
-    date: new Date().toISOString().split("T")[0], // Defaults to today
-    sum: "",
-    description: "",
-    category: "Others", // Default category
+    date: new Date().toISOString().split("T")[0], // Default to today
+    payments: {}, // Payments stored as a dictionary (Map equivalent)
+    currency: "USD",
   });
 
-  const [payments, setPayments] = useState([]);
+  const [sum, setSum] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("Food");
+  const [paymentsList, setPaymentsList] = useState([]);
 
   const categories = [
     "Food",
@@ -23,77 +26,87 @@ const PaymentForm = () => {
     "Others",
   ];
 
-  const handleChange = (e) => {
-    setPaymentData({ ...paymentData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!paymentData.sum || !paymentData.description) {
+
+    if (!sum || !description) {
       alert("Please fill in all required fields.");
       return;
     }
 
-    const newPayment = {
-      date: paymentData.date,
-      sum: parseFloat(paymentData.sum),
-      description: paymentData.description,
-      category: paymentData.category,
+    const newPaymentKey = `${paymentData.date}_${description}_${category}`;
+    const newPayments = {
+      ...paymentData.payments,
+      [newPaymentKey]: parseFloat(sum), // Map-like dictionary
     };
 
-    setPayments([...payments, newPayment]);
-    setPaymentData({
-      date: new Date().toISOString().split("T")[0], // Reset to today
-      sum: "",
-      description: "",
-      category: "Others", // Reset to default category
-    });
+    const updatedPaymentData = {
+      ...paymentData,
+      payments: newPayments,
+    };
+
+    setPaymentsList([...paymentsList, { date: paymentData.date, sum, description, category }]);
+    setPaymentData(updatedPaymentData);
+    setSum("");
+    setDescription("");
+    setCategory("Food");
+
+    // Send JSON data to Spring Boot backend
+    try {
+      const response = await fetch("http://localhost:8080/userData/payments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Include cookies (SESSION_STRING)
+        body: JSON.stringify(updatedPaymentData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send payment data.");
+      }
+
+      console.log("Payment sent successfully!");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
-      <h2>Enter Money Spent</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Date:</label>
+    <div className="payment-container">
+      <form onSubmit={handleSubmit} className="payment-inputs">
+        {/* Larger input for description */}
+        <input
+          type="text"
+          name="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+          required
+          className="description-input"
+        />
+
+        {/* Smaller inputs for date, sum, and category */}
         <input
           type="date"
           name="date"
           value={paymentData.date}
-          onChange={handleChange}
+          onChange={(e) => setPaymentData({ ...paymentData, date: e.target.value })}
           required
-          style={{ padding: "10px", width: "100%", marginBottom: "10px" }}
+          className="small-input"
         />
 
-        <label>Sum ($):</label>
         <input
           type="number"
           name="sum"
-          value={paymentData.sum}
-          onChange={handleChange}
-          placeholder="Enter sum"
+          value={sum}
+          onChange={(e) => setSum(e.target.value)}
+          placeholder="Amount"
           required
-          style={{ padding: "10px", width: "100%", marginBottom: "10px" }}
+          className="small-input"
         />
 
-        <label>Description:</label>
-        <input
-          type="text"
-          name="description"
-          value={paymentData.description}
-          onChange={handleChange}
-          placeholder="Enter description"
-          required
-          style={{ padding: "10px", width: "100%", marginBottom: "10px" }}
-        />
-
-        <label>Category:</label>
-        <select
-          name="category"
-          value={paymentData.category}
-          onChange={handleChange}
-          required
-          style={{ padding: "10px", width: "100%", marginBottom: "10px" }}
-        >
+        <select name="category" value={category} onChange={(e) => setCategory(e.target.value)} required className="small-input">
           {categories.map((cat, index) => (
             <option key={index} value={cat}>
               {cat}
@@ -101,26 +114,8 @@ const PaymentForm = () => {
           ))}
         </select>
 
-        <button type="submit" style={{ padding: "10px", width: "100%" }}>
-          Submit
-        </button>
+        <button type="submit">Add Payment</button>
       </form>
-
-      {payments.length > 0 && (
-        <div>
-          <h3>Payment History</h3>
-          <ul>
-            {payments.map((payment, index) => (
-              <li key={index}>
-                <strong>Date:</strong> {payment.date} | <strong>Sum:</strong> $
-                {payment.sum.toFixed(2)} | <strong>Description:</strong>{" "}
-                {payment.description} | <strong>Category:</strong>{" "}
-                {payment.category}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };
