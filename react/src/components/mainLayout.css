@@ -1,95 +1,186 @@
-/* Global Styles */
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-y: auto; /* Only one scrolling container */
+/* mainLayout.css */
+
+/* Overall Layout */
+.main-layout {
+    font-family: 'Inter', Arial, sans-serif; /* You can replace with your preferred font */
+    background-color: #0d0d0d; /* Dark background */
+    color: #ffffff; /* Light text */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   
-  /* Hide scrollbar for WebKit browsers */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  * {
-    scrollbar-width: none;
-  }
-  
-  /* Sticky Navbar */
+  /* NAVIGATION BAR */
   .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000; /* Creates a stacking context */
-    background-color: #fff;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    background-color: #121212; /* Slightly darker shade */
+    padding: 0.5rem 1rem;
+    position: relative;
   }
   
-  /* Navbar sections */
-  .navbar-left,
+  /* Left side of navbar */
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .home-button {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .home-button:hover {
+    background-color: #1f1f1f; /* Hover effect */
+  }
+  
+  /* Center of navbar (Search Bar) */
+  .navbar-center {
+    flex: 1; /* Take up remaining space */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-bar {
+    width: 60%;
+    max-width: 400px;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    background-color: #1f1f1f;
+    color: #fff;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  
+  .search-bar:focus {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Right side of navbar */
   .navbar-right {
     display: flex;
     align-items: center;
-    flex: 0 0 auto;
-    /* In the original, these were set to position: relative to help with absolute positioning.
-       When using a portal for the dropdown, these don’t affect the dropdown. */
   }
   
-  .navbar-center {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Search Bar */
-  .search-bar {
-    padding: 8px 12px;
+  .profile-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    min-width: 300px;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s ease-in-out;
   }
   
-  /* Dropdown Menu Styling */
-  /* If rendering within the navbar, this CSS applies relative to its parent.
-     If using a portal, adjust the 'top' and 'right' (or 'left') values dynamically. */
+  .profile-btn:hover {
+    background-color: #1f1f1f;
+  }
+  
+  .profile-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-color: #2c2c2c;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    font-weight: 700;
+    user-select: none;
+  }
+  
+  /* DROPDOWN MENU */
   .dropdown-menu {
     position: absolute;
-    /* When not using a portal, you might use:
-       top: calc(100% + 10px);
-       right: 0;
-       However, if rendered in a portal, set fixed values or compute coordinates.
-       Below is an example with fixed values for demonstration: */
-    top: 60px;         /* Adjust as needed to position below the profile button */
-    right: 20px;       /* Adjust according to your layout */
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    top: 60px; /* Adjust to your navbar height */
+    right: 1rem;
+    background-color: #1f1f1f;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    padding: 5px 0;
-    z-index: 2000;     /* Ensures it appears on top */
+    z-index: 9999; /* Ensure it’s on top of other elements */
   }
   
-  /* Dropdown Items */
-  .dropdown-menu .dropdown-item {
-    padding: 8px 12px;
-    border: none;
+  .dropdown-item {
     background: none;
+    border: none;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
     text-align: left;
+    font-size: 0.9rem;
     cursor: pointer;
-    width: 100%;
+    transition: background-color 0.2s ease-in-out;
   }
   
-  .dropdown-menu .dropdown-item:hover {
-    background-color: #f0f0f0;
+  .dropdown-item:hover {
+    background-color: #2c2c2c;
   }
   
-  /* Prevent h1 elements from scrolling (if needed) */
-  h1 {
-    overflow: hidden;
+  /* MAIN CONTENT (Outlet) */
+  .main-layout > *:not(.navbar):not(.dropdown-menu) {
+    flex: 1;
+    /* Example background styling reminiscent of TradingView hero section */
+    background: linear-gradient(
+        rgba(13, 13, 13, 0.8),
+        rgba(13, 13, 13, 0.8)
+      ),
+      url('https://images.unsplash.com/photo-1530549387789-16ea7f4e6e41?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  /* Example hero text styling */
+  .main-layout h1,
+  .main-layout h2,
+  .main-layout p {
+    margin: 1rem 0;
+    max-width: 800px;
+  }
+  
+  /* Example call-to-action button styling */
+  .main-layout .cta-button {
+    background-color: #6f32be; /* Purple accent reminiscent of TradingView */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-top: 1rem;
+  }
+  
+  .main-layout .cta-button:hover {
+    background-color: #8f52de;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .navbar-center {
+      display: none; /* Hide search on small screens or adjust as needed */
+    }
+  
+    .search-bar {
+      width: 100%;
+    }
+  
+    .dropdown-menu {
+      right: 0.5rem;
+    }
   }
   
