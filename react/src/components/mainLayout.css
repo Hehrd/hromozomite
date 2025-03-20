@@ -10,7 +10,7 @@
     --dropdown-hover-bg: #f0f0f0;/* Default dropdown hover color */
   
     /* Default Background Image (Light Mode) */
-    --background-image: url('../assets/lightBackgroundImage.avif');
+    --background-image: url('../assets/back_white.jpg');
   }
   
   body.dark-mode {
@@ -21,7 +21,7 @@
     --dropdown-hover-bg: #2c2c2c;/* Dark dropdown hover color */
   
     /* Dark Mode Background Image */
-    --background-image: url('../assets/darkBackgroundImage.avif'); /* Different background for dark mode */
+    --background-image: url('../assets/back.jpg'); /* Different background for dark mode */
   }
   
   body.light-mode {
