@@ -7,6 +7,10 @@ import lombok.Data;
 @Table(name = "user_account")
 @Data
 public class UserAccountEntity extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column
     private String username;
 

@@ -12,7 +12,7 @@ import java.util.Map;
 public class PaymentsEntity extends BaseEntity{
 
     //@Column
-    private Map<String, Integer> p;
+    private Map<String, Integer> payments;
 
     @Column
     private Date date;
