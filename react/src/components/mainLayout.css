@@ -1,95 +1,136 @@
-/* Global Styles */
+/* -------------------------
+   Global Variables for Navbar
+-------------------------- */
+:root {
+  --navbar-bg: #fff;       /* Default for light mode */
+  --navbar-text: #000;     /* Default for light mode */
+}
+
+body.dark-mode {
+  --navbar-bg: #242424;    /* Dark mode navbar background */
+  --navbar-text: #ffffff;  /* Dark mode navbar text color */
+}
+
+body.light-mode {
+  --navbar-bg: #fff;       /* Light mode navbar background */
+  --navbar-text: #000;     /* Light mode navbar text color */
+}
+
+/* -------------------------
+   Global Reset & Base
+-------------------------- */
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-y: auto; /* Only one scrolling container */
-  }
-  
-  /* Hide scrollbar for WebKit browsers */
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  * {
-    scrollbar-width: none;
-  }
-  
-  /* Sticky Navbar */
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000; /* Creates a stacking context */
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Navbar sections */
-  .navbar-left,
-  .navbar-right {
-    display: flex;
-    align-items: center;
-    flex: 0 0 auto;
-    /* In the original, these were set to position: relative to help with absolute positioning.
-       When using a portal for the dropdown, these don’t affect the dropdown. */
-  }
-  
-  .navbar-center {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Search Bar */
-  .search-bar {
-    padding: 8px 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    min-width: 300px;
-  }
-  
-  /* Dropdown Menu Styling */
-  /* If rendering within the navbar, this CSS applies relative to its parent.
-     If using a portal, adjust the 'top' and 'right' (or 'left') values dynamically. */
-  .dropdown-menu {
-    position: absolute;
-    /* When not using a portal, you might use:
-       top: calc(100% + 10px);
-       right: 0;
-       However, if rendered in a portal, set fixed values or compute coordinates.
-       Below is an example with fixed values for demonstration: */
-    top: 60px;         /* Adjust as needed to position below the profile button */
-    right: 20px;       /* Adjust according to your layout */
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    padding: 5px 0;
-    z-index: 2000;     /* Ensures it appears on top */
-  }
-  
-  /* Dropdown Items */
-  .dropdown-menu .dropdown-item {
-    padding: 8px 12px;
-    border: none;
-    background: none;
-    text-align: left;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .dropdown-menu .dropdown-item:hover {
-    background-color: #f0f0f0;
-  }
-  
-  /* Prevent h1 elements from scrolling (if needed) */
-  h1 {
-    overflow: hidden;
-  }
-  
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto; /* Only one scrolling container */
+}
+
+/* Hide scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: none;
+}
+
+/* -------------------------
+   Sticky Navbar
+-------------------------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--navbar-bg); /* Uses our variable */
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar text & icon colors */
+.navbar a,
+.navbar .profile-icon {
+  color: var(--navbar-text);
+}
+
+/* -------------------------
+   Navbar Sections
+-------------------------- */
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* -------------------------
+   Search Bar
+-------------------------- */
+.search-bar {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 4px;
+  min-width: 300px;
+}
+
+/* -------------------------
+   Profile Button & Icon
+-------------------------- */
+.profile-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-icon {
+  font-size: 1.5rem;
+  /* Color is now set by the navbar color variable */
+  color: var(--navbar-text);
+}
+
+/* -------------------------
+   Dropdown Menu Styling
+-------------------------- */
+.dropdown-menu {
+  position: absolute;
+  top: 60px;       /* Adjust as needed to position below the profile button */
+  right: 20px;     /* Adjust according to your layout */
+  background-color: var(--dropdown-bg, #fff);
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  z-index: 2000;
+}
+
+/* Dropdown Items */
+.dropdown-menu .dropdown-item {
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+.dropdown-menu .dropdown-item:hover {
+  background-color: var(--dropdown-hover-bg, #f0f0f0);
+}
+
+/* -------------------------
+   Other Global Styles
+-------------------------- */
+h1 {
+  overflow: hidden;
+}
+
+/* (You can include additional styling from your app CSS here as needed) */
