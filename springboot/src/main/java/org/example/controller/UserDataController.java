@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.controller.model.GoalDTO;
 import org.example.controller.model.PaymentsDTO;
+import org.example.controller.model.SalaryDTO;
 import org.example.exception.UserNotFoundException;
 import org.example.service.UserAccountService;
 import org.example.service.UserDataService;
@@ -38,5 +39,12 @@ public class UserDataController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body("Goal set successfully!");
+    }
+    @RequestMapping(value="/salary", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> setSalary(@RequestBody SalaryDTO salaryDTO, @CookieValue(value = "SESSION_STRING") String sessionString) throws UserNotFoundException {
+        userDataService.setSalary(salaryDTO, sessionString);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body("Salary set successfully!");
     }
 }
