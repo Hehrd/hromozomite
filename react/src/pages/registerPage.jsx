@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AppContext } from '../../contexts/appContext.jsx'; // Path to the unified AppContext
+import { AppContext } from '../contexts/appContext.jsx'; // Path to the unified AppContext
 import './registerPage.css';  // Import the CSS file here
 
 const Register = () => {
