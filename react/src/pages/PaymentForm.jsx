@@ -52,7 +52,7 @@ const PaymentForm = () => {
 
   return (
     <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
-      <h2>Enter Payment</h2>
+      <h2>Enter Money Spent</h2>
       <form onSubmit={handleSubmit}>
         <label>Date:</label>
         <input
