@@ -1,6 +1,6 @@
 /* Set the entire page background to black */
 body {
-    background-color: #000;
+    background-color: red;
     color: #fff;
     font-family: Arial, sans-serif;
 }
