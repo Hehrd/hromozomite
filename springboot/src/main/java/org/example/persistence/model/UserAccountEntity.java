@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Table(name = "user_account")
 @Data
-public class UserAccountEntity {
+public class UserAccountEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
