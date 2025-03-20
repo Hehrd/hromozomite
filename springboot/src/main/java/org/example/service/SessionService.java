@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exception.UserNotFoundException;
 import org.example.persistence.model.SessionEntity;
 import org.example.persistence.model.UserAccountEntity;
 import org.example.persistence.repository.SessionRepository;
@@ -25,7 +26,7 @@ public class SessionService {
         return sessionEntity;
     }
 
-    public UserAccountEntity getUserFromSessionString(String sessionString) {
-        return userAccountRepository.findBySession_SessionString(sessionString).orElse(null);
+    public UserAccountEntity getUserFromSessionString(String sessionString) throws UserNotFoundException {
+        return userAccountRepository.findBySession_SessionString(sessionString).orElseThrow( () -> new UserNotFoundException("User not found!"));
     }
 }
