@@ -1,6 +1,5 @@
 package org.example.service;
 
-import lombok.Data;
 import org.example.controller.model.UserCredentialsDTO;
 import org.example.persistence.model.UserAccountEntity;
 import org.example.persistence.repository.UserAccountRepository;
