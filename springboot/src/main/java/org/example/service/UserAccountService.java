@@ -19,23 +19,28 @@ public class UserAccountService {
     @Autowired
     private SessionRepository sessionRepository;
 
+    @Autowired
+    private SessionService sessionService;
+
     public void signup(UserCredentialsDTO userCredentialsDTO) throws EmailAlreadyInUseException {
         UserAccountEntity userAccountEntity = new UserAccountEntity();
-        userAccountEntity.setUsername(userAccountEntity.getUsername());
-        userAccountEntity.setPassword(userAccountEntity.getPassword());
-        userAccountEntity.setEmail(userAccountEntity.getEmail());
+        userAccountEntity.setUsername(userCredentialsDTO.getUsername());
+        userAccountEntity.setPassword(userCredentialsDTO.getPassword());
+        userAccountEntity.setEmail(userCredentialsDTO.getEmail());
         userAccountRepository.save(userAccountEntity);
     }
 
-    public void login(UserCredentialsDTO userCredentialsDTO) throws UserNotFoundException {
+    public String login(UserCredentialsDTO userCredentialsDTO) throws UserNotFoundException {
         String email = userCredentialsDTO.getEmail();
         String password = userCredentialsDTO.getPassword();
         UserAccountEntity userAccountEntity = userAccountRepository.findByEmailAndPassword(email, password).orElse(null);
-
         if (userAccountEntity == null) {
-            throw new RuntimeException("No user found with the provided credentials.");
+            throw new UserNotFoundException("User not found!");
         }
-
+        SessionEntity sessionEntity = sessionService.createSession();
+        userAccountEntity.setSession(sessionEntity);
+        userAccountRepository.save(userAccountEntity);
+        return sessionEntity.getSessionString();
     }
     public void logout(String sessionString){
         SessionEntity sessionEntity = sessionRepository.findBySessionString(sessionString).orElse(null);

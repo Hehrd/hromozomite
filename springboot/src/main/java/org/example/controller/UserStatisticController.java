@@ -19,7 +19,7 @@ public class UserStatisticController {
     private PaymentStatisticsService paymentStatisticsService;
 
     @PostMapping("/weekly")
-    public Map<String, Integer> getWeeklyStatistics(@RequestBody List<PaymentsDTO> payments){
-        return paymentStatisticsService.calculateWeeklyStatistics(payments);
+    public Map<String, Integer> getWeeklyStatistics(){
+        return paymentStatisticsService.calculateWeeklyStatistics();
     }
 }
