@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface SessionRepository extends BaseRepository<SessionEntity> {
     boolean existsBySessionString(String sessionString);
     Optional<SessionEntity> findBySessionString(String sessionString);
-    
+
 }
