@@ -1,136 +1,267 @@
-/* -------------------------
-   Global Variables for Navbar
--------------------------- */
+/* -------------------------------------------------------
+   1. Global Variables & Modes
+   (Adjust these to refine your light/dark themes)
+--------------------------------------------------------- */
 :root {
-  --navbar-bg: #fff;       /* Default for light mode */
-  --navbar-text: #000;     /* Default for light mode */
-}
-
-body.dark-mode {
-  --navbar-bg: #242424;    /* Dark mode navbar background */
-  --navbar-text: #ffffff;  /* Dark mode navbar text color */
-}
-
-body.light-mode {
-  --navbar-bg: #fff;       /* Light mode navbar background */
-  --navbar-text: #000;     /* Light mode navbar text color */
-}
-
-/* -------------------------
-   Global Reset & Base
--------------------------- */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow-y: auto; /* Only one scrolling container */
-}
-
-/* Hide scrollbar for WebKit browsers */
-::-webkit-scrollbar {
-  display: none;
-}
-* {
-  scrollbar-width: none;
-}
-
-/* -------------------------
-   Sticky Navbar
--------------------------- */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: var(--navbar-bg); /* Uses our variable */
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Navbar text & icon colors */
-.navbar a,
-.navbar .profile-icon {
-  color: var(--navbar-text);
-}
-
-/* -------------------------
-   Navbar Sections
--------------------------- */
-.navbar-left,
-.navbar-right {
-  display: flex;
-  align-items: center;
-  flex: 0 0 auto;
-}
-.navbar-center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* -------------------------
-   Search Bar
--------------------------- */
-.search-bar {
-  padding: 8px 12px;
-  font-size: 1rem;
-  border: 1px solid var(--border-color, #ccc);
-  border-radius: 4px;
-  min-width: 300px;
-}
-
-/* -------------------------
-   Profile Button & Icon
--------------------------- */
-.profile-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.profile-icon {
-  font-size: 1.5rem;
-  /* Color is now set by the navbar color variable */
-  color: var(--navbar-text);
-}
-
-/* -------------------------
-   Dropdown Menu Styling
--------------------------- */
-.dropdown-menu {
-  position: absolute;
-  top: 60px;       /* Adjust as needed to position below the profile button */
-  right: 20px;     /* Adjust according to your layout */
-  background-color: var(--dropdown-bg, #fff);
-  border: 1px solid var(--border-color, #ccc);
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  padding: 5px 0;
-  z-index: 2000;
-}
-
-/* Dropdown Items */
-.dropdown-menu .dropdown-item {
-  padding: 8px 12px;
-  border: none;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-  width: 100%;
-}
-.dropdown-menu .dropdown-item:hover {
-  background-color: var(--dropdown-hover-bg, #f0f0f0);
-}
-
-/* -------------------------
-   Other Global Styles
--------------------------- */
-h1 {
-  overflow: hidden;
-}
-
-/* (You can include additional styling from your app CSS here as needed) */
+    --navbar-bg: #fff;           /* Default for light mode */
+    --navbar-text: #000;         /* Default for light mode */
+    --border-color: #ccc;        /* Default border color */
+    --dropdown-bg: #fff;         /* Default dropdown background */
+    --dropdown-hover-bg: #f0f0f0;/* Default dropdown hover color */
+  }
+  
+  /* Dark Mode Variables */
+  body.dark-mode {
+    --navbar-bg: #121212;        /* Dark navbar background */
+    --navbar-text: #ffffff;      /* Dark navbar text color */
+    --border-color: #2c2c2c;     /* Dark border color */
+    --dropdown-bg: #1f1f1f;      /* Dark dropdown background */
+    --dropdown-hover-bg: #2c2c2c;/* Dark dropdown hover color */
+  }
+  
+  /* Light Mode Variables */
+  body.light-mode {
+    --navbar-bg: #fff;           /* Light navbar background */
+    --navbar-text: #000;         /* Light navbar text color */
+    --border-color: #ccc;        /* Light border color */
+    --dropdown-bg: #fff;         /* Light dropdown background */
+    --dropdown-hover-bg: #f0f0f0;/* Light dropdown hover color */
+  }
+  
+  /* -------------------------------------------------------
+     2. Global Reset & Base
+  --------------------------------------------------------- */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Disable scrolling on body */
+    font-family: 'Inter', Arial, sans-serif; /* TradingView-like font */
+    background-color: #0d0d0d; /* Overall dark background by default */
+    color: #ffffff;           /* Default text color for dark backgrounds */
+  }
+  
+  /* Hide scrollbar for WebKit browsers */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    scrollbar-width: none;
+  }
+  
+  /* -------------------------------------------------------
+     3. Sticky Navbar
+  --------------------------------------------------------- */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  
+  /* Links and icons in the navbar use the same text color variable */
+  .navbar a,
+  .navbar .profile-icon {
+    color: var(--navbar-text);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .navbar a:hover {
+    opacity: 0.8;
+  }
+  
+  /* -------------------------------------------------------
+     4. Navbar Sections
+  --------------------------------------------------------- */
+  .navbar-left,
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+  
+  .navbar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* -------------------------------------------------------
+     5. Search Bar
+  --------------------------------------------------------- */
+  .search-bar {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    min-width: 300px;
+    background-color: transparent;   /* Allows dark background to show through */
+    color: var(--navbar-text);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  
+  .search-bar:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Subtle glow effect */
+  }
+  
+  /* -------------------------------------------------------
+     6. Profile Button & Icon
+  --------------------------------------------------------- */
+  .profile-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+  }
+  
+  .profile-icon {
+    font-size: 1.2rem;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-color: var(--border-color);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    font-weight: 700;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .profile-btn:hover .profile-icon {
+    background-color: var(--dropdown-hover-bg);
+  }
+  
+  /* -------------------------------------------------------
+     7. Dropdown Menu
+  --------------------------------------------------------- */
+  .dropdown-menu {
+    position: absolute;
+    top: 60px;  /* Adjust to position below the navbar */
+    right: 20px;
+    background-color: var(--dropdown-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+    z-index: 2000;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  /* Dropdown Items */
+  .dropdown-menu .dropdown-item {
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    color: var(--navbar-text);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  
+  .dropdown-menu .dropdown-item:hover {
+    background-color: var(--dropdown-hover-bg);
+  }
+  
+  /* -------------------------------------------------------
+     8. Additional Global Styles
+  --------------------------------------------------------- */
+  h1, h2, p {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    overflow: visible; /* Ensure that h1 does not cause scrolling/clipping */
+  }
+  
+  /* -------------------------------------------------------
+     9. Hero / Main Layout Styling
+     (Incorporates a transparent background image with an overlay)
+  --------------------------------------------------------- */
+  .main-layout > *:not(.navbar):not(.dropdown-menu) {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column; /* Stack hero text & buttons vertically */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  
+    /* Transparent overlay with background image */
+    background: linear-gradient(
+        rgba(13, 13, 13, 0.6),  /* Semi-transparent overlay */
+        rgba(13, 13, 13, 0.6)   /* Adjust the opacity here */
+      ),
+      url('../assets/backgroundImage.webp'); /* Path to your background image inside the assets folder */
+    background-size: cover;
+    background-position: center;
+    padding: 2rem;
+  }
+  
+  /* Larger hero heading */
+  .main-layout h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: #fff; /* Ensure text contrasts with background */
+    overflow: visible; /* Ensure h1 element doesn’t get clipped or cause scroll */
+  }
+  
+  /* Subheading style */
+  .main-layout h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    max-width: 600px; /* Keep text narrower for readability */
+    color: #bdbdbd;   /* Subtle contrast from pure white */
+  }
+  
+  /* General paragraph text in hero area */
+  .main-layout p {
+    max-width: 600px;
+    margin: 0 auto 1rem;
+    color: #cccccc;
+  }
+  
+  /* -------------------------------------------------------
+     10. CTA Button Styling
+     (Bright gradient reminiscent of TradingView)
+  --------------------------------------------------------- */
+  .cta-button {
+    background: linear-gradient(135deg, #6f32be, #8f52de);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .cta-button:hover {
+    background: linear-gradient(135deg, #8f52de, #ab73ee);
+  }
+  
+  /* Optional second CTA style (e.g., "Watch explainer" button) */
+  .cta-button.secondary {
+    background: none;
+    border: 2px solid #ffffff;
+    margin-left: 1rem;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+  
+  .cta-button.secondary:hover {
+    background-color: #ffffff;
+    color: #0d0d0d;
+  }
+  
