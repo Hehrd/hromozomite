@@ -43,6 +43,7 @@ body {
     min-height: 60px; /* Ensures 2+ rows */
     overflow-y: auto; /* Adds scroll when needed */
     line-height: 1.5;
+    outline: none;
 }
 
 /* Smaller input fields for date, amount, and category */
@@ -55,6 +56,7 @@ body {
     background-color: #222;
     color: #fff;
     text-align: center;
+    outline: none;
 }
 
 /* Dropdown styling */

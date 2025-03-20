@@ -1,22 +1,24 @@
-import React, { useState, useContext } from 'react';
-import ReactDOM from 'react-dom';
-import { Link, Outlet } from 'react-router-dom';
-import { AppContext } from '../contexts/AppContext'; // Path to the unified AppContext
-import './mainLayout.css';
+import React, { useState, useContext } from "react";
+import ReactDOM from "react-dom";
+import { Link, Outlet } from "react-router-dom";
+import { AppContext } from "../contexts/AppContext";
+import "./mainLayout.css";
 
-const DropdownMenu = ({ children }) => {
+const DropdownMenu = ({ children, show }) => {
   return ReactDOM.createPortal(
-    <div className="dropdown-menu">{children}</div>,
-    document.body // Render the dropdown as a child of the body element
+    <div className={`dropdown-menu ${show ? "show-dropdown" : ""}`}>
+      {children}
+    </div>,
+    document.body
   );
 };
 
 const MainLayout = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const { theme, toggleTheme, isLoggedIn, logOut } = useContext(AppContext); // Access both theme and user state
+  const { theme, toggleTheme, isLoggedIn, logOut } = useContext(AppContext);
 
   const toggleDropdownMenu = () => {
-    setShowDropdown(prev => !prev);
+    setShowDropdown((prev) => !prev);
   };
 
   return (
@@ -29,11 +31,7 @@ const MainLayout = () => {
         </div>
 
         <div className="navbar-center">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Search..."
-          />
+          <input type="text" className="search-bar" placeholder="Search..." />
         </div>
 
         <div className="navbar-right">
@@ -43,35 +41,33 @@ const MainLayout = () => {
         </div>
       </nav>
 
-      {showDropdown && (
-        <DropdownMenu>
+      <DropdownMenu show={showDropdown}>
+        <button
+          className="dropdown-item"
+          onClick={() => {
+            toggleTheme();
+            setShowDropdown(false);
+          }}
+        >
+          {theme === "light-mode" ? "Dark Theme" : "Light Theme"}
+        </button>
+
+        {isLoggedIn ? (
           <button
             className="dropdown-item"
             onClick={() => {
-              toggleTheme(); // Toggle the theme when the button is clicked
+              logOut();
               setShowDropdown(false);
             }}
           >
-            {theme === 'light-mode' ? 'Dark Theme' : 'Light Theme'}
+            Log Out
           </button>
-
-          {isLoggedIn ? (
-            <button
-              className="dropdown-item"
-              onClick={() => {
-                logOut();  // Log the user out when the Log Out button is clicked
-                setShowDropdown(false);
-              }}
-            >
-              Log Out
-            </button>
-          ) : (
-            <Link to="/login" className="dropdown-item" onClick={() => setShowDropdown(false)}>
-              Log In
-            </Link>
-          )}
-        </DropdownMenu>
-      )}
+        ) : (
+          <Link to="/login" className="dropdown-item" onClick={() => setShowDropdown(false)}>
+            Log In
+          </Link>
+        )}
+      </DropdownMenu>
 
       <Outlet />
     </div>
