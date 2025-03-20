@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Generated;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Map;
 
@@ -15,7 +16,10 @@ public class PaymentsEntity extends BaseEntity{
     private Map<String, Integer> payments;
 
     @Column
-    private Date date;
+    private String currency;
+
+    @Column
+    private LocalDate date;
 
     @JoinColumn
     private UserAccountEntity userAccount;
