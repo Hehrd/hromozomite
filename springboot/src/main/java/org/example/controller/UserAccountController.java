@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/userAccount")
+@RequestMapping("/useraccount")
 @CrossOrigin(origins = "http://localhost:5173")
 @Controller
 public class UserAccountController {
@@ -20,8 +20,8 @@ public class UserAccountController {
     private UserAccountService userAccountService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> login(@RequestBody UserCredentialsDTO userCredentialsDTO, @CookieValue(value = "SESSION_STRING") String sessionString) throws UserNotFoundException{
-        userAccountService.login(userCredentialsDTO);
+    public ResponseEntity<String> login(@RequestBody UserCredentialsDTO userCredentialsDTO) throws UserNotFoundException {
+        String sessionString = userAccountService.login(userCredentialsDTO);
         StringBuilder cookieBuilder = new StringBuilder();
         cookieBuilder.append("SESSION_STRING=");
         cookieBuilder.append(sessionString);
@@ -35,7 +35,6 @@ public class UserAccountController {
                 .headers(headers)
                 .body("Logged in successfully!");
     }
-
     @RequestMapping(value = "/signup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> signup(@RequestBody UserCredentialsDTO userCredentialsDTO) throws EmailAlreadyInUseException {
         userAccountService.signup(userCredentialsDTO) ;
