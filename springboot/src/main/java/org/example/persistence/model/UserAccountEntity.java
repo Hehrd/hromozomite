@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Table(name = "user_account")
 @Data
-public class UserAccountEntity {
+public class UserAccountEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,5 +19,9 @@ public class UserAccountEntity {
 
     @Column
     private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "sessionId", referencedColumnName = "id", nullable = true)
+    private SessionEntity session;
 }
 

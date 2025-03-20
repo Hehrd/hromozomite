@@ -1,8 +1,9 @@
 package org.example.service;
 
-import lombok.Data;
 import org.example.controller.model.UserCredentialsDTO;
+import org.example.persistence.model.SessionEntity;
 import org.example.persistence.model.UserAccountEntity;
+import org.example.persistence.repository.SessionRepository;
 import org.example.persistence.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ public class UserAccountService {
 
     @Autowired
     private UserAccountRepository userAccountRepository;
+
+    @Autowired
+    private SessionRepository sessionRepository;
 
     public void signup(UserCredentialsDTO userCredentialsDTO) {
         UserAccountEntity userAccountEntity = new UserAccountEntity();
@@ -31,7 +35,10 @@ public class UserAccountService {
         }
 
     }
-    public void logout(){
-
+    public void logout(String sessionString){
+        SessionEntity sessionEntity = sessionRepository.findBySessionString(sessionString).orElse(null);
+        if (sessionEntity != null) {
+            sessionRepository.delete(sessionEntity);
+        }
     }
 }
