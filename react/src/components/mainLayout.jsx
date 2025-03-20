@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { Link, Outlet } from 'react-router-dom';
+import { ThemeContext } from '../contexts/themeContext'; // Adjust path as needed
 import './mainLayout.css';
 
 const DropdownMenu = ({ children }) => {
   return ReactDOM.createPortal(
     <div className="dropdown-menu">{children}</div>,
-    document.body // Render the dropdown as a child of the body element
+    document.body
   );
 };
 
 const MainLayout = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const toggleDropdown = () => {
-    setShowDropdown(prev => {
-      const newValue = !prev;
-      console.log("showDropdown is now:", newValue);
-      return newValue;
-    });
+    setShowDropdown(prev => !prev);
   };
 
   return (
@@ -47,7 +45,15 @@ const MainLayout = () => {
 
       {showDropdown && (
         <DropdownMenu>
-          <button className="dropdown-item">Dark Theme</button>
+          <button
+            className="dropdown-item"
+            onClick={() => {
+              toggleTheme();
+              setShowDropdown(false);
+            }}
+          >
+            {theme === 'light-mode' ? 'Dark Theme' : 'Light Theme'}
+          </button>
           <button className="dropdown-item">Log Out</button>
         </DropdownMenu>
       )}

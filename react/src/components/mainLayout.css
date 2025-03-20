@@ -1,186 +1,136 @@
-/* mainLayout.css */
+/* -------------------------
+   Global Variables for Navbar
+-------------------------- */
+:root {
+  --navbar-bg: #fff;       /* Default for light mode */
+  --navbar-text: #000;     /* Default for light mode */
+}
 
-/* Overall Layout */
-.main-layout {
-    font-family: 'Inter', Arial, sans-serif; /* You can replace with your preferred font */
-    background-color: #0d0d0d; /* Dark background */
-    color: #ffffff; /* Light text */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* NAVIGATION BAR */
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #121212; /* Slightly darker shade */
-    padding: 0.5rem 1rem;
-    position: relative;
-  }
-  
-  /* Left side of navbar */
-  .navbar-left {
-    display: flex;
-    align-items: center;
-  }
-  
-  .home-button {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    margin-right: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .home-button:hover {
-    background-color: #1f1f1f; /* Hover effect */
-  }
-  
-  /* Center of navbar (Search Bar) */
-  .navbar-center {
-    flex: 1; /* Take up remaining space */
-    display: flex;
-    justify-content: center;
-  }
-  
-  .search-bar {
-    width: 60%;
-    max-width: 400px;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    border: none;
-    outline: none;
-    background-color: #1f1f1f;
-    color: #fff;
-    transition: box-shadow 0.2s ease-in-out;
-  }
-  
-  .search-bar:focus {
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-  }
-  
-  /* Right side of navbar */
-  .navbar-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-btn {
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .profile-btn:hover {
-    background-color: #1f1f1f;
-  }
-  
-  .profile-icon {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    background-color: #2c2c2c;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 32px;
-    font-weight: 700;
-    user-select: none;
-  }
-  
-  /* DROPDOWN MENU */
-  .dropdown-menu {
-    position: absolute;
-    top: 60px; /* Adjust to your navbar height */
-    right: 1rem;
-    background-color: #1f1f1f;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    z-index: 9999; /* Ensure it’s on top of other elements */
-  }
-  
-  .dropdown-item {
-    background: none;
-    border: none;
-    color: #ffffff;
-    padding: 0.75rem 1.5rem;
-    text-align: left;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #2c2c2c;
-  }
-  
-  /* MAIN CONTENT (Outlet) */
-  .main-layout > *:not(.navbar):not(.dropdown-menu) {
-    flex: 1;
-    /* Example background styling reminiscent of TradingView hero section */
-    background: linear-gradient(
-        rgba(13, 13, 13, 0.8),
-        rgba(13, 13, 13, 0.8)
-      ),
-      url('https://images.unsplash.com/photo-1530549387789-16ea7f4e6e41?auto=format&fit=crop&w=1920&q=80');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
-  }
-  
-  /* Example hero text styling */
-  .main-layout h1,
-  .main-layout h2,
-  .main-layout p {
-    margin: 1rem 0;
-    max-width: 800px;
-  }
-  
-  /* Example call-to-action button styling */
-  .main-layout .cta-button {
-    background-color: #6f32be; /* Purple accent reminiscent of TradingView */
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    color: #ffffff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    margin-top: 1rem;
-  }
-  
-  .main-layout .cta-button:hover {
-    background-color: #8f52de;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .navbar-center {
-      display: none; /* Hide search on small screens or adjust as needed */
-    }
-  
-    .search-bar {
-      width: 100%;
-    }
-  
-    .dropdown-menu {
-      right: 0.5rem;
-    }
-  }
-  
+body.dark-mode {
+  --navbar-bg: #242424;    /* Dark mode navbar background */
+  --navbar-text: #ffffff;  /* Dark mode navbar text color */
+}
+
+body.light-mode {
+  --navbar-bg: #fff;       /* Light mode navbar background */
+  --navbar-text: #000;     /* Light mode navbar text color */
+}
+
+/* -------------------------
+   Global Reset & Base
+-------------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto; /* Only one scrolling container */
+}
+
+/* Hide scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: none;
+}
+
+/* -------------------------
+   Sticky Navbar
+-------------------------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--navbar-bg); /* Uses our variable */
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar text & icon colors */
+.navbar a,
+.navbar .profile-icon {
+  color: var(--navbar-text);
+}
+
+/* -------------------------
+   Navbar Sections
+-------------------------- */
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* -------------------------
+   Search Bar
+-------------------------- */
+.search-bar {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 4px;
+  min-width: 300px;
+}
+
+/* -------------------------
+   Profile Button & Icon
+-------------------------- */
+.profile-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-icon {
+  font-size: 1.5rem;
+  /* Color is now set by the navbar color variable */
+  color: var(--navbar-text);
+}
+
+/* -------------------------
+   Dropdown Menu Styling
+-------------------------- */
+.dropdown-menu {
+  position: absolute;
+  top: 60px;       /* Adjust as needed to position below the profile button */
+  right: 20px;     /* Adjust according to your layout */
+  background-color: var(--dropdown-bg, #fff);
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  z-index: 2000;
+}
+
+/* Dropdown Items */
+.dropdown-menu .dropdown-item {
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+.dropdown-menu .dropdown-item:hover {
+  background-color: var(--dropdown-hover-bg, #f0f0f0);
+}
+
+/* -------------------------
+   Other Global Styles
+-------------------------- */
+h1 {
+  overflow: hidden;
+}
+
+/* (You can include additional styling from your app CSS here as needed) */
