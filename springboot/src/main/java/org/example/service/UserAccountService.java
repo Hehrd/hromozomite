@@ -1,6 +1,8 @@
 package org.example.service;
 
 import org.example.controller.model.UserCredentialsDTO;
+import org.example.exception.EmailAlreadyInUseException;
+import org.example.exception.UserNotFoundException;
 import org.example.persistence.model.SessionEntity;
 import org.example.persistence.model.UserAccountEntity;
 import org.example.persistence.repository.SessionRepository;
@@ -17,7 +19,7 @@ public class UserAccountService {
     @Autowired
     private SessionRepository sessionRepository;
 
-    public void signup(UserCredentialsDTO userCredentialsDTO) {
+    public void signup(UserCredentialsDTO userCredentialsDTO) throws EmailAlreadyInUseException {
         UserAccountEntity userAccountEntity = new UserAccountEntity();
         userAccountEntity.setUsername(userAccountEntity.getUsername());
         userAccountEntity.setPassword(userAccountEntity.getPassword());
@@ -25,7 +27,7 @@ public class UserAccountService {
         userAccountRepository.save(userAccountEntity);
     }
 
-    public void login(UserCredentialsDTO userCredentialsDTO){
+    public void login(UserCredentialsDTO userCredentialsDTO) throws UserNotFoundException {
         String email = userCredentialsDTO.getEmail();
         String password = userCredentialsDTO.getPassword();
         UserAccountEntity userAccountEntity = userAccountRepository.findByEmailAndPassword(email, password).orElse(null);

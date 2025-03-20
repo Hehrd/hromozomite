@@ -1,6 +1,8 @@
 package org.example.controller;
 
 import org.example.controller.model.UserCredentialsDTO;
+import org.example.exception.EmailAlreadyInUseException;
+import org.example.exception.UserNotFoundException;
 import org.example.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,7 +20,7 @@ public class UserAccountController {
     private UserAccountService userAccountService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> login(@RequestBody UserCredentialsDTO userCredentialsDTO, @CookieValue(value = "SESSION_STRING") String sessionString) {
+    public ResponseEntity<String> login(@RequestBody UserCredentialsDTO userCredentialsDTO, @CookieValue(value = "SESSION_STRING") String sessionString) throws UserNotFoundException{
         userAccountService.login(userCredentialsDTO);
         StringBuilder cookieBuilder = new StringBuilder();
         cookieBuilder.append("SESSION_STRING=");
@@ -35,8 +37,8 @@ public class UserAccountController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> signup(@RequestBody UserCredentialsDTO userCredentialsDTO) {
-        userAccountService.signup(userCredentialsDTO);
+    public ResponseEntity<String> signup(@RequestBody UserCredentialsDTO userCredentialsDTO) throws EmailAlreadyInUseException {
+        userAccountService.signup(userCredentialsDTO) ;
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body("User registered successfully!");
@@ -47,6 +49,6 @@ public class UserAccountController {
         userAccountService.logout(sessionString);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("Logged out successfully!");  
+                .body("Logged out successfully!");
     }
 }
