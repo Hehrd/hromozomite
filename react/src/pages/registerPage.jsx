@@ -1,55 +1,47 @@
-import React, { useState, useContext } from 'react';
-import { AppContext } from '../contexts/appContext.jsx'; // Path to the unified AppContext
-import './registerPage.css';  // Import the CSS file here
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link for navigation
+import './registerPage.css';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Access theme from AppContext (for dynamic theme application)
-  const { theme } = useContext(AppContext);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    const { username, email, password } = formData;
-  
-    // Validate form data
-    if (!username || !email || !password) {
+
+    // Simple validation
+    if (!email || !password || !confirmPassword) {
       setError('Please fill in all fields.');
       return;
     }
-  
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+
     // Prepare the data to be sent in the request body
     const registerData = {
-      username: username,
       email: email,
       password: password,
     };
-  
-    // Send the registration request to the backend
-    fetch('http://localhost:6969/useraccount/signup', {
+
+    // Send the request to the backend
+    fetch('http://localhost:6969/useraccount/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(registerData),  // Send form data as JSON
+      body: JSON.stringify(registerData), // Send email and password as JSON
     })
-      .then((response) => response.text())  // Expect a text response
+      .then((response) => response.text()) // Expect a text response instead of JSON
       .then((data) => {
-        if (data === 'Registration successful') {  // Check if the response text matches the success message
-          // Simulate successful registration
+        if (data === 'Registration successful') {
           console.log('Registration successful:', data);
-          setError('');  // Clear any previous error messages
-          // Optionally, redirect to login or home page after successful registration
+          setError(''); // Clear any previous error messages
+          // Redirect to login page or show success message
         } else {
           setError(data || 'Registration failed. Please try again.');
         }
@@ -61,61 +53,48 @@ const Register = () => {
   };
 
   return (
-    <div className={`register-container ${theme}`}>
+    <div className="register-container">
       <h2>Register</h2>
-      <form onSubmit={handleSubmit} className="register-form">
+      <form onSubmit={handleRegister} className="register-form">
         {error && <p className="error-message">{error}</p>}
-
         <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="Enter your username"
-            required
-            autoComplete="off"  // Disable autofill
-            autoCorrect="off"
-            autoCapitalize="off"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
-            name="email"
             id="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             required
-            autoComplete="off"  // Disable autofill
-            autoCorrect="off"
-            autoCapitalize="off"
           />
         </div>
-
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
-            name="password"
             id="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             required
-            autoComplete="off"  // Disable autofill
-            autoCorrect="off"
-            autoCapitalize="off"
           />
         </div>
-
+        <div className="form-group">
+          <label htmlFor="confirm-password">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirm-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
         <button type="submit" className="register-button">Register</button>
       </form>
+      <p className="login-link">
+        Already have an account? <Link to="/login">Log in</Link>
+      </p>
     </div>
   );
 };
