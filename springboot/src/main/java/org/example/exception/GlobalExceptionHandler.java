@@ -28,4 +28,18 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body("User not found!");
     }
+
+    @ExceptionHandler({InvalidValuesException.class})
+    public ResponseEntity<String> handleInvalidValuesException() {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Invalid values!");
+    }
+
+    @ExceptionHandler({NoPaymentsFound.class})
+    public ResponseEntity<String> handleNoPaymentsFound() {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("No payments found!");
+    }
 }
