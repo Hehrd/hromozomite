@@ -11,9 +11,35 @@ const QrScaner = () => {
       setResult(data);
       setScanning(false); // remove camera view on successful scan
       
-      // Use the scanned data directly
-      const price = data.split('*').pop();
-      console.log(price);
+      // Assume the scanned result is in the format:
+      // 02854258*0278890*2025-03-20*11:56:10*3.30
+      const parts = data.split('*');
+      if (parts.length >= 5) {
+        const date = parts[2];  // "2025-03-20"
+        const amount = parts[4]; // "3.30"
+        
+        // Log extracted values to the console
+        console.log("Date:", date);
+        console.log("Price:", amount);
+
+        // Send the extracted data to the backend
+        fetch(`${import.meta.env.VITE_API_URL}/createpayment`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ date, amount })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Payment created:", data);
+        })
+        .catch(error => {
+          console.error("Error creating payment:", error);
+        });
+      } else {
+        console.error("Unexpected QR code format.");
+      }
     }
   };
 

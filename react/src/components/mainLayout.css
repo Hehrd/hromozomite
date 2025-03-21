@@ -136,6 +136,7 @@ html {
    Dropdown Menu Swipe Animation
 --------------------------------------------------------- */
 .dropdown-menu {
+  display: none !important; /* Hide the dropdown by default */
   position: absolute;
   top: 60px;
   right: 0px;
@@ -155,8 +156,10 @@ html {
 
 /* Show dropdown with animation */
 .show-dropdown {
+  display: flex !important;
   opacity: 1;
   transform: translateY(0) translateX(0); /* Move into position */
+  
 }
 
 /* Dropdown Items */
