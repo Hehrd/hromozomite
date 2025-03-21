@@ -13,6 +13,7 @@ import AboutUsPage from './pages/aboutUsPage';
 import QrScaner from './pages/qrScanPage'; // Your QR code scanner page
 import AnalyticsPage from './pages/analyticsPage.jsx';
 import Settings from './pages/settings.jsx';
+import SubscriptionManager from './pages/subscriptionManager.jsx';
 function App() {
   return (
     <AppProvider>
@@ -31,6 +32,7 @@ function App() {
               <Route path="/qrscan" element={<QrScaner />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/subscription-manager" element={<SubscriptionManager />} />  // Your subscription manager page
             </Route>
           </Routes>
         </Router>
