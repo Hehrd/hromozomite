@@ -88,9 +88,9 @@
 
 /* Styling for the balance box */
 .balance-box {
-    background: linear-gradient(135deg, #6f32be, #8f52de); /* Cool gradient background */
+    background-color: transparent; /* Match the background color of other boxes */
     color: #ffffff;
-    border: 2px solid #ffffff; /* Add the same border as other tab-boxes */
+    border: 2px solid #ffffff; /* Keep the same border as other tab-boxes */
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Match shadow with other boxes */
     padding: 20px;
     text-align: center;
