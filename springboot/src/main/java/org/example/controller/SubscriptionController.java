@@ -17,7 +17,7 @@ public class SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
 
-    @RequestMapping(value = "/subscription", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/subscription", method = RequestMethod.GET)
     public ResponseEntity<String> subscribe(@RequestBody SubscriptionDTO subscriptionDTO, @CookieValue(value = "SESSION_STRING") String sessionString) throws UserNotFoundException {
         subscriptionService.saveSubscription(subscriptionDTO);
         return ResponseEntity

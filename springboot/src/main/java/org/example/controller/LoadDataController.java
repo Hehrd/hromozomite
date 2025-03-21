@@ -52,4 +52,11 @@ public class LoadDataController {
                 .status(HttpStatus.OK)
                 .body(result);
     }
+    @RequestMapping(value = "/balance", method = RequestMethod.GET)
+    public ResponseEntity<Long> getBalance(@CookieValue(value = "SESSION_STRING", required = true) String sessionString) throws UserNotFoundException {
+        loadDataService.getBalance(sessionString);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(loadDataService.getBalance(sessionString));
+    }
 }

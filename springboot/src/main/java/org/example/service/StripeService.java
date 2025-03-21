@@ -38,7 +38,7 @@ public class StripeService {
         TransactionEntity transactionEntity = new TransactionEntity();
         transactionEntity.setAmount(request.getAmount());
         transactionEntity.setCurrency(request.getCurrency());
-        transactionEntity.setUserId(userAccountRepository.findBySession_SessionString(sessionString).orElseThrow(()-> new UserNotFoundException("User not found!")).getId());
+        transactionEntity.setUser(userAccountRepository.findBySession_SessionString(sessionString).orElseThrow(()-> new UserNotFoundException("User not found!")));
         saveTransaction(transactionEntity);
         return responseData;
     }
@@ -56,7 +56,6 @@ public class StripeService {
                 .build();
         return createParams;
     }
-    @Transactional
     protected void saveTransaction(TransactionEntity transactionEntity){
         transactionRepository.save(transactionEntity);
     }
