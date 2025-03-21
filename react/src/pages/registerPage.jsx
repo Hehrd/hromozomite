@@ -29,7 +29,7 @@ const Register = () => {
     };
 
     // Send the request to the backend
-    fetch('http://localhost:6969/useraccount/register', {
+    fetch('http://localhost:6969/useraccount/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
