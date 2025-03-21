@@ -34,12 +34,11 @@ body {
    Payment Form Styling
 --------------------------------------------------------- */
 .payment-container {
-    width: 100%;
-    height: auto;
-    position: fixed;
+    width: calc(100% - 40px);     /* Adds 20px space left & right */
+    margin: 0 20px 20px 20px;     /* Left, Right, and Bottom margin */
     bottom: 0;
     left: 0;
-    background-color: var(--container-bg-dark); /* Dark mode by default */
+    background-color: var(--container-bg-dark);
     padding: 15px 20px;
     box-shadow: 0px -2px 10px rgba(255, 255, 255, 0.1);
     display: flex;
@@ -47,7 +46,9 @@ body {
     align-items: center;
     gap: 10px;
     z-index: 1000;
+    border-radius: 30px; /* Optional: slightly rounded corners */
 }
+
 
 /* Payment input container */
 .payment-inputs {
