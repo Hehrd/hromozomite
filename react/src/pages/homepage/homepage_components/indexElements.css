@@ -8,15 +8,17 @@
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px; /* Move the container higher */
     gap: 20px;
     padding: 0 20px;
+    position: relative; /* Allow positioning for animations */
+    animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
 }
 
 /* Each tab box styling */
 .tab-box {
     flex: 1;
-    border: 2px solid var(--border-color); /* Updated border */
+    border: 2px solid #ffffff; /* Use hex for consistency */
     padding: 20px;
     text-align: center;
     font-size: 1.5rem;
@@ -27,31 +29,32 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--container-bg-dark); /* Updated background */
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    position: relative;
-    z-index: 0;
+    background-color: transparent; /* Add background for clarity */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    position: relative; /* Ensure proper stacking context */
+    z-index: 0; /* Prevent rendering issues */
+    animation: slideUp 0.8s ease-in-out; /* Add slide-up animation */
 }
 
 /* Add hover effect for better interactivity */
 .tab-box:hover {
-    box-shadow: 0 4px 10px rgba(165, 201, 202, 0.2); /* Adjusted hover shadow */
-    border: 2px solid var(--button-hover-bg-dark); /* Updated hover border */
-    z-index: 1;
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3); /* Enhanced hover shadow */
+    transform: translateY(-5px); /* Slight upward movement */
+    z-index: 1; /* Bring the element to the front */
 }
 
 /* Title spacing inside tab box */
 .tab-box h2 {
     margin-bottom: 15px;
-    font-size: 1.8rem;
-    color: var(--text-color-dark);
+    font-size: 1.8rem; /* Slightly larger for better readability */
+    color: #ffffff;
 }
 
 /* Ensure all tab content is always visible */
 .tab-content {
     width: 100%;
     text-align: center;
-    color: var(--secondary-text-color);
+    color: #ffffff;
     font-size: 1rem;
     line-height: 1.5;
 }
@@ -64,10 +67,10 @@
     justify-content: center;
     margin-bottom: 20px;
     padding: 10px;
-    border: 2px solid var(--border-color);
+    border: 2px solid #ffffff;
     border-radius: 10px;
-    background-color: var(--container-bg-dark);
-    color: var(--text-color-dark);
+    background-color: transparent;
+    color: #ffffff;
     font-size: 1.5rem;
     text-align: center;
 }
@@ -124,6 +127,81 @@
     cursor: default;
 }
 
+/* Center the bottom elements */
+.bottom-elements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; /* Add spacing from the tab boxes */
+    animation: fadeIn 1.2s ease-in-out; /* Add fade-in animation */
+}
+
+/* Center the input fields and button */
+.center-elements {
+    display: flex;
+    flex-direction: row; /* Arrange elements in a row */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    gap: 15px; /* Add spacing between elements */
+    position: absolute; /* Position in the center of the screen */
+    top: 50%; /* Vertically center */
+    left: 50%; /* Horizontally center */
+    transform: translate(-50%, -50%); /* Adjust for centering */
+    width: 100%; /* Ensure it spans the width */
+    max-width: 800px; /* Limit the width for better alignment */
+    padding: 20px;
+}
+
+/* Styling for input fields */
+.center-elements input,
+.center-elements select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Make inputs responsive */
+    max-width: 200px; /* Limit the width of each input */
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Styling for the Add Payment button */
+.center-elements .add-payment-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #0072ce; /* Blue background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.center-elements .add-payment-btn:hover {
+    background-color: #005bb5; /* Darker blue on hover */
+}
+
+/* Add animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .tabs-container {
@@ -134,5 +212,20 @@
     .tab-box {
         min-height: 250px;
         font-size: 1.2rem;
+    }
+
+    .bottom-elements {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .center-elements {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+        gap: 10px;
+    }
+
+    .center-elements input,
+    .center-elements select {
+        max-width: 100%; /* Allow inputs to take full width */
     }
 }
