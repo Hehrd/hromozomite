@@ -154,6 +154,44 @@ html {
     justify-content: flex-end;
 }
 
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Space between left, center, and right sections */
+  align-items: center; /* Vertically center items */
+  padding: 10px 20px;
+  background-color: #333; /* Example background color */
+  color: #fff;
+}
+
+/* Center the navbar-center element */
+.navbar-center {
+  position: absolute; /* Position it absolutely relative to the navbar */
+  left: 50%; /* Move it to the horizontal center */
+  transform: translateX(-50%); /* Adjust for the element's width */
+  text-align: center;
+}
+
+/* Navbar left and right sections */
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Navbar center link styling */
+.navbar-center-element {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-center-element:hover {
+  color: #ccc; /* Example hover color */
+}
+
 /* ---------------------------------------
    5. Profile Button & Icon
 --------------------------------------- */

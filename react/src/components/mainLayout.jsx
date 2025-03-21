@@ -78,6 +78,11 @@ const MainLayout = () => {
         <Link to="/aboutus" className="dropdown-item" onClick={() => setShowDropdown(false)}>
           About Us
         </Link>
+
+        {/* New Settings Option */}
+        <Link to="/settings" className="dropdown-item" onClick={() => setShowDropdown(false)}>
+          Settings
+        </Link>
       </DropdownMenu>
 
       <Outlet />

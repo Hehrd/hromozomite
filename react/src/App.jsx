@@ -12,6 +12,7 @@ import PaymentPage from './pages/paymentPage'; // Your payment page
 import AboutUsPage from './pages/aboutUsPage';
 import QrScaner from './pages/qrScanPage'; // Your QR code scanner page
 import AnalyticsPage from './pages/analyticsPage.jsx';
+import Settings from './pages/settings.jsx';
 function App() {
   return (
     <AppProvider>
@@ -29,6 +30,7 @@ function App() {
               <Route path="/aboutus" element={<AboutUsPage />} />
               <Route path="/qrscan" element={<QrScaner />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
           </Routes>
         </Router>

@@ -1,0 +1,263 @@
+/* General container styling */
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px;
+    background: linear-gradient(
+        rgba(13, 13, 13, 0.6),
+        rgba(13, 13, 13, 0.6)
+      ),
+      url("../assets/settings-background.jpg"); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    min-height: 100vh;
+  }
+  
+  /* Page title styling */
+  .settings-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Section styling */
+  .settings-section {
+    width: 100%;
+    max-width: 600px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Subtitle styling */
+  .settings-subtitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Button styling */
+  .settings-button {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #6f32be, #8f52de);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .settings-button:hover {
+    background: linear-gradient(135deg, #8f52de, #ab73ee);
+  }
+  
+  /* Modal overlay styling */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it appears above other elements */
+  }
+  
+  /* Modal styling */
+  .modal {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Modal header styling */
+  .modal-header {
+    background-color: #6f32be; /* Purple background */
+    color: #ffffff; /* White text */
+    padding: 15px;
+    border-radius: 10px 10px 0 0; /* Rounded corners for the top */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Modal title styling */
+  .modal-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Modal content styling */
+  .modal-content {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #555555;
+  }
+  
+  /* Modal close button styling */
+  .modal-close-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #6f32be, #8f52de);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .modal-close-button:hover {
+    background: linear-gradient(135deg, #8f52de, #ab73ee);
+  }
+  
+  /* Fade-in animation for the modal */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .settings-title {
+      font-size: 2rem;
+    }
+  
+    .settings-section {
+      max-width: 100%;
+    }
+  
+    .settings-subtitle {
+      font-size: 1.5rem;
+    }
+  
+    .settings-button {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      
+    }
+  }
+  
+  /* Modal input styling */
+  .modal-input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    border: 2px solid #cccccc;
+    border-radius: 5px;
+    outline: none;
+    text-align: center;
+  }
+  
+  /* Modal calculate button styling */
+  .modal-calculate-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #6f32be, #8f52de);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .modal-calculate-button:hover {
+    background: linear-gradient(135deg, #8f52de, #ab73ee);
+  }
+
+  /* Warning box styling */
+  .warning-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffcc00; /* Yellow background */
+    color: #333333; /* Dark text */
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Savings box styling */
+  .savings-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #6f32be; /* Purple background */
+    color: #ffffff; /* White text */
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Modal close button styling */
+  .modal-close-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #6f32be, #8f52de);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .modal-close-button:hover {
+    background: linear-gradient(135deg, #8f52de, #ab73ee);
+  }
+
+  /* Modal button container styling */
+  .modal-button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Add spacing between the buttons */
+    margin-top: 20px;
+  }
+
+  /* Button group styling */
+  .button-group {
+    display: flex;
+    gap: 10px; /* Add spacing between buttons */
+  }
+
+  /* Radio group styling */
+  .radio-group {
+    display: flex;
+    flex-direction: row; /* Align radio buttons horizontally */
+    gap: 20px; /* Add spacing between radio buttons */
+    margin-top: 10px;
+    justify-content: center; /* Center the radio buttons */
+    align-items: center; /* Align the labels and buttons vertically */
+    color: #332727;
+  }
