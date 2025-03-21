@@ -5,7 +5,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { StripeContext } from './StripeContext';
 
 // Add your Stripe publishable key here
-const STRIPE_PUBLISHABLE_KEY = ''; // Replace with your actual Stripe publishable key
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51R4m0xP4pNvEwxcZ2qLyLfrCvG5u6q6X6ru0Pu4nPHUl2nuTEQKWQkc6p6IFfY3psyre2UVZYEpOJfOJj0y4gOJt00SZJhSAdH'; // Replace with your actual Stripe publishable key
 
 const StripeProvider = ({ children }) => {
   const [stripe, setStripe] = useState(null);
