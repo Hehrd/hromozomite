@@ -25,9 +25,11 @@ const MainLayout = () => {
     <div className={`main-layout ${theme}`}>
       <nav className="navbar">
         <div className="navbar-left">
-          <Link to="/" className="home-button">
-            Home
-          </Link>
+          <Link to="/" className="home-button">Home</Link>
+        </div>
+
+        <div className="navbar-center">
+          <h1 className="navbar-title">Spestisimo</h1>
         </div>
 
         <div className="navbar-right">
@@ -36,6 +38,7 @@ const MainLayout = () => {
           </button>
         </div>
       </nav>
+
 
       <DropdownMenu show={showDropdown}>
         <button

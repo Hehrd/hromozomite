@@ -3,21 +3,16 @@
    (Adjust these to refine your light/dark themes)
 --------------------------------------------------------- */
 :root {
-    --navbar-bg: #fff;           /* Default for light mode */
-    --navbar-text: #000;         /* Default for light mode */
-    --border-color: #ccc;        /* Default border color */
-    --dropdown-bg: #fff;         /* Default dropdown background */
-    --dropdown-hover-bg: #f0f0f0;/* Default dropdown hover color */
-    --background-image: url('../assets/back_white.jpg'); /* Light mode background */
-}
-
-body.dark-mode {
-    --navbar-bg: #121212;        /* Dark navbar background */
-    --navbar-text: #ffffff;      /* Dark navbar text color */
-    --border-color: #2c2c2c;     /* Dark border color */
-    --dropdown-bg: #1f1f1f;      /* Dark dropdown background */
-    --dropdown-hover-bg: #2c2c2c;/* Dark dropdown hover color */
-    --background-image: url('../assets/back.jpg'); /* Dark mode background */
+    --navbar-bg: #395B64;         /* Navbar background */
+    --navbar-text: #E7F6F2;       /* Navbar text color */
+    --border-color: #A5C9CA;      /* Border color */
+    --dropdown-bg: #2C3333;       /* Dropdown background */
+    --dropdown-hover-bg: #A5C9CA; /* Dropdown hover color */
+    --cta-bg: #395B64;            /* CTA button background */
+    --cta-hover-bg: #A5C9CA;      /* CTA button hover background */
+    --text-color: #E7F6F2;        /* Default text color */
+    --secondary-text-color: #A5C9CA; /* Secondary text color */
+    --background-color: #2C3333;  /* Page background */
 }
 
 /* -------------------------------------------------------
@@ -29,10 +24,12 @@ html, body {
     height: 100%;
     overflow: hidden; /* Disable scrolling */
     font-family: 'Inter', Arial, sans-serif;
-    background-color: #0d0d0d; /* Default dark background */
-    color: #ffffff;           /* Default text color */
+    color: var(--text-color);  /* Default text color */
+    background-color: var(--bg-color-dark) 
 }
-
+.main-layout {
+    background-color: var(--bg-color-dark) !important; /* Prevents any override */
+}
 html {
     overflow: hidden; /* Disable scrolling for the entire page */
 }
@@ -56,12 +53,32 @@ html {
     background-color: var(--navbar-bg);
     color: var(--navbar-text);
     display: flex;
-    align-items: center;
+    align-items: center; /* Vertically center all items */
+    justify-content: space-between; /* Space between left, center, and right sections */
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    overflow: hidden; /* Prevent scrolling within the navbar */
     height: 60px; /* Ensure consistent height */
+}
+
+/* Center the h1 element */
+.navbar-center {
+    flex: 1; /* Allow the center section to take up available space */
+    display: flex;
+    justify-content: center; /* Horizontally center the h1 */
+    align-items: center; /* Vertically center the h1 */
+    height: 100%; /* Match the height of the navbar */
+}
+
+/* Styling for the h1 element */
+.navbar-center h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--navbar-text);
+    margin: 0;
+    text-align: center;
+    height: 100%; /* Match the height of the navbar */
+    display: flex;
+    align-items: center; /* Vertically center the text inside the h1 */
 }
 
 .navbar a,
@@ -86,37 +103,11 @@ html {
     flex: 0 0 auto;
 }
 
-.navbar-center {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .navbar-right {
     margin-left: auto; /* Push the user button to the far right */
     display: flex;
     align-items: center;
     justify-content: flex-end;
-}
-
-/* -------------------------------------------------------
-   4. Search Bar
---------------------------------------------------------- */
-.search-bar {
-    padding: 8px 12px;
-    font-size: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    min-width: 300px;
-    background-color: transparent;
-    color: var(--navbar-text);
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.search-bar:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 /* -------------------------------------------------------
@@ -158,6 +149,7 @@ html {
    Dropdown Menu Swipe Animation
 --------------------------------------------------------- */
 .dropdown-menu {
+  display: none !important; /* Hide the dropdown by default */
   position: absolute;
   top: 60px;
   right: 0px;
@@ -177,8 +169,10 @@ html {
 
 /* Show dropdown with animation */
 .show-dropdown {
+  display: flex !important;
   opacity: 1;
   transform: translateY(0) translateX(0); /* Move into position */
+  
 }
 
 /* Dropdown Items */
@@ -223,7 +217,7 @@ html {
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2; /* Adjust line height to prevent text clipping */
-    color: #fff;
+    color: var(--text-color);
     overflow: hidden; /* Prevent scrolling within the h1 */
     text-overflow: ellipsis; /* Handle overflow text gracefully */
     white-space: nowrap; /* Prevent text wrapping */
@@ -234,13 +228,13 @@ html {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     max-width: 600px;
-    color: #bdbdbd;
+    color: var(--secondary-text-color);
 }
 
 .main-layout p {
     max-width: 600px;
     margin: 0 auto 1rem;
-    color: #cccccc;
+    color: var(--secondary-text-color);
     line-height: 1.5; /* Ensure proper spacing for other text elements */
 }
 
@@ -259,11 +253,11 @@ html {
    8. CTA Button Styling
 --------------------------------------------------------- */
 .cta-button {
-    background: linear-gradient(135deg, #6f32be, #8f52de);
+    background: var(--cta-bg);
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 4px;
-    color: #ffffff;
+    color: var(--text-color);
     font-weight: 600;
     cursor: pointer;
     margin-top: 1rem;
@@ -271,19 +265,19 @@ html {
 }
 
 .cta-button:hover {
-    background: linear-gradient(135deg, #8f52de, #ab73ee);
+    background: var(--cta-hover-bg);
 }
 
 .cta-button.secondary {
     background: none;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--text-color);
     margin-left: 1rem;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .cta-button.secondary:hover {
-    background-color: #ffffff;
-    color: #0d0d0d;
+    background-color: var(--text-color);
+    color: var(--bg-color);
 }
 
 .home-button {

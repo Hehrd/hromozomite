@@ -10,7 +10,13 @@ const IndexElements = () => {
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const response = await fetch("/api/balance"); // Replace with your backend endpoint
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/useraccount/balance`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
         const data = await response.json();
         setBalance(data.balance); // Assuming the backend sends { balance: <amount> }
       } catch (error) {

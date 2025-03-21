@@ -3,22 +3,22 @@
 --------------------------------------------------------- */
 :root {
     /* Light Mode Variables */
-    --bg-color-light: #fff;
+    --bg-color-light: #E7F6F2;
     --text-color-light: #000;
-    --container-bg-light: #f5f5f5;
-    --input-bg-light: #eee;
-    --input-border-light: #ddd;
-    --button-bg-light: #007bff;
-    --button-hover-bg-light: #0056b3;
+    --container-bg-light: #A5C9CA;
+    --input-bg-light: #ffffff;
+    --input-border-light: #395B64;
+    --button-bg-light: #395B64;
+    --button-hover-bg-light: #2C3333;
 
-    /* Dark Mode Variables */
-    --bg-color-dark: #111;
-    --text-color-dark: #fff;
-    --container-bg-dark: #222;
-    --input-bg-dark: #333;
-    --input-border-dark: #444;
-    --button-bg-dark: #007bff;
-    --button-hover-bg-dark: #0056b3;
+    /* Dark Mode Variables (Custom Blue-Green Palette) */
+    --bg-color-dark: #2C3333;       /* Background */
+    --text-color-dark: #E7F6F2;     /* Main text color */
+    --container-bg-dark: #395B64;   /* Container backgrounds */
+    --input-bg-dark: #395B64;       /* Input fields */
+    --input-border-dark: #A5C9CA;   /* Input & card borders */
+    --button-bg-dark: #A5C9CA;      /* Primary buttons */
+    --button-hover-bg-dark: #E7F6F2; /* Button hover state */
 }
 
 /* -------------------------------------------------------

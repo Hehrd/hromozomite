@@ -38,7 +38,7 @@ const Register = () => {
       captcha: captchaToken,
     };
 
-    fetch('http://localhost:6969/useraccount/signup', {
+    fetch(`${import.meta.env.VITE_API_URL}/useraccount/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(registerData),

@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.controller.model.SubscriptionDTO;
+import org.example.exception.UserNotFoundException;
 import org.example.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +17,11 @@ public class SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
 
-    @RequestMapping(value = "/subscription", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> subscribe(@RequestBody SubscriptionDTO subscriptionDTO, @CookieValue(value = "SESSION_STRING") String sessionString) {
+    @RequestMapping(value = "/subscription", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> subscribe(@RequestBody SubscriptionDTO subscriptionDTO, @CookieValue(value = "SESSION_STRING") String sessionString) throws UserNotFoundException {
         subscriptionService.saveSubscription(subscriptionDTO);
         return ResponseEntity
-                .status(HttpStatus.CREATED)
+                .status(200)
                 .body("Subscription created successfully!");
     }
 }
