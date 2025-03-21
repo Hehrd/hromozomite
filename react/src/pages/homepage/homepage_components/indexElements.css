@@ -110,6 +110,9 @@
     font-size: 1rem;
     line-height: 1.5;
   }
+  #money-spent-h2{
+    min-height: fit-content;
+  }
   
   /* Bottom elements container (if you have additional content) */
   .bottom-elements {
