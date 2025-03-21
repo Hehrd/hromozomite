@@ -1,35 +1,115 @@
+/* ------------------------------------------------------------------
+   1) THEME VARIABLES
+      - Dark Mode (Default): White inputs/select
+      - Light Mode (data-theme="light"): Gray inputs/select
+------------------------------------------------------------------ */
+:root {
+  /* Dark Mode (default) */
+  --payment-input-bg: #ffffff; /* White background for inputs/select */
+  --payment-input-text: #000000;
+}
+
+:root[data-theme="light"] {
+  /* Light Mode */
+  --payment-input-bg: #cccccc; /* Gray background for inputs/select */
+  --payment-input-text: #000000;
+}
+
+/* ------------------------------------------------------------------
+   2) CONTAINER / LAYOUT
+------------------------------------------------------------------ */
 .container {
-    text-align: center;
-    margin: 20px;
-  }
-  
-  .qr-reader {
-    margin: 20px auto;
-    width: 300px;
-    max-width: 100%;
-    border: 2px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-  }
-  
-  .result {
-    margin: 20px auto;
-    font-size: 1.2rem;
-    color: #333;
-  }
-  
-  .button {
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1rem;
-    margin: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  padding: 1rem;
+}
+
+.qr-reader {
+  margin: 20px auto;
+  width: 300px;
+  max-width: 100%;
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.result {
+  margin: 20px auto;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* ------------------------------------------------------------------
+   3) BUTTON STYLES
+------------------------------------------------------------------ */
+.button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+/* ------------------------------------------------------------------
+   4) PAYMENT FORM & INPUTS (including select)
+------------------------------------------------------------------ */
+.payment-form {
+  /* We stack one "row" for inputs, another "row" for the button */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Row of inputs: description, date, amount, category */
+.payment-inputs {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Apply the theme-based background and text color to inputs + select */
+.payment-inputs input,
+.payment-inputs select {
+  background-color: var(--payment-input-bg);
+  color: var(--payment-input-text);
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Make the Amount input narrower */
+.amount-field {
+  width: 90px;
+}
+
+/* Button row (Add Payment) on its own line */
+.payment-button {
+  display: flex;
+  justify-content: center;
+}
+
+/* Optionally remove the default arrow from the select for a cleaner look */
+.payment-inputs select {
+  background-color: var(--payment-input-bg) !important; /* Any color you like */
+  color: var(--payment-input-text) !important;              /* Adjust text color as needed */
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: none;
+}
