@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class SubscriptionDTO {
     private String name;
-    private int amount;
+    private Long amount;
     private String currency;
 }

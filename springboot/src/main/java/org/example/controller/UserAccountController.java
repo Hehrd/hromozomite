@@ -5,15 +5,12 @@ import org.example.exception.EmailAlreadyInUseException;
 import org.example.exception.UserNotFoundException;
 import org.example.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/useraccount")
-@CrossOrigin(origins = "${host}")
+@CrossOrigin(origins = "${host}", allowCredentials = "true")
 @Controller
 public class UserAccountController {
     @Autowired
@@ -22,14 +19,14 @@ public class UserAccountController {
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> login(@RequestBody UserCredentialsDTO userCredentialsDTO) throws UserNotFoundException {
         String sessionString = userAccountService.login(userCredentialsDTO);
-        StringBuilder cookieBuilder = new StringBuilder();
-        cookieBuilder.append("SESSION_STRING=");
-        cookieBuilder.append(sessionString);
-        cookieBuilder.append("; Path=/");
-        cookieBuilder.append("; Secure");
-        cookieBuilder.append("; SameSite=Strict");
+        ResponseCookie cookie = ResponseCookie.from("SESSION_STRING", sessionString)
+                .path("/")
+                .httpOnly(true)
+                .secure(false)  // Set to true if using HTTPS
+                .maxAge(24 * 60 * 60) // 1 day
+                .build();
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.SET_COOKIE, cookieBuilder.toString());
+        headers.add(HttpHeaders.SET_COOKIE, cookie.toString());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .headers(headers)

@@ -31,6 +31,7 @@ const Login = () => {
   
     // Send the request to the backend
     fetch(`${import.meta.env.VITE_API_URL}/useraccount/login`, {
+      credentials: "include",
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

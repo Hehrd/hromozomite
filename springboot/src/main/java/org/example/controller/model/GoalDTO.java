@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class GoalDTO {
-    private int amount;
+    private Long amount;
 }

@@ -14,7 +14,7 @@ public class SubscriptionEntity extends BaseEntity {
     private String name;
 
     @Column
-    private int amount;
+    private Long amount;
 
     @Column
     private String currency;

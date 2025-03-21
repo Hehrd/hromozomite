@@ -10,7 +10,7 @@ import org.hibernate.annotations.CollectionId;
 public class GoalEntity extends BaseEntity{
 
     @Column
-    private int amount;
+    private Long amount;
 
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")

@@ -18,7 +18,7 @@ public class PaymentsForADayEntity extends BaseEntity{
 //    private Map<String, Integer> payments;
 
     @Column
-    private int amount;
+    private Long amount;
 
     @Column
     private String currency;

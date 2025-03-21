@@ -13,9 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public interface LoadDataRepository extends JpaRepository<SinglePaymentEntity, Long> {
-    Optional<SinglePaymentEntity> findById(Long id);
-    List<SinglePaymentEntity> findByDateBetween(Date startDate, Date endDate);
-    List<SinglePaymentEntity> findByUserIdOrderByTransactionDateDesc(Long amount, Pageable pageable);
-}
+//@Repository
+//public interface LoadDataRepository extends JpaRepository<SinglePaymentEntity, Long> {
+//    Optional<SinglePaymentEntity> findById(Long id);
+//    List<SinglePaymentEntity> findByDateBetween(Date startDate, Date endDate);
+//    List<SinglePaymentEntity> findByUserIdOrderByTransactionDateDesc(Long amount, Pageable pageable);
+//}
