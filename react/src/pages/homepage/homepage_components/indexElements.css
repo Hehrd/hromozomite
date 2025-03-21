@@ -35,7 +35,7 @@
 
 /* Add hover effect for better interactivity */
 .tab-box:hover {
-    transform: translateY(-5px);
+   /* transform: translateY(-5px);*/
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
     border: 2px solid #ffffff; /* Explicitly define the border to prevent disappearing */
     z-index: 1; /* Bring the element to the front */
@@ -55,6 +55,73 @@
     color: #ffffff;
     font-size: 1rem;
     line-height: 1.5;
+}
+
+/* Styling for the balance display */
+.balance-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.balance-display h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #ffffff;
+}
+
+.balance-display p {
+    margin: 5px 0 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Styling for the balance box */
+.balance-box {
+    background: linear-gradient(135deg, #6f32be, #8f52de); /* Cool gradient background */
+    color: #ffffff;
+    border: none; /* Remove border for a cleaner look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    padding: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.balance-box h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.balance-box p {
+    margin: 10px 0 0;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Add hover effect for the balance box */
+.balance-box:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Enhance shadow on hover */
 }
 
 /* Add responsive design for smaller screens */
