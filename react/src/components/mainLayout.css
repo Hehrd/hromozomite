@@ -3,21 +3,15 @@
    (Adjust these to refine your light/dark themes)
 --------------------------------------------------------- */
 :root {
-    --navbar-bg: #fff;           /* Default for light mode */
-    --navbar-text: #000;         /* Default for light mode */
-    --border-color: #ccc;        /* Default border color */
-    --dropdown-bg: #fff;         /* Default dropdown background */
-    --dropdown-hover-bg: #f0f0f0;/* Default dropdown hover color */
-    --background-image: url('../assets/back_white.jpg'); /* Light mode background */
-}
-
-body.dark-mode {
-    --navbar-bg: #121212;        /* Dark navbar background */
-    --navbar-text: #ffffff;      /* Dark navbar text color */
-    --border-color: #2c2c2c;     /* Dark border color */
-    --dropdown-bg: #1f1f1f;      /* Dark dropdown background */
-    --dropdown-hover-bg: #2c2c2c;/* Dark dropdown hover color */
-    --background-image: url('../assets/back.jpg'); /* Dark mode background */
+    --navbar-bg: #27391C;         /* Navbar background */
+    --navbar-text: #ffffff;       /* Navbar text color */
+    --border-color: #255F38;      /* Border color */
+    --dropdown-bg: #18230F;       /* Dropdown background */
+    --dropdown-hover-bg: #1F7D53; /* Dropdown hover color */
+    --cta-bg: #255F38;            /* CTA button background */
+    --cta-hover-bg: #1F7D53;      /* CTA button hover background */
+    --text-color: #ffffff;        /* Default text color */
+    --secondary-text-color: #bdbdbd; /* Secondary text color */
 }
 
 /* -------------------------------------------------------
@@ -29,8 +23,8 @@ html, body {
     height: 100%;
     overflow: hidden; /* Disable scrolling */
     font-family: 'Inter', Arial, sans-serif;
-    background-color: #0d0d0d; /* Default dark background */
-    color: #ffffff;           /* Default text color */
+    background-color: #18230F; /* Background color */
+    color: var(--text-color);  /* Default text color */
 }
 
 html {
@@ -109,7 +103,7 @@ html {
     border: 1px solid var(--border-color);
     border-radius: 4px;
     min-width: 300px;
-    background-color: transparent;
+    background-color: var(--dropdown-bg);
     color: var(--navbar-text);
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
@@ -223,7 +217,7 @@ html {
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2; /* Adjust line height to prevent text clipping */
-    color: #fff;
+    color: var(--text-color);
     overflow: hidden; /* Prevent scrolling within the h1 */
     text-overflow: ellipsis; /* Handle overflow text gracefully */
     white-space: nowrap; /* Prevent text wrapping */
@@ -234,13 +228,13 @@ html {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     max-width: 600px;
-    color: #bdbdbd;
+    color: var(--secondary-text-color);
 }
 
 .main-layout p {
     max-width: 600px;
     margin: 0 auto 1rem;
-    color: #cccccc;
+    color: var(--secondary-text-color);
     line-height: 1.5; /* Ensure proper spacing for other text elements */
 }
 
@@ -259,11 +253,11 @@ html {
    8. CTA Button Styling
 --------------------------------------------------------- */
 .cta-button {
-    background: linear-gradient(135deg, #6f32be, #8f52de);
+    background: var(--cta-bg);
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 4px;
-    color: #ffffff;
+    color: var(--text-color);
     font-weight: 600;
     cursor: pointer;
     margin-top: 1rem;
@@ -271,19 +265,19 @@ html {
 }
 
 .cta-button:hover {
-    background: linear-gradient(135deg, #8f52de, #ab73ee);
+    background: var(--cta-hover-bg);
 }
 
 .cta-button.secondary {
     background: none;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--text-color);
     margin-left: 1rem;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .cta-button.secondary:hover {
-    background-color: #ffffff;
-    color: #0d0d0d;
+    background-color: var(--text-color);
+    color: var(--bg-color);
 }
 
 .home-button {
