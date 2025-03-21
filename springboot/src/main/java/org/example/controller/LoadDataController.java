@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,9 +26,20 @@ public class LoadDataController {
     private LoadDataService loadDataService;
 
     @RequestMapping(value = "/transactions", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<SinglePaymentDTO>> loadData(@RequestBody DateRangeDTO dateRangeDTO, @CookieValue(value = "SESSION_STRING", required = false) String sessionString) throws UserNotFoundException {
+    public ResponseEntity<List<SinglePaymentDTO>> loadData(@RequestBody DateRangeDTO dateRangeDTO, @CookieValue(value = "SESSION_STRING", required = true) String sessionString) throws UserNotFoundException {
 
         List<SinglePaymentDTO> result = loadDataService.getPaymentsBetween(dateRangeDTO.getStartDate(), dateRangeDTO.getEndDate());
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(result);
+    }
+
+    @RequestMapping(value = "/last-3-transactions", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<SinglePaymentDTO>> getLast3Transactions(@RequestBody SinglePaymentDTO singlePaymentDTO, @CookieValue(value = "SESSION_STRING", required = true) String sessionString) throws UserNotFoundException {
+
+
+        List<SinglePaymentDTO> result = loadDataService.getLastTransactions(sessionString);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
