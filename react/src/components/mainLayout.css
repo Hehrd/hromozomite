@@ -1,84 +1,129 @@
-/* -------------------------------------------------------
-   1. Global Variables & Modes
-   (Adjust these to refine your light/dark themes)
---------------------------------------------------------- */
+/* ---------------------------------------
+   1. Base Variables (default to Dark Mode)
+   High Contrast: BLACK background, WHITE text,
+   BLACK navbar
+--------------------------------------- */
 :root {
-    --navbar-bg: #395B64;         /* Navbar background */
-    --navbar-text: #E7F6F2;       /* Navbar text color */
-    --border-color: #A5C9CA;      /* Border color */
-    --dropdown-bg: #2C3333;       /* Dropdown background */
-    --dropdown-hover-bg: #A5C9CA; /* Dropdown hover color */
-    --cta-bg: #395B64;            /* CTA button background */
-    --cta-hover-bg: #A5C9CA;      /* CTA button hover background */
-    --text-color: #E7F6F2;        /* Default text color */
-    --secondary-text-color: #A5C9CA; /* Secondary text color */
-    --background-color: #2C3333;  /* Page background */
+    /* Navbar & Borders (Dark) */
+    --navbar-bg: #222222;        /* Pure black navbar */
+    --navbar-text: #ffffff;     /* White navbar text */
+    --border-color: #888888;    /* Medium gray for borders */
+
+    /* Dropdown Colors (Dark) */
+    --dropdown-bg: #111111;     /* Slightly lighter black */
+    --dropdown-hover-bg: #333333; /* Grayish hover in dark mode */
+
+    /* CTA Button Colors (Dark) */
+    --cta-bg: #000000;          /* Black background for CTA */
+    --cta-hover-bg: #333333;    /* Dark gray hover */
+
+    /* Text Colors (Dark) */
+    --text-color: #ffffff;      /* Primary text is white */
+    --secondary-text-color: #cccccc; /* Lighter gray/white for secondary text */
+
+    /* Page Background (Dark) */
+    --bg-color: #000000;        /* Overall black background */  
+    /* Important Colors (Dark Mode) */
+    --important-text-color: #ffff00; /* Bright yellow for important text */
+    --important-bg-color: #ff0000;   /* Red highlight background if needed */
 }
 
-/* -------------------------------------------------------
-   2. Global Reset & Base
---------------------------------------------------------- */
+/* ---------------------------------------
+   2. Light Mode Variables
+   Light BG, Black Text, Navbar is WHITE
+--------------------------------------- */
+:root[data-theme="light"] {
+    /* Navbar & Borders (Light) */
+    --navbar-bg: #d7d7d7;      /* White navbar in light mode */
+    --navbar-text: #000000;    /* Black navbar text */
+    --border-color: #555555;   /* Medium gray border */
+
+    /* Dropdown Colors (Light) */
+    --dropdown-bg: #bfbfbf;    /* Very light gray for dropdown background */
+    --dropdown-hover-bg: #dddddd; /* Medium gray hover */
+
+    /* CTA Button Colors (Light) */
+    --cta-bg: #000000;         /* Black background for CTA button */
+    --cta-hover-bg: #555555;   /* Gray hover on CTA button */
+
+    /* Text Colors (Light) */
+    --text-color: #000000;     /* Black text for main content */
+    --secondary-text-color: #333333; /* Dark gray for secondary text */
+
+    /* Page Background (Light) */
+    --bg-color: #ffffff;       /* White background for main content */
+    
+    /* Important Colors (Light Mode) */
+    --important-text-color: #ff0000; /* Bright red for important text */
+    --important-bg-color: #ffff00;   /* Yellow highlight if needed */
+}
+
+/* ---------------------------------------
+   3. Global Reset & Base
+--------------------------------------- */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     overflow: hidden; /* Disable scrolling */
     font-family: 'Inter', Arial, sans-serif;
-    color: var(--text-color);  /* Default text color */
-    background-color: var(--bg-color-dark) 
+    color: var(--text-color);
+    background-color: var(--bg-color);
 }
+
 .main-layout {
-    background-color: var(--bg-color-dark) !important; /* Prevents any override */
+    background-color: var(--bg-color) !important; /* Prevent override */
 }
+
 html {
     overflow: hidden; /* Disable scrolling for the entire page */
 }
 
+/* Hide scrollbars in all browsers */
 ::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for WebKit browsers */
+    display: none;
 }
-
 * {
-    scrollbar-width: none; /* Hide scrollbar for other browsers */
+    scrollbar-width: none;
 }
 
-/* -------------------------------------------------------
-   3. Navbar Styling
---------------------------------------------------------- */
-/* Prevent scrolling for the navbar */
+/* ---------------------------------------
+   4. Navbar Styling
+--------------------------------------- */
 .navbar {
+    overflow: hidden;
     position: sticky;
     top: 0;
     z-index: 1000;
     background-color: var(--navbar-bg);
+    min-height: 60px;
     color: var(--navbar-text);
     display: flex;
-    align-items: center; /* Vertically center all items */
-    justify-content: space-between; /* Space between left, center, and right sections */
+    align-items: center;
+    justify-content: space-between;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 60px; /* Ensure consistent height */
+    height: 60px;
 }
 
-/* Center the h1 element */
 .navbar-center {
-    flex: 1; /* Allow the center section to take up available space */
+    flex: 1;
+    font-size: 1.5rem;
     display: flex;
-    justify-content: center; /* Horizontally center the h1 */
-    align-items: center; /* Vertically center the h1 */
-    height: 100%; /* Match the height of the navbar */
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
-/* Styling for the h1 element */
 .navbar-center h1 {
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--navbar-text);
     margin: 0;
     text-align: center;
-    height: 100%; /* Match the height of the navbar */
+    height: 100%;
     display: flex;
-    align-items: center; /* Vertically center the text inside the h1 */
+    align-items: center;
 }
 
 .navbar a,
@@ -90,12 +135,11 @@ html {
 
 .navbar a:hover {
     opacity: 0.8;
-    transform: none; /* Ensure no movement */
-    margin: 0; /* Prevent any margin changes */
-    padding: 0; /* Prevent padding changes */
+    transform: none;
+    margin: 0;
+    padding: 0;
 }
 
-/* Navbar Sections */
 .navbar-left,
 .navbar-right {
     display: flex;
@@ -104,15 +148,15 @@ html {
 }
 
 .navbar-right {
-    margin-left: auto; /* Push the user button to the far right */
+    margin-left: auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-/* -------------------------------------------------------
+/* ---------------------------------------
    5. Profile Button & Icon
---------------------------------------------------------- */
+--------------------------------------- */
 .profile-btn {
     background: none;
     border: none;
@@ -120,9 +164,10 @@ html {
     margin-left: 1rem;
     outline: none;
 }
+
 .profile-btn:focus {
-  outline: none;
-  box-shadow: none; /* Prevent any highlight */
+    outline: none;
+    box-shadow: none;
 }
 
 .profile-icon {
@@ -142,60 +187,52 @@ html {
     background-color: var(--dropdown-hover-bg);
 }
 
-/* -------------------------------------------------------
+/* ---------------------------------------
    6. Dropdown Menu
---------------------------------------------------------- */
-/* -------------------------------------------------------
-   Dropdown Menu Swipe Animation
---------------------------------------------------------- */
+--------------------------------------- */
 .dropdown-menu {
-  display: none !important; /* Hide the dropdown by default */
-  position: absolute;
-  top: 60px;
-  right: 0px;
-  background-color: var(--dropdown-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 6px; /* Slightly larger border radius for a smoother look */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Increased shadow for better visibility */
-  display: flex;
-  flex-direction: column;
-  z-index: 2000;
-  opacity: 0;
-  transform: translateY(0px) translateX(20px); /* Start from bottom-left */
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  width: 200px; /* Increased width */
-  padding: 10px 0; /* Added padding for better spacing */
+    display: none !important;
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    background-color: var(--dropdown-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    z-index: 2000;
+    opacity: 0;
+    transform: translateY(0px) translateX(20px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    width: 200px;
+    padding: 10px 0;
 }
 
-/* Show dropdown with animation */
 .show-dropdown {
-  display: flex !important;
-  opacity: 1;
-  transform: translateY(0) translateX(0); /* Move into position */
-  
+    display: flex !important;
+    opacity: 1;
+    transform: translateY(0) translateX(0);
 }
 
-/* Dropdown Items */
 .dropdown-menu .dropdown-item {
-  padding: 12px 20px; /* Increased padding for larger clickable area */
-  background: none;
-  text-align: left;
-  cursor: pointer;
-  width: 100%;
-  color: var(--navbar-text);
-  font-size: 1.2rem; /* Slightly larger font size for better readability */
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    padding: 12px 20px;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    color: var(--navbar-text);
+    font-size: 1.2rem;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-/* Hover Effect */
 .dropdown-menu .dropdown-item:hover {
-  background-color: var(--dropdown-hover-bg);
+    background-color: var(--dropdown-hover-bg);
 }
 
-
-/* -------------------------------------------------------
+/* ---------------------------------------
    7. Hero / Main Layout Styling
---------------------------------------------------------- */
+--------------------------------------- */
 .main-layout > *:not(.navbar):not(.dropdown-menu) {
     min-height: calc(100vh - 60px);
     display: flex;
@@ -203,10 +240,13 @@ html {
     justify-content: center;
     align-items: center;
     text-align: center;
+
+    /* Optional overlay + background image */
     background: linear-gradient(
-        rgba(13, 13, 13, 0.6),
-        rgba(13, 13, 13, 0.6)
-    ), var(--background-image);
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6)
+    ),
+    var(--background-image);
     background-size: cover;
     background-position: center;
     padding: 2rem;
@@ -216,12 +256,12 @@ html {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    line-height: 1.2; /* Adjust line height to prevent text clipping */
+    line-height: 1.2;
     color: var(--text-color);
-    overflow: hidden; /* Prevent scrolling within the h1 */
-    text-overflow: ellipsis; /* Handle overflow text gracefully */
-    white-space: nowrap; /* Prevent text wrapping */
-    padding-bottom: 0.2em; /* Add slight padding to prevent clipping */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-bottom: 0.2em;
 }
 
 .main-layout h2 {
@@ -229,39 +269,36 @@ html {
     margin-bottom: 1.5rem;
     max-width: 600px;
     color: var(--secondary-text-color);
+    line-height: 1.5;
 }
 
 .main-layout p {
     max-width: 600px;
     margin: 0 auto 1rem;
     color: var(--secondary-text-color);
-    line-height: 1.5; /* Ensure proper spacing for other text elements */
-}
-
-.main-layout h2 {
-    line-height: 1.5; /* Ensure proper spacing for other text elements */
+    line-height: 1.5;
 }
 
 .main-layout {
-    overflow: hidden; /* Prevent scrolling within the main layout */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 100%; /* Ensure it takes up the full height */
+    height: 100%;
 }
 
-/* -------------------------------------------------------
+/* ---------------------------------------
    8. CTA Button Styling
---------------------------------------------------------- */
+--------------------------------------- */
 .cta-button {
     background: var(--cta-bg);
-    border: none;
+    border: 2px solid var(--border-color);
     padding: 0.75rem 1.5rem;
     border-radius: 4px;
     color: var(--text-color);
     font-weight: 600;
     cursor: pointer;
     margin-top: 1rem;
-    transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .cta-button:hover {
@@ -272,7 +309,6 @@ html {
     background: none;
     border: 2px solid var(--text-color);
     margin-left: 1rem;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .cta-button.secondary:hover {
@@ -282,4 +318,16 @@ html {
 
 .home-button {
     font-size: 30px;
+}
+
+/* ---------------------------------------
+   9. Highlighting Important Stuff
+--------------------------------------- */
+.important {
+    color: var(--important-text-color);
+    font-weight: bold;
+    /* For a colored background highlight, uncomment:
+       background-color: var(--important-bg-color);
+       padding: 0.2em 0.3em;
+       border-radius: 4px; */
 }

@@ -1,1 +1,177 @@
+/* General container styling */
+.analytics-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content closer to the top */
+  padding: 20px 20px; /* Reduce padding to pull content higher */
+  background: linear-gradient(
+      rgba(13, 13, 13, 0.6),
+      rgba(13, 13, 13, 0.6)
+    ),
+    url("../assets/analytics-background.jpg"); /* Replace with your background image */
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Page title styling */
+.analytics-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px; /* Add spacing below the title */
+  padding-bottom: 0; /* Remove unnecessary padding */
+  line-height: 1.3; /* Adjust line height for better spacing */
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Add subtle shadow for better readability */
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+  z-index: 1; /* Ensure the title is above other elements */
+  min-height: 69px;
+}
+
+/* Chart container styling */
+.chart-container {
+  width: 100%;
+  max-width: 800px; /* Limit the width of the chart */
+  height: 400px; /* Set a fixed height for the chart */
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px; /* Add spacing above the chart */
+  animation: slideUp 1s ease-in-out; /* Add slide-up animation */
+}
+
+/* Pie chart container styling */
+.pie-chart-container {
+  width: 100%;
+  max-width: 600px; /* Limit the width of the pie chart */
+  height: 400px; /* Set a fixed height for the pie chart */
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin-top: 30px; /* Add spacing above the pie chart */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+/* Bar chart container styling */
+.bar-chart-container {
+  width: 100%;
+  max-width: 800px; /* Limit the width of the bar chart */
+  height: 400px; /* Set a fixed height for the bar chart */
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin-top: 30px; /* Add spacing above the bar chart */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
     
+/* Section container styling */
+.section-container {
+  width: 100%;
+  max-width: 1000px; /* Limit the width of the section */
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin-top: 40px; /* Add spacing above the section */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 1.5s ease-in-out; /* Add fade-in animation */
+}
+
+/* Section title styling */
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Add subtle shadow */
+}
+
+/* Section content styling */
+.section-content {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Button styling */
+.analytics-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6f32be, #8f52de);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.analytics-button:hover {
+  background: linear-gradient(135deg, #8f52de, #ab73ee);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chart-container,
+  .pie-chart-container,
+  .section-container {
+    max-width: 100%; /* Allow the sections to take full width on smaller screens */
+    height: auto; /* Adjust height for smaller screens */
+  }
+
+  .analytics-title {
+    font-size: 2rem; /* Adjust title size for smaller screens */
+  }
+
+  .section-title {
+    font-size: 1.8rem; /* Adjust section title size for smaller screens */
+  }
+
+  .section-content {
+    font-size: 1rem; /* Adjust content font size for smaller screens */
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Link, Outlet } from "react-router-dom";
 import { AppContext } from "../contexts/appContext.jsx";
@@ -17,6 +17,15 @@ const MainLayout = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { theme, toggleTheme, isLoggedIn, logOut } = useContext(AppContext);
 
+  // Update the document root's data-theme attribute based on current theme
+  useEffect(() => {
+    if (theme === "light-mode") {
+      document.documentElement.setAttribute("data-theme", "light");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+  }, [theme]);
+
   const toggleDropdownMenu = () => {
     setShowDropdown((prev) => !prev);
   };
@@ -25,11 +34,11 @@ const MainLayout = () => {
     <div className={`main-layout ${theme}`}>
       <nav className="navbar">
         <div className="navbar-left">
-          <Link to="/" className="home-button">Home</Link>
+          <Link to="/" className="home-button">Spestissimo</Link>
         </div>
 
         <div className="navbar-center">
-          <h1 className="navbar-title">Spestisimo</h1>
+          <Link to="/qrscan" className="navbar-center-element">Enter payment</Link>
         </div>
 
         <div className="navbar-right">
@@ -38,7 +47,6 @@ const MainLayout = () => {
           </button>
         </div>
       </nav>
-
 
       <DropdownMenu show={showDropdown}>
         <button
@@ -67,7 +75,6 @@ const MainLayout = () => {
           </Link>
         )}
 
-        {/* Third Option for About Us */}
         <Link to="/aboutus" className="dropdown-item" onClick={() => setShowDropdown(false)}>
           About Us
         </Link>
