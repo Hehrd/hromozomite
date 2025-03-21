@@ -39,6 +39,7 @@ html, body, #root {
   font-weight: var(--font-weight);
   color: var(--text-color);
   background-color: var(--background-color);
+  transition: 0.5s ease-in-out;
 }
 
 /* Basic link styling */

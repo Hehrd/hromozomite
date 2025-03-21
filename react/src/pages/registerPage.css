@@ -194,3 +194,23 @@ body {
   background-color: var(--form-bg) !important;  /* Webkit autofill background */
   color: var(--text-color) !important;           /* Webkit autofill text color */
 }
+
+/* -------------------------
+   Login Link Styling
+-------------------------- */
+.login-link {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.login-link a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'; 
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import { AppContext } from '../../contexts/appContext.jsx';  // Path to the unified AppContext
+import { useNavigate, Link } from 'react-router-dom';  // Import Link
+import { AppContext } from '../contexts/appContext.jsx';  // Path to the unified AppContext
 import './loginPage.css';
 
 const Login = () => {
@@ -86,6 +86,9 @@ const Login = () => {
         </div>
         <button type="submit" className="login-button">Log In</button>
       </form>
+      <p className="register-link">
+        No account? <Link to="/register">Register</Link>
+      </p>
     </div>
   );
 };
