@@ -7,6 +7,7 @@ import org.example.service.LoadDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -23,7 +24,7 @@ public class LoadDataController {
     @Autowired
     private LoadDataService loadDataService;
 
-    @RequestMapping(value = "/transactions", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/transactions", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<SinglePaymentDTO>> loadData(@RequestBody DateRangeDTO dateRangeDTO, @CookieValue(value = "SESSION_STRING", required = false) String sessionString) throws UserNotFoundException {
 
         List<SinglePaymentDTO> result = loadDataService.getPaymentsBetween(dateRangeDTO.getStartDate(), dateRangeDTO.getEndDate());
