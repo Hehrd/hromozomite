@@ -43,7 +43,6 @@ org/example/exception/GlobalExceptionHandler.class
 org/example/controller/model/PaymentsForADayDTO.class
 org/example/controller/model/PaymentRequest.class
 org/example/persistence/model/GoalEntity.class
-org/example/persistence/repository/LoadDataRepository.class
 org/example/persistence/repository/TransactionRepository.class
 org/example/Application.class
 org/example/controller/UserAccountController.class

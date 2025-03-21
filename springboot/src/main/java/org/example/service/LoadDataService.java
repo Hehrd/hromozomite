@@ -1,11 +1,14 @@
 package org.example.service;
 
+import com.stripe.service.tax.TransactionService;
 import org.example.controller.model.SinglePaymentDTO;
 import org.example.exception.UserNotFoundException;
 import org.example.persistence.model.SinglePaymentEntity;
+import org.example.persistence.model.TransactionEntity;
 import org.example.persistence.model.UserAccountEntity;
 //import org.example.persistence.repository.LoadDataRepository;
 import org.example.persistence.repository.SinglePaymentRepository;
+import org.example.persistence.repository.TransactionRepository;
 import org.example.persistence.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +30,8 @@ public class LoadDataService {
     private SinglePaymentRepository singlePaymentRepository;
     @Autowired
     private UserAccountRepository userAccountRepository;
+    @Autowired
+    private TransactionRepository transactionRepository;
 
 
 //    public List<SinglePaymentDTO> getPaymentsBetween(Date startDate, Date endDate) {
@@ -64,5 +69,15 @@ public class LoadDataService {
         }
 
         return singlePaymentDTOS;
+    }
+
+    public Long getBalance(String sessionString) throws UserNotFoundException {
+        UserAccountEntity userAccountEntity = userAccountRepository.findBySession_SessionString(sessionString).orElseThrow(() -> new UserNotFoundException("User not found!"));
+        List<TransactionEntity> transactionEntities = transactionRepository.findAllByUser_Id(userAccountEntity.getId()).orElseThrow(() -> new RuntimeException("User not found!"));
+        Long balance = 0L;
+        for (TransactionEntity transactionEntity : transactionEntities) {
+            balance += transactionEntity.getAmount();
+        }
+        return balance;
     }
 }
