@@ -9,6 +9,10 @@
   --accent-color: #6200ea;        /* Accent color for dark mode */
   --hover-accent: #7e35ff;        /* Hover accent for dark mode */
   --active-accent: #5a00c8;       /* Active accent for dark mode */
+
+  /* NEW variables for input backgrounds */
+  --input-bg: #2c2c2c;            /* Dark mode input background */
+  --input-focus-bg: #3a3a3a;      /* Dark mode input background on focus */
 }
 
 /* -------------------------
@@ -22,6 +26,10 @@ body.light-mode {
   --accent-color: #0055ff;        /* Accent color for light mode */
   --hover-accent: #3388ff;        /* Hover accent for light mode */
   --active-accent: #0044cc;       /* Active accent for light mode */
+
+  /* Light mode overrides for input backgrounds */
+  --input-bg: #ffffff;
+  --input-focus-bg: #f0f0f0;
 }
 
 /* -------------------------
@@ -109,26 +117,24 @@ body {
 -------------------------- */
 .form-group input {
   padding: 0.75rem 1rem;
-  border: 2px solid var(--border-color);      /* Border color based on theme */
+  border: 2px solid var(--border-color);
   border-radius: 4px;
-  background-color: var(--form-bg);           /* Background color based on theme */
-  color: var(--text-color);                   /* Text color based on theme */
+
+  /* Use our new custom variables for background & text color */
+  background-color: var(--input-bg);
+  color: var(--text-color);
+
   font-size: 1rem;
   transition: border 0.3s, background-color 0.3s;
 }
 
-/* Fixing email input to ensure consistency */
-.form-group input[type="email"],
-.form-group input[type="password"],
-.form-group input[type="text"] {
-  background-color: var(--form-bg); /* Ensure consistency in background across all inputs */
-}
-
 /* Focus state for input fields */
 .form-group input:focus {
-  border: 2px solid var(--accent-color);      /* Accent color for focused input */
+  border: 2px solid var(--accent-color);
   outline: none;
-  background-color: var(--form-bg);           /* Keep background on focus */
+
+  /* Use focus variable for background on focus */
+  background-color: var(--input-focus-bg);
 }
 
 /* -------------------------
@@ -155,7 +161,7 @@ body {
 }
 
 /* -------------------------
-   Additional Link Styling (if applicable)
+   Additional Link Styling
 -------------------------- */
 .register-link {
   text-align: center;
@@ -175,24 +181,22 @@ body {
 }
 
 /* -------------------------
-   Fix for Autofill Inputs
+   Autofill Fixes
 -------------------------- */
 .form-group input:-webkit-autofill {
-  background-color: var(--form-bg) !important;  /* Ensure the autofill background matches the theme */
-  color: var(--text-color) !important;           /* Ensure the autofill text color matches the theme */
-  transition: background-color 5000s ease-in-out 0s;  /* Prevent autofill background color from changing */
+  background-color: var(--input-bg) !important;
+  color: var(--text-color) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
-/* For Firefox Autofill Styling */
 .form-group input:-moz-placeholder {
-  background-color: var(--form-bg) !important;  /* Firefox autofill background */
-  color: var(--text-color) !important;           /* Firefox autofill text color */
+  background-color: var(--input-bg) !important;
+  color: var(--text-color) !important;
 }
 
-/* For WebKit browsers (Chrome, Safari, Edge) */
 .form-group input:-webkit-input-placeholder {
-  background-color: var(--form-bg) !important;  /* Webkit autofill background */
-  color: var(--text-color) !important;           /* Webkit autofill text color */
+  background-color: var(--input-bg) !important;
+  color: var(--text-color) !important;
 }
 
 /* -------------------------

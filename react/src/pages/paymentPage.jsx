@@ -1,158 +1,146 @@
-// components/PaymentForm.js
 import React, { useState, useContext } from "react";
-import { StripeContext } from "../contexts/StripeContext"; // Import Stripe context
-import { CardElement } from "@stripe/react-stripe-js"; // Stripe's card input element
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
-const PaymentForm = () => {
-  const [paymentData, setPaymentData] = useState({
-    date: new Date().toISOString().split("T")[0], // Default to today
-    payments: {}, // Payments stored as a dictionary (Map equivalent)
-    currency: "USD",
-  });
+// Example categories
+const categories = [
+  "Food", "Entertainment", "Transport", "Health",
+  "Shopping", "Utilities", "Education", "Rent",
+  "Travel", "Others"
+];
 
+function PaymentForm() {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  // Payment-related state
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [sum, setSum] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Food");
-  const [paymentsList, setPaymentsList] = useState([]);
+  const [message, setMessage] = useState("");
 
-  const { stripe, elements } = useContext(StripeContext); // Access stripe and elements from context
-
-  const categories = [
-    "Food",
-    "Entertainment",
-    "Transport",
-    "Health",
-    "Shopping",
-    "Utilities",
-    "Education",
-    "Rent",
-    "Travel",
-    "Others",
-  ];
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!sum || !description || !stripe || !elements) {
-      alert("Please fill in all required fields and ensure Stripe is ready.");
+    // Basic validation
+    if (!stripe || !elements) {
+      setMessage("Stripe has not loaded yet. Please wait.");
+      return;
+    }
+    if (!sum || !description) {
+      setMessage("Please provide an amount and description.");
       return;
     }
 
-    // Get the card details from the CardElement
-    const cardElement = elements.getElement(CardElement);
+    try {
+      // 1) Create a PaymentIntent on the backend
+      const amountInCents = parseInt(sum, 10) * 100; // e.g. $10 => 1000
+      const response = await fetch("http://localhost:6969/stripe/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // if your backend requires cookies, else remove
+        body: JSON.stringify({
+          amount: amountInCents,
+          currency: "usd"
+        }),
+      });
 
-    // Create a token from the card element
-    stripe.createToken(cardElement).then(({ token, error }) => {
+      const { clientSecret, error } = await response.json();
       if (error) {
-        alert(`Error: ${error.message}`);
+        setMessage(`Server error: ${error}`);
         return;
       }
 
-      const newPaymentKey = `${paymentData.date}_${description}_${category}`;
-      const newPayments = {
-        ...paymentData.payments,
-        [newPaymentKey]: parseFloat(sum), // Map-like dictionary
-      };
-
-      const updatedPaymentData = {
-        ...paymentData,
-        payments: newPayments,
-      };
-
-      setPaymentsList([
-        ...paymentsList,
-        { date: paymentData.date, sum, description, category },
-      ]);
-      setPaymentData(updatedPaymentData);
-      setSum("");
-      setDescription("");
-      setCategory("Food");
-
-      // Send JSON data to the backend along with the Stripe token
-      console.log("TOKEN ID: ", token.id);
-      fetch("http://localhost:6969/stripe/chargeCard", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      // 2) Confirm the card payment with the returned clientSecret
+      const cardElement = elements.getElement(CardElement);
+      const { paymentIntent, error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            // You can add more info like name, email, address, etc.
+            name: "Test User",
+          },
         },
-        credentials: "include", // Include cookies (SESSION_STRING)
-        body: JSON.stringify({
-          ...updatedPaymentData,
-          stripeToken: token.id, // Send the token to your backend
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to send payment data.");
-          }
-          return response.json(); // Parse JSON if the response is successful
-        })
-        .then((data) => {
-          console.log("Payment sent successfully!", data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    });
+      });
+
+      if (stripeError) {
+        setMessage(`Payment failed: ${stripeError.message}`);
+      } else if (paymentIntent && paymentIntent.status === "succeeded") {
+        setMessage("Payment succeeded! Thank you for your purchase.");
+        
+        // (Optional) Send your purchase data to your server for record-keeping
+        // For example:
+        // await fetch("http://localhost:6969/myapp/save-payment-data", {
+        //    method: "POST",
+        //    headers: { "Content-Type": "application/json" },
+        //    body: JSON.stringify({ date, sum, description, category }),
+        // });
+        
+        // Reset form
+        setSum("");
+        setDescription("");
+        setCategory("Food");
+      }
+    } catch (err) {
+      setMessage(`Unexpected error: ${err.message}`);
+    }
   };
 
   return (
     <div className="payment-container">
-      <form onSubmit={handleSubmit} className="payment-inputs">
-        {/* Larger input for description */}
+      <h2>Payment with Stripe PaymentIntents</h2>
+      <form onSubmit={handleSubmit}>
+        {/* Description field */}
         <input
           type="text"
-          name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
           required
-          className="description-input"
         />
 
-        {/* Smaller inputs for date, sum, and category */}
+        {/* Date field */}
         <input
           type="date"
-          name="date"
-          value={paymentData.date}
-          onChange={(e) => setPaymentData({ ...paymentData, date: e.target.value })}
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
           required
-          className="small-input"
         />
 
+        {/* Amount field */}
         <input
           type="number"
-          name="sum"
           value={sum}
           onChange={(e) => setSum(e.target.value)}
-          placeholder="Amount"
+          placeholder="Amount (USD)"
           required
-          className="small-input"
         />
 
+        {/* Category dropdown */}
         <select
-          name="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          required
-          className="small-input"
         >
-          {categories.map((cat, index) => (
-            <option key={index} value={cat}>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
               {cat}
             </option>
           ))}
         </select>
 
-        {/* Stripe CardElement for card details */}
-        <div className="stripe-card-element">
+        {/* Stripe Card Element */}
+        <div style={{ margin: "20px 0" }}>
           <CardElement />
         </div>
 
-        <button type="submit" disabled={!stripe}>Add Payment</button>
+        <button type="submit" disabled={!stripe}>
+          Submit Payment
+        </button>
       </form>
+
+      {message && <div style={{ marginTop: "20px" }}>{message}</div>}
     </div>
   );
-};
+}
 
 export default PaymentForm;

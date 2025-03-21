@@ -9,6 +9,10 @@
   --accent-color: #6200ea;
   --hover-accent: #7e35ff;
   --active-accent: #5a00c8;
+
+  /* Add these two new variables */
+  --input-bg: #2c2c2c;        /* Default (dark mode) input background */
+  --input-focus-bg: #3a3a3a;  /* Default (dark mode) focus background */
 }
 
 /* -------------------------
@@ -22,6 +26,10 @@ body.light-mode {
   --accent-color: #0055ff;
   --hover-accent: #3388ff;
   --active-accent: #0044cc;
+
+  /* Override for light mode */
+  --input-bg: #ffffff;
+  --input-focus-bg: #f0f0f0;
 }
 
 /* -------------------------
@@ -109,9 +117,6 @@ body {
   gap: 0.5rem;
 }
 
-/* -------------------------
-   Labels
--------------------------- */
 .form-group label {
   font-size: 1rem;
   color: var(--text-color);
@@ -124,16 +129,22 @@ body {
   padding: 0.75rem 1rem;
   border: 2px solid var(--border-color);
   border-radius: 4px;
-  background-color: #2c2c2c;
+
+  /* Use your custom variables for background & text color */
+  background-color: var(--input-bg);
   color: var(--text-color);
+
   font-size: 1rem;
   transition: border 0.3s, background-color 0.3s;
 }
 
 .form-group input:focus {
   border: 2px solid var(--accent-color);
+
+  /* Use the focus background variable */
+  background-color: var(--input-focus-bg);
+
   outline: none;
-  background-color: #3a3a3a;
 }
 
 /* -------------------------
@@ -162,22 +173,6 @@ body {
 /* -------------------------
    Register Link Styling
 -------------------------- */
-.register-link {
-  text-align: center;
-  color: #cccccc;
-  font-size: 0.9rem;
-}
-
-.register-link a {
-  color: var(--accent-color);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.register-link a:hover {
-  color: var(--hover-accent);
-  text-decoration: underline;
-}
 .register-link {
   margin-top: 1rem;
   text-align: center;
