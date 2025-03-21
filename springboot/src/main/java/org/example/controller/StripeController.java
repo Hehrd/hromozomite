@@ -10,6 +10,7 @@ import com.stripe.model.Charge;
 import com.stripe.param.ChargeCreateParams;
 import org.example.controller.model.SinglePaymentDTO;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,9 @@ public class StripeController {
                         .setSource(singlePaymentDTO.getTokenId())
                         .build();
         Charge charge = Charge.create(params);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "http://localhost:5173");
+        headers.add("Access-Control-Allow-Credentials", "true");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Payment successful!");
