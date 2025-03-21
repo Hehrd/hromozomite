@@ -5,6 +5,7 @@
 /Users/alexander/IdeaProjects/HacktuesHromozomite/hromozomite/springboot/src/main/java/org/example/exception/GlobalExceptionHandler.java
 /Users/alexander/IdeaProjects/HacktuesHromozomite/hromozomite/springboot/src/main/java/org/example/controller/UserStatisticController.java
 /Users/alexander/IdeaProjects/HacktuesHromozomite/hromozomite/springboot/src/main/java/org/example/exception/SessionExpiredException.java
+/Users/alexander/IdeaProjects/HacktuesHromozomite/hromozomite/springboot/src/main/java/org/example/controller/CorsConfig.java
 /Users/alexander/IdeaProjects/HacktuesHromozomite/hromozomite/springboot/src/main/java/org/example/controller/model/SubscriptionDTO.java
 /Users/alexander/IdeaProjects/HacktuesHromozomite/hromozomite/springboot/src/main/java/org/example/persistence/model/SalaryEntity.java
 /Users/alexander/IdeaProjects/HacktuesHromozomite/hromozomite/springboot/src/main/java/org/example/persistence/model/SessionEntity.java
