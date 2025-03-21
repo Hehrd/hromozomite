@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppProvider from './contexts/appProvider';
-import StripeProvider from './contexts/StripeProvider';  // Import the StripeProvider
+import StripeProvider from './contexts/stripeProvider';  // Import the StripeProvider
 import Register from './pages/registerPage'; 
 import Login from './pages/loginPage';
 import HomePage from './pages/homepage/homePage.jsx';
