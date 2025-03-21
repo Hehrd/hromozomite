@@ -19,7 +19,7 @@ public class UserDataController {
     @Autowired
     private UserDataService userDataService;
 
-    @RequestMapping(value = "/payments", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/createpayment", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> setPayments(@RequestBody SinglePaymentDTO singlePaymentDTO,
                                               @CookieValue(value = "SESSION_STRING") String sessionString) throws UserNotFoundException {
         userDataService.setPayments(singlePaymentDTO, sessionString);

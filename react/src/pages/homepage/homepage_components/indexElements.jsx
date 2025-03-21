@@ -52,7 +52,7 @@ const IndexElements = () => {
     <div className="tabs-container">
       {/* Money Spent - Link to analyticsPage */}
       <div className="tab-box">
-        <Link to="/analyticsPage" className="tab-link">
+        <Link to="/analytics" className="tab-link">
           <h2>Money Spent</h2>
           <MoneySpentChart /> {/* Line chart inside */}
         </Link>

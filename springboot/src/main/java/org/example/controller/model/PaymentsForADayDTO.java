@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class QrScannerDTO {
-    private int amount;
+public class PaymentsForADayDTO {
+    private Long amount;
     private LocalDate date;
 }
