@@ -23,5 +23,4 @@ public class SubscriptionController {
                 .status(HttpStatus.CREATED)
                 .body("Subscription created successfully!");
     }
-
 }

@@ -90,8 +90,8 @@
 .balance-box {
     background: linear-gradient(135deg, #6f32be, #8f52de); /* Cool gradient background */
     color: #ffffff;
-    border: none; /* Remove border for a cleaner look */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    border: 2px solid #ffffff; /* Add the same border as other tab-boxes */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Match shadow with other boxes */
     padding: 20px;
     text-align: center;
     font-size: 1.5rem;
@@ -101,7 +101,7 @@
     align-items: center;
     justify-content: center;
     min-height: 300px;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
 .balance-box h2 {
@@ -113,15 +113,23 @@
 
 .balance-box p {
     margin: 10px 0 0;
-    font-size: 2rem;
+    font-size: 1.8rem; /* Slightly larger font size for better readability */
     font-weight: bold;
     color: #ffffff;
 }
 
-/* Add hover effect for the balance box */
+/* Remove hover effects for the balance box */
 .balance-box:hover {
-    transform: scale(1.05); /* Slight zoom effect */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Enhance shadow on hover */
+    transform: none; /* Disable zoom effect */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Keep consistent shadow */
+    border: 2px solid #ffffff; /* Ensure the border remains consistent */
+    cursor: default; /* Change cursor to default to indicate no interaction */
+}
+
+/* Remove hover zoom effect for the third tab-box */
+.balance-box:hover {
+    transform: none; /* Disable zoom effect */
+    box-shadow: none; /* Remove shadow enhancement */
 }
 
 /* Add responsive design for smaller screens */
