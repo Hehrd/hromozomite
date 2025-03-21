@@ -6,7 +6,6 @@ import IndexElements from "./homepage_components/indexElements.jsx"; // Import t
 const HomePage = () => {
   return (
     <div>
-      <h1>Spestisimo</h1>
       <IndexElements />
       <PaymentForm />
     </div>

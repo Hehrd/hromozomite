@@ -1,5 +1,5 @@
 /* -------------------------------------------------------
-   Index Elements Styling
+   Index Elements Styling (Updated Colors)
 --------------------------------------------------------- */
 
 /* Tabs container spans full width */
@@ -16,7 +16,7 @@
 /* Each tab box styling */
 .tab-box {
     flex: 1;
-    border: 2px solid #ffffff; /* Use hex for consistency */
+    border: 2px solid var(--border-color); /* Updated border */
     padding: 20px;
     text-align: center;
     font-size: 1.5rem;
@@ -27,32 +27,31 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: transparent; /* Add background for clarity */
+    background-color: var(--container-bg-dark); /* Updated background */
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    position: relative; /* Ensure proper stacking context */
-    z-index: 0; /* Prevent rendering issues */
+    position: relative;
+    z-index: 0;
 }
 
 /* Add hover effect for better interactivity */
 .tab-box:hover {
-   /* transform: translateY(-5px);*/
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
-    border: 2px solid #ffffff; /* Explicitly define the border to prevent disappearing */
-    z-index: 1; /* Bring the element to the front */
+    box-shadow: 0 4px 10px rgba(165, 201, 202, 0.2); /* Adjusted hover shadow */
+    border: 2px solid var(--button-hover-bg-dark); /* Updated hover border */
+    z-index: 1;
 }
 
 /* Title spacing inside tab box */
 .tab-box h2 {
     margin-bottom: 15px;
-    font-size: 1.8rem; /* Slightly larger for better readability */
-    color: #ffffff;
+    font-size: 1.8rem;
+    color: var(--text-color-dark);
 }
 
 /* Ensure all tab content is always visible */
 .tab-content {
     width: 100%;
     text-align: center;
-    color: #ffffff;
+    color: var(--secondary-text-color);
     font-size: 1rem;
     line-height: 1.5;
 }
@@ -65,10 +64,10 @@
     justify-content: center;
     margin-bottom: 20px;
     padding: 10px;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--border-color);
     border-radius: 10px;
-    background-color: transparent;
-    color: #ffffff;
+    background-color: var(--container-bg-dark);
+    color: var(--text-color-dark);
     font-size: 1.5rem;
     text-align: center;
 }
@@ -76,22 +75,21 @@
 .balance-display h2 {
     margin: 0;
     font-size: 1.8rem;
-    color: #ffffff;
+    color: var(--text-color-dark);
 }
 
 .balance-display p {
     margin: 5px 0 0;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--text-color-dark);
 }
 
 /* Styling for the balance box */
 .balance-box {
-    background-color: transparent; /* Match the background color of other boxes */
-    color: #ffffff;
-    border: 2px solid #ffffff; /* Keep the same border as other tab-boxes */
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Match shadow with other boxes */
+    background-color: var(--container-bg-dark);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 4px 10px rgba(165, 201, 202, 0.2);
     padding: 20px;
     text-align: center;
     font-size: 1.5rem;
@@ -108,31 +106,25 @@
     margin: 0;
     font-size: 2rem;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--text-color-dark);
 }
 
 .balance-box p {
     margin: 10px 0 0;
-    font-size: 1.8rem; /* Slightly larger font size for better readability */
+    font-size: 1.8rem;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--text-color-dark);
 }
 
 /* Remove hover effects for the balance box */
 .balance-box:hover {
-    transform: none; /* Disable zoom effect */
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2); /* Keep consistent shadow */
-    border: 2px solid #ffffff; /* Ensure the border remains consistent */
-    cursor: default; /* Change cursor to default to indicate no interaction */
+    transform: none;
+    box-shadow: 0 4px 10px rgba(165, 201, 202, 0.2);
+    border: 2px solid var(--border-color);
+    cursor: default;
 }
 
-/* Remove hover zoom effect for the third tab-box */
-.balance-box:hover {
-    transform: none; /* Disable zoom effect */
-    box-shadow: none; /* Remove shadow enhancement */
-}
-
-/* Add responsive design for smaller screens */
+/* Responsive Design */
 @media (max-width: 768px) {
     .tabs-container {
         flex-direction: column;

@@ -3,15 +3,16 @@
    (Adjust these to refine your light/dark themes)
 --------------------------------------------------------- */
 :root {
-    --navbar-bg: #27391C;         /* Navbar background */
-    --navbar-text: #ffffff;       /* Navbar text color */
-    --border-color: #255F38;      /* Border color */
-    --dropdown-bg: #18230F;       /* Dropdown background */
-    --dropdown-hover-bg: #1F7D53; /* Dropdown hover color */
-    --cta-bg: #255F38;            /* CTA button background */
-    --cta-hover-bg: #1F7D53;      /* CTA button hover background */
-    --text-color: #ffffff;        /* Default text color */
-    --secondary-text-color: #bdbdbd; /* Secondary text color */
+    --navbar-bg: #395B64;         /* Navbar background */
+    --navbar-text: #E7F6F2;       /* Navbar text color */
+    --border-color: #A5C9CA;      /* Border color */
+    --dropdown-bg: #2C3333;       /* Dropdown background */
+    --dropdown-hover-bg: #A5C9CA; /* Dropdown hover color */
+    --cta-bg: #395B64;            /* CTA button background */
+    --cta-hover-bg: #A5C9CA;      /* CTA button hover background */
+    --text-color: #E7F6F2;        /* Default text color */
+    --secondary-text-color: #A5C9CA; /* Secondary text color */
+    --background-color: #2C3333;  /* Page background */
 }
 
 /* -------------------------------------------------------
@@ -23,10 +24,12 @@ html, body {
     height: 100%;
     overflow: hidden; /* Disable scrolling */
     font-family: 'Inter', Arial, sans-serif;
-    background-color: #18230F; /* Background color */
     color: var(--text-color);  /* Default text color */
+    background-color: var(--bg-color-dark) 
 }
-
+.main-layout {
+    background-color: var(--bg-color-dark) !important; /* Prevents any override */
+}
 html {
     overflow: hidden; /* Disable scrolling for the entire page */
 }
@@ -51,11 +54,11 @@ html {
     color: var(--navbar-text);
     display: flex;
     align-items: center;
-    padding: 10px 20px;
+    padding: 20px 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     overflow: hidden; /* Prevent scrolling within the navbar */
-    height: 60px; /* Ensure consistent height */
+    height: 80px; /* Ensure consistent height */
 }
 
 .navbar a,
@@ -92,25 +95,6 @@ html {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-}
-
-/* -------------------------------------------------------
-   4. Search Bar
---------------------------------------------------------- */
-.search-bar {
-    padding: 8px 12px;
-    font-size: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    min-width: 300px;
-    background-color: var(--dropdown-bg);
-    color: var(--navbar-text);
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.search-bar:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 /* -------------------------------------------------------
