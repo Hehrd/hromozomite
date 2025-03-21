@@ -11,6 +11,7 @@ import TransactionPage from './pages/transactions.jsx';
 import PaymentPage from './pages/paymentPage'; // Your payment page
 import AboutUsPage from './pages/aboutUsPage';
 import QrScaner from './pages/qrScanPage'; // Your QR code scanner page
+import AnalyticsPage from './pages/analyticsPage.jsx';
 function App() {
   return (
     <AppProvider>

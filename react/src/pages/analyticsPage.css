@@ -1,1 +1,76 @@
-    
+/* General container styling */
+.analytics-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(
+      rgba(13, 13, 13, 0.6),
+      rgba(13, 13, 13, 0.6)
+    ),
+    url("../assets/analytics-background.jpg"); /* Replace with your background image */
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Page title styling */
+.analytics-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Add subtle shadow for better readability */
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+/* Chart container styling */
+.chart-container {
+  width: 100%;
+  max-width: 800px; /* Limit the width of the chart */
+  height: 400px; /* Set a fixed height for the chart */
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slideUp 1s ease-in-out; /* Add slide-up animation */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chart-container {
+    max-width: 100%; /* Allow the chart to take full width on smaller screens */
+    height: 300px; /* Reduce height for smaller screens */
+  }
+
+  .analytics-title {
+    font-size: 2rem; /* Adjust title size for smaller screens */
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
