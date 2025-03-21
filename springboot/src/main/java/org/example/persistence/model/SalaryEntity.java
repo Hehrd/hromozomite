@@ -11,6 +11,9 @@ public class SalaryEntity extends BaseEntity{
     @Column
     private int amount;
 
+    @Column
+    private String currency;
+
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private UserAccountEntity user;

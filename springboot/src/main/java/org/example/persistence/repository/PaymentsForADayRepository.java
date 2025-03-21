@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface PaymentsForADayRepository extends BaseRepository<PaymentsForADayEntity>{
-    Optional<List<PaymentsForADayEntity>> findByDateAfter(LocalDate date);
+    Optional<List<PaymentsForADayEntity>> findByDateBetweenAndUserAccount_Id(LocalDate startDate, LocalDate endDate, Long userId);
 }

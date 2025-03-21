@@ -4,11 +4,10 @@ import org.example.controller.model.GoalDTO;
 import org.example.controller.model.SinglePaymentDTO;
 import org.example.controller.model.SalaryDTO;
 import org.example.exception.UserNotFoundException;
-import org.example.persistence.model.GoalEntity;
-import org.example.persistence.model.PaymentsForADayEntity;
-import org.example.persistence.model.SalaryEntity;
+import org.example.persistence.model.*;
 import org.example.persistence.repository.GoalRepository;
 import org.example.persistence.repository.PaymentsForADayRepository;
+import org.example.persistence.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,26 +20,33 @@ public class UserDataService {
     private SessionService sessionService;
     @Autowired
     private GoalRepository goalRepository;
-
+    @Autowired
+    private UserAccountRepository userAccountRepository;
 
     public void setPayments(SinglePaymentDTO singlePaymentDTO, String sessionString) throws UserNotFoundException {
-        PaymentsForADayEntity paymentsForADayEntity = new PaymentsForADayEntity();
+        SinglePaymentEntity singlePaymentEntity = new SinglePaymentEntity();
 //        paymentsEntity.setPayments(paymentsDTO.getPayments());
-        paymentsForADayEntity.setCurrency(singlePaymentDTO.getCurrency());
-        paymentsForADayEntity.setDate(singlePaymentDTO.getDate());
+        singlePaymentEntity.setCurrency(singlePaymentDTO.getCurrency());
+        singlePaymentEntity.setDate(singlePaymentDTO.getDate());
         paymentsForADayRepository.save(paymentsForADayEntity);
     }
 
     public void setGoal(GoalDTO goalDTO, String sessionString) throws UserNotFoundException {
-        GoalEntity goalEntity = new GoalEntity();
+        GoalEntity goalEntity = goalRepository.findByUser_id(userAccountRepository.findBySession_SessionString(sessionString)
+                .orElseThrow(()-> new UserNotFoundException("User not found!")).getId()).orElse(new GoalEntity());
         goalEntity.setAmount(goalDTO.getAmount());
         goalEntity.setUser(sessionService.getUserFromSessionString(sessionString));
         goalRepository.save(goalEntity);
     }
 
     public void setSalary(SalaryDTO salaryDTO, String sessionString) throws UserNotFoundException {
-        SalaryEntity salaryEntity = new SalaryEntity();
-        salaryEntity.setAmount(salaryDTO.getAmount());
-        salaryEntity.setUser(sessionService.getUserFromSessionString(sessionString));
+
+        UserAccountEntity userAccountEntity = userAccountRepository.findBySession_SessionString(sessionString).orElseThrow(()-> new UserNotFoundException("User not found!"));
+        if (userAccountEntity.getSalary() == null) {
+            userAccountEntity.setSalary(new SalaryEntity());
+        }
+        userAccountEntity.getSalary().setAmount(salaryDTO.getAmount());
+        userAccountEntity.getSalary().setCurrency(salaryDTO.getCurrency());
+        userAccountRepository.save(userAccountEntity);
     }
 }

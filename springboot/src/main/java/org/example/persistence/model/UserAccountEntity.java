@@ -15,8 +15,12 @@ public class UserAccountEntity extends BaseEntity {
     @Column
     private String password;
 
-    @Column
+    @Column(unique = true)
     private String email;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "salaryId", referencedColumnName = "id")
+    private SalaryEntity salary;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sessionId", referencedColumnName = "id", nullable = true)
