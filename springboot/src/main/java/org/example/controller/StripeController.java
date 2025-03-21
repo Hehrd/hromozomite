@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/stripe")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "${host}", allowCredentials = "true")
 public class StripeController {
     @Value( "${stripe.api.key}")
     private String apiKey;
