@@ -23,12 +23,6 @@ const IndexElements = () => {
 
   return (
     <div className="tabs-container">
-      {/* Balance Display */}
-      <div className="tab-box balance-box">
-        <h2>Balance:</h2>
-        <p>${balance.toFixed(2)}</p> {/* Format balance to 2 decimal places */}
-      </div>
-
       {/* Money Spent - Link to analyticsPage */}
       <div className="tab-box">
         <Link to="/analyticsPage" className="tab-link">
@@ -45,10 +39,10 @@ const IndexElements = () => {
         </Link>
       </div>
 
-      {/* Money Saved - Placeholder content */}
-      <div className="tab-box">
+      {/* Money Saved - Placeholder content with Balance */}
+      <div className="tab-box balance-box">
         <h2>Money Saved This Month</h2>
-        <p>Coming Soon...</p>
+        <p>Balance: ${balance.toFixed(2)}</p> {/* Display balance here */}
       </div>
     </div>
   );
