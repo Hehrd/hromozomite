@@ -8,4 +8,5 @@ import java.time.LocalDate;
 public class PaymentsForADayDTO {
     private Long amount;
     private LocalDate date;
+    private String category;
 }

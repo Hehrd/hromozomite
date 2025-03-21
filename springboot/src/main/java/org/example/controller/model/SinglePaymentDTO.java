@@ -11,9 +11,4 @@ public class SinglePaymentDTO {
     private Long amount;
     private String currency;
     private LocalDate date;
-
-    public SinglePaymentDTO(long amount, LocalDate date) {
-        this.amount = amount;
-        this.date = date;
-    }
 }
