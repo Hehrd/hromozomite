@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @Table(name = "single_payment_table")
@@ -15,4 +17,6 @@ public class SinglePaymentEntity extends BaseEntity{
     private String currency;
     @Column
     private String description;
+    @Column
+    private LocalDate date;
 }
