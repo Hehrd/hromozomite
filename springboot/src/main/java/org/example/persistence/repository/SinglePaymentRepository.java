@@ -18,4 +18,6 @@ public interface SinglePaymentRepository extends BaseRepository<SinglePaymentEnt
             @Param("userId") Long userId
     );
 
+    Optional<List<SinglePaymentEntity>> findByDateAndUser_Id(LocalDate date, Long userId);
+
 }
