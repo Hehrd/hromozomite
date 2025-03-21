@@ -50,4 +50,8 @@ public class UserAccountController {
                 .status(HttpStatus.OK)
                 .body("Logged out successfully!");
     }
+    @GetMapping("/me")
+    public ResponseEntity<String> getUser() {
+        return ResponseEntity.ok("User found");
+    }
 }

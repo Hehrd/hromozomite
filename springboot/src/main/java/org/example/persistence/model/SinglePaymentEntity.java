@@ -1,9 +1,9 @@
 package org.example.persistence.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -14,5 +14,11 @@ public class SinglePaymentEntity extends BaseEntity{
     @Column
     private String currency;
     @Column
+    private LocalDate date;
+    @Column
     private String description;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id", name = "userId")
+    private UserAccountEntity user;
 }

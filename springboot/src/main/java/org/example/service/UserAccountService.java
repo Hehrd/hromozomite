@@ -23,6 +23,9 @@ public class UserAccountService {
     private SessionService sessionService;
 
     public void signup(UserCredentialsDTO userCredentialsDTO) throws EmailAlreadyInUseException {
+        if (userAccountRepository.existsByEmail(userCredentialsDTO.getEmail())) {
+            throw new EmailAlreadyInUseException("Email already in use!");
+        }
         UserAccountEntity userAccountEntity = new UserAccountEntity();
         userAccountEntity.setUsername(userCredentialsDTO.getUsername());
         userAccountEntity.setPassword(userCredentialsDTO.getPassword());
@@ -33,10 +36,7 @@ public class UserAccountService {
     public String login(UserCredentialsDTO userCredentialsDTO) throws UserNotFoundException {
         String email = userCredentialsDTO.getEmail();
         String password = userCredentialsDTO.getPassword();
-        UserAccountEntity userAccountEntity = userAccountRepository.findByEmailAndPassword(email, password).orElse(null);
-        if (userAccountEntity == null) {
-            throw new UserNotFoundException("User not found!");
-        }
+        UserAccountEntity userAccountEntity = userAccountRepository.findByEmailAndPassword(email, password).orElseThrow(()-> new UserNotFoundException("User not found!"));
         SessionEntity sessionEntity = sessionService.createSession();
         userAccountEntity.setSession(sessionEntity);
         userAccountRepository.save(userAccountEntity);
