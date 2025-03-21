@@ -30,10 +30,6 @@ const MainLayout = () => {
           </Link>
         </div>
 
-        <div className="navbar-center">
-          <input type="text" className="search-bar" placeholder="Search..." />
-        </div>
-
         <div className="navbar-right">
           <button className="profile-btn" onClick={toggleDropdownMenu}>
             <span className="profile-icon">U</span>

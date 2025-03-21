@@ -48,6 +48,7 @@ html {
 /* -------------------------------------------------------
    3. Navbar Styling
 --------------------------------------------------------- */
+/* Prevent scrolling for the navbar */
 .navbar {
     position: sticky;
     top: 0;
@@ -59,6 +60,8 @@ html {
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    overflow: hidden; /* Prevent scrolling within the navbar */
+    height: 60px; /* Ensure consistent height */
 }
 
 .navbar a,
@@ -70,6 +73,9 @@ html {
 
 .navbar a:hover {
     opacity: 0.8;
+    transform: none; /* Ensure no movement */
+    margin: 0; /* Prevent any margin changes */
+    padding: 0; /* Prevent padding changes */
 }
 
 /* Navbar Sections */
@@ -85,6 +91,13 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.navbar-right {
+    margin-left: auto; /* Push the user button to the far right */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 /* -------------------------------------------------------
@@ -209,8 +222,12 @@ html {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    line-height: 1.2;
+    line-height: 1.2; /* Adjust line height to prevent text clipping */
     color: #fff;
+    overflow: hidden; /* Prevent scrolling within the h1 */
+    text-overflow: ellipsis; /* Handle overflow text gracefully */
+    white-space: nowrap; /* Prevent text wrapping */
+    padding-bottom: 0.2em; /* Add slight padding to prevent clipping */
 }
 
 .main-layout h2 {
@@ -224,6 +241,18 @@ html {
     max-width: 600px;
     margin: 0 auto 1rem;
     color: #cccccc;
+    line-height: 1.5; /* Ensure proper spacing for other text elements */
+}
+
+.main-layout h2 {
+    line-height: 1.5; /* Ensure proper spacing for other text elements */
+}
+
+.main-layout {
+    overflow: hidden; /* Prevent scrolling within the main layout */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure it takes up the full height */
 }
 
 /* -------------------------------------------------------
