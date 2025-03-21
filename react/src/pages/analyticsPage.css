@@ -42,10 +42,28 @@
   animation: slideUp 1s ease-in-out; /* Add slide-up animation */
 }
 
+/* Pie chart container styling */
+.pie-chart-container {
+  width: 100%;
+  max-width: 600px; /* Limit the width of the pie chart */
+  height: 400px; /* Set a fixed height for the pie chart */
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin-top: 30px; /* Add spacing between the line chart and pie chart */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
-  .chart-container {
-    max-width: 100%; /* Allow the chart to take full width on smaller screens */
+  .chart-container,
+  .pie-chart-container {
+    max-width: 100%; /* Allow the charts to take full width on smaller screens */
     height: 300px; /* Reduce height for smaller screens */
   }
 

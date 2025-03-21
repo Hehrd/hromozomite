@@ -28,6 +28,7 @@ function App() {
               <Route path="/payment" element={<PaymentPage />} />
               <Route path="/aboutus" element={<AboutUsPage />} />
               <Route path="/qrscan" element={<QrScaner />} />
+              <Route path="/analytics" element={<AnalyticsPage />} />
             </Route>
           </Routes>
         </Router>
