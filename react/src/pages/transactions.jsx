@@ -25,7 +25,12 @@ const TransactionTable = () => {
 
   const fetchTransactions = async () => {
     try {
-      const response = await fetch('/api/transactions');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/transactions`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       setTransactions(data);
     } catch (error) {
