@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'; // Import Link for navigation
 import './registerPage.css';
 
 const Register = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -12,7 +13,7 @@ const Register = () => {
     e.preventDefault();
 
     // Simple validation
-    if (!email || !password || !confirmPassword) {
+    if (!username || !email || !password || !confirmPassword) {
       setError('Please fill in all fields.');
       return;
     }
@@ -24,6 +25,7 @@ const Register = () => {
 
     // Prepare the data to be sent in the request body
     const registerData = {
+      username: username,
       email: email,
       password: password,
     };
@@ -34,7 +36,7 @@ const Register = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(registerData), // Send email and password as JSON
+      body: JSON.stringify(registerData), // Send username, email, and password as JSON
     })
       .then((response) => response.text()) // Expect a text response instead of JSON
       .then((data) => {
@@ -57,6 +59,17 @@ const Register = () => {
       <h2>Register</h2>
       <form onSubmit={handleRegister} className="register-form">
         {error && <p className="error-message">{error}</p>}
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter your username"
+            required
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
