@@ -8,6 +8,7 @@ org/example/exception/EmailAlreadyInUseException.class
 org/example/controller/StripeController.class
 org/example/controller/model/SubscriptionDTO.class
 org/example/persistence/model/SubscriptionEntity.class
+org/example/controller/CorsConfig.class
 org/example/controller/model/UserCredentialsDTO.class
 org/example/persistence/repository/PaymentsForADayRepository.class
 org/example/service/UserDataService.class
@@ -29,6 +30,7 @@ org/example/persistence/model/SalaryEntity.class
 org/example/controller/model/SalaryDTO.class
 org/example/exception/InvalidValuesException.class
 org/example/exception/GlobalExceptionHandler.class
+org/example/controller/CorsConfig$1.class
 org/example/controller/UserDataController.class
 org/example/controller/model/SinglePaymentDTO.class
 org/example/persistence/model/GoalEntity.class
