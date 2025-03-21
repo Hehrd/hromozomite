@@ -1,0 +1,35 @@
+.container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .qr-reader {
+    margin: 20px auto;
+    width: 300px;
+    max-width: 100%;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .result {
+    margin: 20px auto;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
