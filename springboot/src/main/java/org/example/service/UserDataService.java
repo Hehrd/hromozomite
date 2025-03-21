@@ -7,6 +7,7 @@ import org.example.exception.UserNotFoundException;
 import org.example.persistence.model.*;
 import org.example.persistence.repository.GoalRepository;
 import org.example.persistence.repository.PaymentsForADayRepository;
+import org.example.persistence.repository.SinglePaymentRepository;
 import org.example.persistence.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ import org.springframework.stereotype.Service;
 public class UserDataService {
     @Autowired
     private PaymentsForADayRepository paymentsForADayRepository;
-
+    @Autowired
+    private SinglePaymentRepository singlePaymentRepository;
     @Autowired
     private SessionService sessionService;
     @Autowired
@@ -28,7 +30,9 @@ public class UserDataService {
 //        paymentsEntity.setPayments(paymentsDTO.getPayments());
         singlePaymentEntity.setCurrency(singlePaymentDTO.getCurrency());
         singlePaymentEntity.setDate(singlePaymentDTO.getDate());
-        paymentsForADayRepository.save(paymentsForADayEntity);
+        singlePaymentEntity.setAmount(singlePaymentDTO.getAmount());
+        singlePaymentEntity.setUser(sessionService.getUserFromSessionString(sessionString));
+        singlePaymentRepository.save(singlePaymentEntity);
     }
 
     public void setGoal(GoalDTO goalDTO, String sessionString) throws UserNotFoundException {

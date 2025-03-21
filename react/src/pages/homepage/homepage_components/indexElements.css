@@ -54,6 +54,14 @@
     height: 70%;
   }
   
+  .tab-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
   /* Base styling for each "tab" box */
   .tab-box {
     flex: 1;
@@ -79,7 +87,6 @@
     z-index: 0 !important;
     animation: slideUp 0.8s ease-in-out; /* Slide-up on initial load */
   }
-  
   /* Hover effect: "lift" + shadow */
   .tab-box:hover {
     box-shadow: 0 6px 15px var(--hover-shadow);
@@ -88,12 +95,13 @@
   }
   
   /* Title styling inside each box */
-  .tab-box h2 {
-    margin-bottom: 15px;
+  .tab-box .tab-link h2 {
     font-size: 1.8rem;
     color: var(--box-text-color);
   }
-  
+  ul{
+    font-size: 2rem;
+  }
   /* Ensures text content is visible and centered */
   .tab-content {
     width: 100%;
@@ -101,6 +109,9 @@
     color: var(--box-text-color);
     font-size: 1rem;
     line-height: 1.5;
+  }
+  #money-spent-h2{
+    min-height: fit-content;
   }
   
   /* Bottom elements container (if you have additional content) */
@@ -127,7 +138,10 @@
     max-width: 800px;
     padding: 20px;
   }
-  
+  .balance-p{
+    font-size: 4rem !important;
+    color: rgb(122, 163, 40) !important;
+  }
   /* Styling for input fields */
   .center-elements input,
   .center-elements select {
