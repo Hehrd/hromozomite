@@ -1,9 +1,6 @@
 package org.example.persistence.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -16,6 +13,7 @@ public class TransactionEntity extends BaseEntity{
     @Column
     private String currency;
 
+    @ManyToOne
     @JoinColumn(referencedColumnName = "id", name = "userId")
-    private Long userId;
+    private UserAccountEntity user;
 }
