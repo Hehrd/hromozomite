@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 import './registerPage.css';
+
+const RECAPTCHA_SITE_KEY = '6LdWO_sqAAAAAHAd90TXaOfdBKwtPon21moPE2Nb'; // ⬅️ Replace with your Google reCAPTCHA site key
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [captchaToken, setCaptchaToken] = useState('');
   const [error, setError] = useState('');
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // Simple validation
     if (!username || !email || !password || !confirmPassword) {
       setError('Please fill in all fields.');
       return;
@@ -23,27 +26,28 @@ const Register = () => {
       return;
     }
 
-    // Prepare the data to be sent in the request body
+    if (!captchaToken) {
+      setError('Please complete the reCAPTCHA.');
+      return;
+    }
+
     const registerData = {
-      username: username,
-      email: email,
-      password: password,
+      username,
+      email,
+      password,
+      captcha: captchaToken, // Send the reCAPTCHA token to backend
     };
 
-    // Send the request to the backend
     fetch('http://localhost:6969/useraccount/signup', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(registerData), // Send username, email, and password as JSON
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(registerData),
     })
-      .then((response) => response.text()) // Expect a text response instead of JSON
+      .then((response) => response.text())
       .then((data) => {
         if (data === 'Registration successful') {
           console.log('Registration successful:', data);
-          setError(''); // Clear any previous error messages
-          // Redirect to login page or show success message
+          setError('');
         } else {
           setError(data || 'Registration failed. Please try again.');
         }
@@ -61,48 +65,26 @@ const Register = () => {
         {error && <p className="error-message">{error}</p>}
         <div className="form-group">
           <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
-            required
-          />
+          <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
         </div>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            required
-          />
+          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required
-          />
+          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
         <div className="form-group">
           <label htmlFor="confirm-password">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirm-password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm your password"
-            required
-          />
+          <input type="password" id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
         </div>
+
+        {/* Google reCAPTCHA */}
+        <div className="form-group">
+          <ReCAPTCHA sitekey={RECAPTCHA_SITE_KEY} onChange={(token) => setCaptchaToken(token)} />
+        </div>
+
         <button type="submit" className="register-button">Register</button>
       </form>
       <p className="login-link">
