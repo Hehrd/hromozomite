@@ -9,7 +9,7 @@ import lombok.Data;
 public class SalaryEntity extends BaseEntity{
 
     @Column
-    private int amount;
+    private Long amount;
 
     @Column
     private String currency;

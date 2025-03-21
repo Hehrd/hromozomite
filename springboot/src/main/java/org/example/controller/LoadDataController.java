@@ -45,12 +45,11 @@ public class LoadDataController {
                 .body(loadDataService.getPaymentsByDate(date, sessionString));
     }
 
-//    @RequestMapping(value = "/last-3-transactions", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<List<SinglePaymentDTO>> getLast3Transactions(@RequestBody SinglePaymentDTO singlePaymentDTO, @CookieValue(value = "SESSION_STRING", required = true) String sessionString) throws UserNotFoundException {
-//        List<SinglePaymentDTO> result = loadDataService.getLastTransactions(sessionString);
-//
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(result);
-//    }
+    @RequestMapping(value = "/last-3-transactions", method = RequestMethod.GET)
+    public ResponseEntity<List<SinglePaymentDTO>> getLast3Transactions(@CookieValue(value = "SESSION_STRING", required = true) String sessionString) throws UserNotFoundException {
+        List<SinglePaymentDTO> result = loadDataService.getLastTransactions(sessionString);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(result);
+    }
 }

@@ -50,11 +50,19 @@ public class LoadDataService {
         return singlePaymentDTOS;
     }
 
-//    public List<SinglePaymentDTO> getLastTransactions(String sessionString) {
-//        UserAccountEntity userAccountEntity = userAccountRepository.findBySession_SessionString(sessionString).orElseThrow(()-> new RuntimeException("User not found!"));
-//        return loadDataRepository.findByUserIdOrderByTransactionDateDesc(userAccountEntity.getId(), PageRequest.of(0, 3))
-//                .stream()
-//                .map(entity -> new SinglePaymentDTO(entity.getAmount(), entity.getDate()))
-//                .collect(Collectors.toList());
-//    }
+    public List<SinglePaymentDTO> getLastTransactions(String sessionString) {
+        UserAccountEntity userAccountEntity = userAccountRepository.findBySession_SessionString(sessionString).orElseThrow(() -> new RuntimeException("User not found!"));
+        List<SinglePaymentEntity> singlePaymentEntities = singlePaymentRepository.findLastThreePaymentsByUserId(userAccountEntity.getId());
+        List<SinglePaymentDTO> singlePaymentDTOS = new java.util.ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            SinglePaymentEntity singlePaymentEntity = singlePaymentEntities.get(i);
+            SinglePaymentDTO singlePaymentDTO = new SinglePaymentDTO();
+            singlePaymentDTO.setAmount(singlePaymentEntity.getAmount());
+            singlePaymentDTO.setDate(singlePaymentEntity.getDate());
+            singlePaymentDTO.setCurrency(singlePaymentEntity.getCurrency());
+            singlePaymentDTOS.add(singlePaymentDTO);
+        }
+
+        return singlePaymentDTOS;
+    }
 }

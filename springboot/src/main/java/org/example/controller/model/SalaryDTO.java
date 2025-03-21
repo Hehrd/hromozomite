@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class SalaryDTO {
-    private int amount;
+    private Long amount;
     private String currency;
 }

@@ -49,14 +49,15 @@ const QrScaner = () => {
   // Submit data to backend
   const handleAddPayment = () => {
     const paymentData = {
-      description,
+      // description,
       date,
       amount,
       category,
     };
 
-    fetch(`${import.meta.env.VITE_API_URL}/createpayment`, {
+    fetch(`${import.meta.env.VITE_API_URL}/userData/createpayment`, {
       method: 'POST',
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(paymentData),
     })

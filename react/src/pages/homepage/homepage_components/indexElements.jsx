@@ -13,37 +13,54 @@ const IndexElements = () => {
   
   // Fetch balance from the backend
   useEffect(() => {
-    const fetchBalance = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/useraccount/balance`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
-        const data = await response.json();
-        setBalance(data.balance); // Assuming the backend sends { balance: <amount> }
-      } catch (error) {
-        console.error("Error fetching balance:", error);
-      }
-    };
-    fetchBalance();
+  //   const fetchBalance = async () => {
+  //     try {
+  //       const response = await fetch(`${import.meta.env.VITE_API_URL}/useraccount/balance`, {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         credentials: "include",
+  //       });
+  //       const data = await response.json();
+  //       setBalance(data.balance); // Assuming the backend sends { balance: <amount> }
+  //     } catch (error) {
+  //       console.error("Error fetching balance:", error);
+  //     }
+  //   };
+  //   fetchBalance();
 
     const fetchTransactions = async () => {
       try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/last-3-transactions`, {
-        method: "GET",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-      const data = await response.json();
-      setTransactions(data.transactions);
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/loadData/last-3-transactions`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              credentials: "include",
+            }
+        );
+        const data = await response.json();
+
+        // Update the transactions to match the expected structure
+        if (Array.isArray(data)) {
+          setTransactions(
+              data.map((transaction) => ({
+                amount: transaction.amount,
+                currency: transaction.currency || "Unknown", // Handle null or missing currency
+                date: transaction.date,
+              }))
+          );
+        } else {
+          setTransactions([]);
+        }
       } catch (error) {
-      console.error("Error fetching transactions:", error);
+        console.error("Error fetching transactions:", error);
+        setTransactions([]);
       }
+
     };
     fetchTransactions();
 
