@@ -37,16 +37,13 @@ const Login = () => {
       },
       body: JSON.stringify(loginData),  // Send email and password as JSON
     })
-      .then((response) => response.text())  // Expect a text response instead of JSON
+      .then((response) => response.text())  // Expect a text response
       .then((data) => {
-        if (data === 'Login successful') {  // Check if the response text matches the success message
-          // Simulate a successful login
+        if (data === 'Login successful') {
           console.log('Login successful:', data);
-          logIn();  // Call the logIn function from context to update app state
-          setError('');  // Clear any previous error messages
-          
-          // Redirect to the homepage or dashboard after login
-          navigate('/dashboard');  // Replace '/dashboard' with your desired path
+          logIn();  // Update login state in context
+          setError('');
+          navigate('/dashboard');  // Go to dashboard (or another page)
         } else {
           setError(data || 'Login failed. Please try again.');
         }
@@ -60,30 +57,37 @@ const Login = () => {
   return (
     <div className={`login-container ${theme}`}>
       <h2>Log in</h2>
-      <form onSubmit={handleLogin} className="login-form">
+      {/* Disable autofill for the whole form */}
+      <form onSubmit={handleLogin} className="login-form" autoComplete="off">
         {error && <p className="error-message">{error}</p>}
+
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input 
-            type="email" 
-            id="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            placeholder="Enter your email" 
+            type="email"
+            id="email"
+            value={email}
+            autoComplete="off" 
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
             required
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="password">Password:</label>
+          {/* Using "new-password" is more reliable to stop autofill than "off". */}
           <input 
-            type="password" 
-            id="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            placeholder="Enter your password" 
+            type="password"
+            id="password"
+            value={password}
+            autoComplete="new-password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
             required
           />
         </div>
+
         <button type="submit" className="login-button">Log In</button>
       </form>
       <p className="register-link">

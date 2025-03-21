@@ -1,7 +1,7 @@
 package org.example.service;
 
 import org.example.controller.model.GoalDTO;
-import org.example.controller.model.PaymentsDTO;
+import org.example.controller.model.SinglePaymentDTO;
 import org.example.controller.model.SalaryDTO;
 import org.example.exception.UserNotFoundException;
 import org.example.persistence.model.GoalEntity;
@@ -23,11 +23,11 @@ public class UserDataService {
     private GoalRepository goalRepository;
 
 
-    public void setPayments(PaymentsDTO paymentsDTO, String sessionString) throws UserNotFoundException {
+    public void setPayments(SinglePaymentDTO singlePaymentDTO, String sessionString) throws UserNotFoundException {
         PaymentsForADayEntity paymentsForADayEntity = new PaymentsForADayEntity();
 //        paymentsEntity.setPayments(paymentsDTO.getPayments());
-        paymentsForADayEntity.setCurrency(paymentsDTO.getCurrency());
-        paymentsForADayEntity.setDate(paymentsDTO.getDate());
+        paymentsForADayEntity.setCurrency(singlePaymentDTO.getCurrency());
+        paymentsForADayEntity.setDate(singlePaymentDTO.getDate());
         paymentsForADayRepository.save(paymentsForADayEntity);
     }
 

@@ -11,7 +11,7 @@ import lombok.Data;
 public class SubscriptionEntity extends BaseEntity {
 
     @Column
-    private String Name;
+    private String name;
 
     @Column
     private int amount;

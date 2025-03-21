@@ -1,4 +1,4 @@
 .idea
 .DS_Store
 .env
-application.properties
+springboot/src/main/resources/application.properties
