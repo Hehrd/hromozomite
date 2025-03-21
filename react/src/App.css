@@ -1,23 +1,31 @@
+/* Centering the main container */
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: var(--bg-color-dark); /* Ensures the background is consistent */
+  color: var(--text-color-dark);
+  min-height: 100vh; /* Ensures it takes full height */
 }
 
+/* Logo Styling */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
-  transition: filter 300ms;
+  transition: filter 300ms ease-in-out;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #1F7D53aa); /* Updated to match theme */
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Animation for rotating logo */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,16 +35,23 @@
   }
 }
 
+/* Apply animation when motion preference allows */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* Card styling */
 .card {
   padding: 2em;
+  background-color: var(--container-bg-dark); /* Matches theme */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(31, 125, 83, 0.2);
 }
 
+/* Text color fix for documentation links */
 .read-the-docs {
-  color: #888;
+  color: var(--text-color-dark); /* Uses the dark mode text color */
+  opacity: 0.7; /* Slightly faded effect */
 }
