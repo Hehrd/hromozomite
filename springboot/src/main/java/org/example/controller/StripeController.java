@@ -4,6 +4,7 @@ package org.example.controller;
 //import com.stripe.exception.StripeException;
 //import com.stripe.model.Charge;
 //import com.stripe.param.ChargeCreateParams;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.param.ChargeCreateParams;
@@ -23,6 +24,7 @@ public class StripeController {
     private String apiKey;
     @RequestMapping(value = "/create-payment-intent", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> chargeCard(@RequestBody SinglePaymentDTO singlePaymentDTO) throws StripeException {
+        Stripe.apiKey = apiKey;
         ChargeCreateParams params =
                 ChargeCreateParams.builder()
                         .setAmount(singlePaymentDTO.getAmount())
