@@ -53,12 +53,32 @@ html {
     background-color: var(--navbar-bg);
     color: var(--navbar-text);
     display: flex;
-    align-items: center;
-    padding: 20px 30px;
+    align-items: center; /* Vertically center all items */
+    justify-content: space-between; /* Space between left, center, and right sections */
+    padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    overflow: hidden; /* Prevent scrolling within the navbar */
-    height: 80px; /* Ensure consistent height */
+    height: 60px; /* Ensure consistent height */
+}
+
+/* Center the h1 element */
+.navbar-center {
+    flex: 1; /* Allow the center section to take up available space */
+    display: flex;
+    justify-content: center; /* Horizontally center the h1 */
+    align-items: center; /* Vertically center the h1 */
+    height: 100%; /* Match the height of the navbar */
+}
+
+/* Styling for the h1 element */
+.navbar-center h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--navbar-text);
+    margin: 0;
+    text-align: center;
+    height: 100%; /* Match the height of the navbar */
+    display: flex;
+    align-items: center; /* Vertically center the text inside the h1 */
 }
 
 .navbar a,
@@ -81,13 +101,6 @@ html {
     display: flex;
     align-items: center;
     flex: 0 0 auto;
-}
-
-.navbar-center {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .navbar-right {
