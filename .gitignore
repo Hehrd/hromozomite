@@ -1,5 +1,5 @@
 .idea
 .DS_Store
 .env
-springboot/src/main/resources/application.properties
-*.class
+/springboot/gisrc/main/resources/application.properties
+

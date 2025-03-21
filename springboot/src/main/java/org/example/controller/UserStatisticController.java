@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/statistic")
+@CrossOrigin(origins = "${host}", allowCredentials = "true")
 public class UserStatisticController {
 
     @Autowired

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/useraccount")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "${host}")
 @Controller
 public class UserAccountController {
     @Autowired
