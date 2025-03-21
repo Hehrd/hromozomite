@@ -63,6 +63,11 @@ const MainLayout = () => {
             Log In
           </Link>
         )}
+
+        {/* Third Option for About Us */}
+        <Link to="/aboutus" className="dropdown-item" onClick={() => setShowDropdown(false)}>
+          About Us
+        </Link>
       </DropdownMenu>
 
       <Outlet />
