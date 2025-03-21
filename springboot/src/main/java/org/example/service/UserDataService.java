@@ -5,18 +5,17 @@ import org.example.controller.model.PaymentsDTO;
 import org.example.controller.model.SalaryDTO;
 import org.example.exception.UserNotFoundException;
 import org.example.persistence.model.GoalEntity;
-import org.example.persistence.model.PaymentsEntity;
+import org.example.persistence.model.PaymentsForADayEntity;
 import org.example.persistence.model.SalaryEntity;
-import org.example.persistence.model.UserAccountEntity;
 import org.example.persistence.repository.GoalRepository;
-import org.example.persistence.repository.PaymentsRepository;
+import org.example.persistence.repository.PaymentsForADayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserDataService {
     @Autowired
-    private PaymentsRepository paymentsRepository;
+    private PaymentsForADayRepository paymentsForADayRepository;
 
     @Autowired
     private SessionService sessionService;
@@ -25,11 +24,11 @@ public class UserDataService {
 
 
     public void setPayments(PaymentsDTO paymentsDTO, String sessionString) throws UserNotFoundException {
-        PaymentsEntity paymentsEntity = new PaymentsEntity();
+        PaymentsForADayEntity paymentsForADayEntity = new PaymentsForADayEntity();
 //        paymentsEntity.setPayments(paymentsDTO.getPayments());
-        paymentsEntity.setCurrency(paymentsDTO.getCurrency());
-        paymentsEntity.setDate(paymentsDTO.getDate());
-        paymentsRepository.save(paymentsEntity);
+        paymentsForADayEntity.setCurrency(paymentsDTO.getCurrency());
+        paymentsForADayEntity.setDate(paymentsDTO.getDate());
+        paymentsForADayRepository.save(paymentsForADayEntity);
     }
 
     public void setGoal(GoalDTO goalDTO, String sessionString) throws UserNotFoundException {
