@@ -9,7 +9,7 @@ import HomePage from './pages/homepage/homePage.jsx';
 import MainLayout from './components/mainLayout.jsx'; 
 import TransactionPage from './pages/transactions.jsx';
 import PaymentPage from './pages/paymentPage'; // Your payment page
-
+import AboutUsPage from './pages/aboutUsPage';
 function App() {
   return (
     <AppProvider>
@@ -24,6 +24,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/transactions" element={<TransactionPage />} />
               <Route path="/payment" element={<PaymentPage />} />
+              <Route path="/aboutus" element={<AboutUsPage />} />
             </Route>
           </Routes>
         </Router>
