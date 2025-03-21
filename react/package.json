@@ -13,7 +13,7 @@
     "@stripe/react-stripe-js": "^1.11.0",
     "@stripe/stripe-js": "^1.25.0",
     "chart.js": "^4.4.8",
-    "react": "^18.2.0",
+    "react": "file:",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "^3.1.0",

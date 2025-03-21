@@ -53,12 +53,12 @@ const PaymentForm = () => {
 
     // Send JSON data to Spring Boot backend
     try {
-      const response = await fetch("http://localhost:6969/userData/payments", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/userData/payments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // Include cookies (SESSION_STRING)
+        credentials: "include",
         body: JSON.stringify(updatedPaymentData),
       });
 

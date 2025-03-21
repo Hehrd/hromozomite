@@ -32,7 +32,7 @@ function PaymentForm() {
     try {
       // Step 1: Create a PaymentIntent on your backend
       const amountInCents = parseInt(sum, 10) * 100;
-      const intentResponse = await fetch("http://localhost:6969/stripe/create-payment-intent", {
+      const intentResponse = await fetch(`${import.meta.env.VITE_API_URL}/stripe/create-payment-intent`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -77,9 +77,10 @@ function PaymentForm() {
         };
 
         // Send the payment data to your backend
-        const saveResponse = await fetch("http://localhost:6969/stripe/create-payment-intent", {
+        const saveResponse = await fetch(`${import.meta.env.VITE_API_URL}/stripe/create-payment-intent`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify(payload),
         });
 
