@@ -28,4 +28,5 @@ public class PaymentsForADayEntity extends BaseEntity{
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private UserAccountEntity userAccount;
+
 }

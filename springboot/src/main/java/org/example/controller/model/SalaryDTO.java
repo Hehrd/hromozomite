@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class SalaryDTO {
     private int amount;
+    private String currency;
 }

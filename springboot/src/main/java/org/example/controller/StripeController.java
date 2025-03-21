@@ -12,6 +12,9 @@ import com.stripe.param.ChargeCreateParams;
 import com.stripe.param.PaymentIntentCreateParams;
 import org.example.controller.model.PaymentRequest;
 import org.example.controller.model.SinglePaymentDTO;
+import org.example.exception.UserNotFoundException;
+import org.example.service.StripeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,28 +30,11 @@ import java.util.Map;
 @RequestMapping("/stripe")
 @CrossOrigin(origins = "${host}", allowCredentials = "true")
 public class StripeController {
-    @Value( "${stripe.api.key}")
-    private String apiKey;
+    @Autowired
+    private StripeService stripeService;
+
     @RequestMapping(value = "/create-payment-intent", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> chargeCard(@RequestBody PaymentRequest request) throws StripeException {
-        Stripe.apiKey = apiKey;
-        PaymentIntentCreateParams createParams = PaymentIntentCreateParams.builder()
-                .setAmount(request.getAmount())    // e.g. 1234 means $12.34 if currency=usd
-                .setCurrency(request.getCurrency())
-                .setAutomaticPaymentMethods(
-                        PaymentIntentCreateParams.AutomaticPaymentMethods
-                                .builder()
-                                .setEnabled(true)
-                                .build()
-                )
-                .build();
-
-        // Create the PaymentIntent on Stripe
-        PaymentIntent paymentIntent = PaymentIntent.create(createParams);
-
-        // Return the clientSecret to the frontend
-        Map<String, Object> responseData = new HashMap<>();
-        responseData.put("clientSecret", paymentIntent.getClientSecret());
-        return ResponseEntity.ok(responseData);
+    public ResponseEntity<Map<String, Object>> chargeCard(@RequestBody PaymentRequest request, @CookieValue(value = "SESSION_STRING") String sessionString) throws StripeException, UserNotFoundException {
+        return ResponseEntity.ok(stripeService.chargeCustomer(sessionString, request));
     }
 }

@@ -6,20 +6,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Entity
+@Table(name = "transaction_table")
 @Data
-@Table(name = "single_payment_table")
-public class SinglePaymentEntity extends BaseEntity{
+public class TransactionEntity extends BaseEntity{
     @Column
-    private int amount;
+    private Long amount;
+
     @Column
     private String currency;
-    @Column
-    private LocalDate date;
-    @Column
-    private String description;
+
     @JoinColumn(referencedColumnName = "id", name = "userId")
     private Long userId;
 }
