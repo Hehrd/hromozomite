@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "payments_table")
@@ -24,6 +25,14 @@ public class PaymentsForADayEntity extends BaseEntity{
 
     @Column
     private LocalDate date;
+
+
+//    @JoinTable(
+//            name = "single_payment_table",
+//            joinColumns = @JoinColumn(name = "paymentsForADayEntityId"),
+//            inverseJoinColumns = @JoinColumn(name = "singlePaymentId")
+//    )
+//    private List<SinglePaymentEntity> payments;
 
     @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
