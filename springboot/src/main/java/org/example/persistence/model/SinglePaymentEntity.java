@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Table(name = "single_payment_table")
 public class SinglePaymentEntity extends BaseEntity{
     @Column
-    private int amount;
+    private Long amount;
     @Column
     private String currency;
     @Column

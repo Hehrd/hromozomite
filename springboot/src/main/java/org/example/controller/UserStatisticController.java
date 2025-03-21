@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.controller.model.PaymentsForADayDTO;
 import org.example.exception.UserNotFoundException;
 import org.example.service.PaymentStatisticsService;
 import org.example.service.SessionService;
@@ -22,7 +23,7 @@ public class UserStatisticController {
     private SessionService sessionService;
 
     @RequestMapping(value ="/weekly", method = RequestMethod.GET)
-    public ResponseEntity<List<Integer>> getWeeklyStatistics(@CookieValue(value = "SESSION_STRING") String sessionString) throws UserNotFoundException {
+    public ResponseEntity<List<PaymentsForADayDTO>> getWeeklyStatistics(@CookieValue(value = "SESSION_STRING") String sessionString) throws UserNotFoundException {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(paymentStatisticsService.calculateWeeklyStatistics(sessionString));
