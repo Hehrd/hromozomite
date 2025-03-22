@@ -86,7 +86,6 @@ const QrScaner = () => {
         </div>
       ) : (
         <div className="result">
-          <p>Scanned QR Data: {scanResult}</p>
           <button className="button" onClick={handleScanAgain}>
             Scan Again
           </button>
