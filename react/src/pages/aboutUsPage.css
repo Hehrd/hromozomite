@@ -1,92 +1,130 @@
-/* General container styling */
+/* ------------------------------------------------------------------
+   1) THEME VARIABLES
+      - Dark Mode (Default)
+      - Light Mode (data-theme="light")
+------------------------------------------------------------------ */
+:root {
+  /* Dark mode (no data-theme): Purple gradient boxes, white text */
+  --about-us-bg-overlay: rgba(13, 13, 13, 0.6);
+  --about-us-text-color: #ffffff;
+  --about-us-box-bg: linear-gradient(135deg, #6f32be, #8f52de);
+  --about-us-border-color: #ffffff;
+}
+
+:root[data-theme="light"] {
+  /* Light mode: Lighter overlay, dark text, subtler box gradient */
+  --about-us-bg-overlay: rgba(255, 255, 255, 0.7);
+  --about-us-text-color: #000000;
+  --about-us-box-bg: linear-gradient(135deg, #cccccc, #dddddd);
+  --about-us-border-color: #555555;
+}
+
+/* ------------------------------------------------------------------
+   2) GENERAL CONTAINER STYLING
+------------------------------------------------------------------ */
 .about-us-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
+
+  /* Overlaid gradient + background image using theme variable */
   background: linear-gradient(
-      rgba(13, 13, 13, 0.6),
-      rgba(13, 13, 13, 0.6)
+      var(--about-us-bg-overlay),
+      var(--about-us-bg-overlay)
     ),
     url("../assets/back.jpg");
   background-size: cover;
   background-position: center;
-  color: #ffffff;
+
+  color: var(--about-us-text-color);
   min-height: 100vh;
   overflow: hidden; /* Disable scrolling */
 }
 
-/* Page title styling */
+/* ------------------------------------------------------------------
+   3) PAGE TITLE STYLING
+------------------------------------------------------------------ */
 .about-us-container h1 {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 30px;
-  color: #ffffff;
+  color: var(--about-us-text-color); /* Themed */
 }
 
-/* Content container styling */
+/* ------------------------------------------------------------------
+   4) CONTENT CONTAINER STYLING
+------------------------------------------------------------------ */
 .about-us-content {
   display: flex;
   justify-content: space-between;
-  align-items: stretch; /* Ensure all boxes stretch to the same height */
+  align-items: stretch; /* Ensure boxes stretch to the same height */
   gap: 20px;
   flex-wrap: wrap;
   width: 100%;
   max-width: 1200px;
 }
 
-/* Individual box styling */
+/* ------------------------------------------------------------------
+   5) INDIVIDUAL BOX STYLING
+------------------------------------------------------------------ */
 .about-us-box {
   flex: 1;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--about-us-border-color);
   border-radius: 10px;
   padding: 20px;
-  background: linear-gradient(135deg, #6f32be, #8f52de);
+
+  /* Box background uses a gradient (themed) */
+  background: var(--about-us-box-bg);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Align content to the top */
-  min-height: 300px; /* Set a consistent height for all boxes */
-  max-height: 300px; /* Prevent boxes from growing larger */
-  transition: none; /* Remove hover transition effects */
+
+  min-height: 300px; /* Consistent height for all boxes */
+  max-height: 300px;
+  transition: none; /* Remove hover transitions */
 }
 
 /* Remove hover effect */
 .about-us-box:hover {
-  transform: none; /* Disable zoom effect */
-  box-shadow: none; /* Remove shadow enhancement */
-  cursor: default; /* Change cursor to default to indicate no interaction */
+  transform: none;
+  box-shadow: none;
+  cursor: default;
 }
 
 /* Box title styling */
 .about-us-box h2 {
   font-size: 1.8rem;
   margin-bottom: 15px;
-  color: #ffffff;
-  min-height: 50px; /* Ensure all headers have the same height */
+  color: var(--about-us-text-color); /* Themed */
+  min-height: 50px; /* Ensure consistent header space */
   display: flex;
-  align-items: center; /* Vertically center the text inside the header */
-  justify-content: center; /* Horizontally center the text */
+  align-items: center;
+  justify-content: center;
 }
 
 /* Box content styling */
 .about-us-box p {
   font-size: 1.2rem;
   line-height: 1.5;
-  color: #ffffff;
-  flex: 1; /* Allow the paragraph to take up remaining space */
+  color: var(--about-us-text-color); /* Themed */
+  flex: 1; /* Paragraph fills remaining box space */
 }
 
-/* Link styling */
+/* Link styling inside the box */
 .about-us-box a {
-  color: #ffffff;
+  color: var(--about-us-text-color); /* Themed text color */
   text-decoration: underline;
   font-weight: bold;
 }
 
-/* Responsive design for smaller screens */
+/* ------------------------------------------------------------------
+   6) RESPONSIVE DESIGN FOR SMALLER SCREENS
+------------------------------------------------------------------ */
 @media (max-width: 768px) {
   .about-us-content {
     flex-direction: column;
@@ -94,11 +132,11 @@
   }
 
   .about-us-box {
-    min-height: 250px; /* Adjust height for smaller screens */
+    min-height: 250px; 
     max-height: 250px;
   }
 
   .about-us-box h2 {
-    min-height: 40px; /* Adjust header height for smaller screens */
+    min-height: 40px;
   }
 }

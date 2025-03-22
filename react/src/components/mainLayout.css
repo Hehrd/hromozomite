@@ -95,7 +95,7 @@ html {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: var(--navbar-bg);
+    background-color: var(--navbar-bg) !important;
     min-height: 60px;
     color: var(--navbar-text);
     display: flex;
@@ -189,7 +189,7 @@ html {
 }
 
 .navbar-center-element:hover {
-  color: #ccc; /* Example hover color */
+  color: #808080; /* Example hover color */
 }
 
 /* Navbar left and right sections */
