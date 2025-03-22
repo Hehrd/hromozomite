@@ -88,10 +88,23 @@ const AnalyticsPage = () => {
     plugins: {
       legend: {
         position: "top",
+        labels: {
+          font: {
+            size: 16, // Increase font size for legend labels
+          },
+        },
       },
       title: {
         display: true,
         text: "Transaction Trends",
+        font: {
+          size: 24, // Increase font size for the chart title
+        },
+      },
+      tooltip: {
+        bodyFont: {
+          size: 14, // Increase font size for tooltips
+        },
       },
     },
   };
@@ -100,11 +113,24 @@ const AnalyticsPage = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: "right", // Position the legend on the right
+        position: "right",
+        labels: {
+          font: {
+            size: 16, // Increase font size for legend labels
+          },
+        },
       },
       title: {
         display: true,
         text: "Spending Categories",
+        font: {
+          size: 24, // Increase font size for the chart title
+        },
+      },
+      tooltip: {
+        bodyFont: {
+          size: 14, // Increase font size for tooltips
+        },
       },
     },
   };
@@ -114,10 +140,23 @@ const AnalyticsPage = () => {
     plugins: {
       legend: {
         position: "top",
+        labels: {
+          font: {
+            size: 16, // Increase font size for legend labels
+          },
+        },
       },
       title: {
         display: true,
         text: "Monthly Spending",
+        font: {
+          size: 24, // Increase font size for the chart title
+        },
+      },
+      tooltip: {
+        bodyFont: {
+          size: 14, // Increase font size for tooltips
+        },
       },
     },
   };
@@ -125,14 +164,27 @@ const AnalyticsPage = () => {
   return (
     <div className="analytics-container">
       <h1 className="analytics-title">Analytics</h1>
-      <div className="chart-container">
-        <Line data={lineData} options={options} />
-      </div>
-      <div className="pie-chart-container">
-        <Pie data={pieData} options={pieOptions} />
-      </div>
-      <div className="bar-chart-container">
-        <Bar data={barData} options={barOptions} />
+      <div className="charts-grid">
+        {/* First Column */}
+        <div className="column">
+          <div className="chart-container">
+            <Line data={lineData} options={options} />
+          </div>
+        </div>
+
+        {/* Second Column */}
+        <div className="column">
+          <div className="chart-container">
+            <Pie data={pieData} options={pieOptions} />
+          </div>
+        </div>
+
+        {/* Third Column */}
+        <div className="column">
+          <div className="chart-container">
+            <Bar data={barData} options={barOptions} />
+          </div>
+        </div>
       </div>
     </div>
   );
