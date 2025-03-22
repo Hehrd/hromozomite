@@ -1,0 +1,122 @@
+.payment-container {
+    max-width: 480px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 24px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  
+  .payment-container h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+    color: #575757;
+  }
+  
+  /* Form Layout */
+  .payment-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Spacing between inputs, select, and card fields */
+  }
+  
+  /* Inputs & Select */
+  .payment-container input,
+  .payment-container select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .payment-container input:focus,
+  .payment-container select:focus {
+    outline: none;
+    border-color: #888;
+  }
+  
+  /* Split Card Element Layout */
+  .split-card-element {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    gap: 16px;
+  }
+  
+  .form-group {
+    flex: 1;
+    min-width: 120px; /* Ensures each field has enough space */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Stripe Elements */
+  .stripe-input {
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-sizing: border-box;
+  }
+  
+  /* Submit Button */
+  .payment-container button[type="submit"] {
+    background-color: #008c7b;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .payment-container button[type="submit"]:hover {
+    background-color: #006653;
+  }
+  
+  .payment-container button[type="submit"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Payment Message */
+  .payment-message {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #666;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 480px) {
+    .payment-container {
+      padding: 16px;
+      margin: 20px auto;
+    }
+  
+    .payment-container h2 {
+      font-size: 1.3rem;
+    }
+  
+    .payment-container input,
+    .payment-container select,
+    .stripe-input {
+      padding: 10px 14px;
+      font-size: 0.95rem;
+    }
+  
+    .split-card-element {
+      gap: 12px;
+    }
+  }
+  

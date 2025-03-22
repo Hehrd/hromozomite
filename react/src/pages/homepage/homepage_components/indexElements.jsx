@@ -96,7 +96,7 @@ const IndexElements = () => {
 
       {/* Money Saved - Placeholder content with Balance */}
       <div className="tab-box balance-box">
-        <Link to="/balance" className="tab-link">
+        <Link className="tab-link">
           <h2>Money Saved This Month</h2>
           <p>Balance: </p> {/* Display balance here */}
           <p className="balance-p">
