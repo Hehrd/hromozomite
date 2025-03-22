@@ -23,4 +23,6 @@ public interface SinglePaymentRepository extends BaseRepository<SinglePaymentEnt
     @Query("SELECT s FROM SinglePaymentEntity s WHERE s.user.id = :userId ORDER BY s.date DESC")
     List<SinglePaymentEntity> findLastThreePaymentsByUserId(@Param("userId") Long userId);
 
+    Optional<List<SinglePaymentEntity>> findByDateBetweenAndUser_Id(LocalDate startDate, LocalDate endDate, Long userId);
+
 }
