@@ -10,48 +10,48 @@ const IndexElements = () => {
     { description: "Utilities", amount: 45.0 },
     { description: "Entertainment", amount: 15.5 },
   ]);
-  
+
   // Fetch balance from the backend
   useEffect(() => {
-  //   const fetchBalance = async () => {
-  //     try {
-  //       const response = await fetch(`${import.meta.env.VITE_API_URL}/useraccount/balance`, {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         credentials: "include",
-  //       });
-  //       const data = await response.json();
-  //       setBalance(data.balance); // Assuming the backend sends { balance: <amount> }
-  //     } catch (error) {
-  //       console.error("Error fetching balance:", error);
-  //     }
-  //   };
-  //   fetchBalance();
+    //   const fetchBalance = async () => {
+    //     try {
+    //       const response = await fetch(`${import.meta.env.VITE_API_URL}/useraccount/balance`, {
+    //         method: "GET",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         credentials: "include",
+    //       });
+    //       const data = await response.json();
+    //       setBalance(data.balance); // Assuming the backend sends { balance: <amount> }
+    //     } catch (error) {
+    //       console.error("Error fetching balance:", error);
+    //     }
+    //   };
+    //   fetchBalance();
 
     const fetchTransactions = async () => {
       try {
         const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/loadData/last-3-transactions`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              credentials: "include",
-            }
+          `${import.meta.env.VITE_API_URL}/loadData/last-3-transactions`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
         );
         const data = await response.json();
 
         // Update the transactions to match the expected structure
         if (Array.isArray(data)) {
           setTransactions(
-              data.map((transaction) => ({
-                amount: transaction.amount,
-                currency: transaction.currency || "Unknown", // Handle null or missing currency
-                date: transaction.date,
-              }))
+            data.map((transaction) => ({
+              amount: transaction.amount,
+              currency: transaction.currency || "Unknown", // Handle null or missing currency
+              date: transaction.date,
+            }))
           );
         } else {
           setTransactions([]);
@@ -77,21 +77,21 @@ const IndexElements = () => {
 
       {/* Transactions today - Link to transactionsPage */}
       <div className="tab-box" id="transactions-box">
-  <Link to="/transactions" className="tab-link">
-    <h2>Last 3 transactions</h2>
-    {transactions.length > 0 ? (
-      <ul>
-        {transactions.map((tx, index) => (
-          <li key={index}>
-            {tx.description} - ${tx.amount}
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p>No transactions found.</p>
-    )}
-  </Link>
-</div>
+        <Link to="/transactions" className="tab-link">
+          <h2>Last 3 transactions</h2>
+          {transactions.length > 0 ? (
+            <ul>
+              {transactions.map((tx, index) => (
+                <li key={index}>
+                  {tx.description} - ${tx.amount}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No transactions found.</p>
+          )}
+        </Link>
+      </div>
 
 
       {/* Money Saved - Placeholder content with Balance */}
@@ -99,7 +99,10 @@ const IndexElements = () => {
         <Link to="/balance" className="tab-link">
           <h2>Money Saved This Month</h2>
           <p>Balance: </p> {/* Display balance here */}
-          <p className="balance-p">${balance.toFixed(2)}</p>
+          <p className="balance-p">
+            ${typeof balance === 'number' ? balance.toFixed(2) : '0.00'}
+          </p>
+
         </Link>
       </div>
     </div>

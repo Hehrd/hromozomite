@@ -35,7 +35,7 @@ const Register = () => {
       username,
       email,
       password,
-      captcha: captchaToken,
+      captcha: captchaToken, // Always use the reCAPTCHA token
     };
 
     fetch(`${import.meta.env.VITE_API_URL}/useraccount/signup`, {
@@ -58,11 +58,14 @@ const Register = () => {
       });
   };
 
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token);
+  };
+
   return (
     <div className="register-container">
       <h2>Register</h2>
 
-      {/* Disable autocomplete at the form level */}
       <form
         onSubmit={handleRegister}
         className="register-form"
@@ -72,7 +75,6 @@ const Register = () => {
 
         <div className="form-group">
           <label htmlFor="username">Username:</label>
-          {/* Disable autocomplete for this field */}
           <input
             type="text"
             id="username"
@@ -85,7 +87,6 @@ const Register = () => {
 
         <div className="form-group">
           <label htmlFor="email">Email:</label>
-          {/* Disable autocomplete for this field */}
           <input
             type="email"
             id="email"
@@ -98,7 +99,6 @@ const Register = () => {
 
         <div className="form-group">
           <label htmlFor="password">Password:</label>
-          {/* For password fields, using autoComplete="new-password" is common */}
           <input
             type="password"
             id="password"
@@ -111,7 +111,6 @@ const Register = () => {
 
         <div className="form-group">
           <label htmlFor="confirm-password">Confirm Password:</label>
-          {/* Similarly, you can use new-password here as well */}
           <input
             type="password"
             id="confirm-password"
@@ -122,10 +121,11 @@ const Register = () => {
           />
         </div>
 
+        {/* Always render reCAPTCHA */}
         <div className="form-group">
           <ReCAPTCHA
             sitekey={RECAPTCHA_SITE_KEY}
-            onChange={(token) => setCaptchaToken(token)}
+            onChange={handleCaptchaChange}
           />
         </div>
 

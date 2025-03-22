@@ -365,8 +365,8 @@ html {
 .home-button {
   font-size: 30px;
   font-weight: bold;
-  background: linear-gradient(to right, #ffffff 50%, #ffa500 50%); /* White to Orange gradient */
-  -webkit-background-clip: text; /* Clip the gradient to the text */
+  background: linear-gradient(to right, #008c7b, #769f30);
+    -webkit-background-clip: text; /* Clip the gradient to the text */
   -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
   text-decoration: none;
   transition: opacity 0.3s ease-in-out;
