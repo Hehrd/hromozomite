@@ -14,7 +14,8 @@ import QrScaner from './pages/qrScanPage';
 import AnalyticsPage from './pages/analyticsPage.jsx';
 import Settings from './pages/settings.jsx';
 import SubscriptionManager from './pages/subscriptionManager.jsx';
-
+import ProtectedRoute from './contexts/protectedRoutes.jsx';
+import Balance from './pages/balancePage.jsx';
 function App() {
   return (
     <AppProvider>
@@ -35,6 +36,7 @@ function App() {
               <Route path="/analytics" element={<AnalyticsPage />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/subscription-manager" element={<SubscriptionManager />} />
+              <Route path="/balance" element={<Balance />} />
             </Route>
           </Routes>
         </Router>
