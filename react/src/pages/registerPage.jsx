@@ -26,9 +26,7 @@ const Register = () => {
       return;
     }
 
-    // Bypass reCAPTCHA validation in development mode
-    const isDevelopment = window.location.hostname === 'localhost';
-    if (!isDevelopment && !captchaToken) {
+    if (!captchaToken) {
       setError('Please complete the reCAPTCHA.');
       return;
     }
@@ -37,7 +35,7 @@ const Register = () => {
       username,
       email,
       password,
-      captcha: isDevelopment ? 'bypass-captcha' : captchaToken, // Use a placeholder token in development
+      captcha: captchaToken, // Always use the reCAPTCHA token
     };
 
     fetch(`${import.meta.env.VITE_API_URL}/useraccount/signup`, {
@@ -58,6 +56,10 @@ const Register = () => {
         setError('An error occurred. Please try again.');
         console.error('Error during registration:', error);
       });
+  };
+
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token);
   };
 
   return (
@@ -119,15 +121,13 @@ const Register = () => {
           />
         </div>
 
-        {/* Only render reCAPTCHA if not in development mode */}
-        {!window.location.hostname === 'localhost' && (
-          <div className="form-group">
-            <ReCAPTCHA
-              sitekey={RECAPTCHA_SITE_KEY}
-              onChange={(token) => setCaptchaToken(token)}
-            />
-          </div>
-        )}
+        {/* Always render reCAPTCHA */}
+        <div className="form-group">
+          <ReCAPTCHA
+            sitekey={RECAPTCHA_SITE_KEY}
+            onChange={handleCaptchaChange}
+          />
+        </div>
 
         <button type="submit" className="register-button">
           Register
