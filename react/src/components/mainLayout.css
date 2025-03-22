@@ -172,14 +172,14 @@ html {
   text-align: center;
 }
 
-/* Navbar left and right sections */
-.navbar-left,
-.navbar-right {
+/* Navbar center link styling */
+.navbar-center {
   display: flex;
-  align-items: center;
+  gap: 20px; /* Add spacing between the links */
+  justify-content: center; /* Center the links horizontally */
+  align-items: center; /* Align the links vertically */
 }
 
-/* Navbar center link styling */
 .navbar-center-element {
   font-size: 1.2rem;
   font-weight: bold;
@@ -190,6 +190,13 @@ html {
 
 .navbar-center-element:hover {
   color: #ccc; /* Example hover color */
+}
+
+/* Navbar left and right sections */
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
 }
 
 /* ---------------------------------------

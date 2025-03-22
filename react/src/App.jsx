@@ -2,28 +2,36 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppProvider from './contexts/appProvider';
-import StripeProvider from './contexts/stripeProvider';  // Import the StripeProvider
-import Register from './pages/registerPage'; 
+import StripeProvider from './contexts/stripeProvider';
+import Register from './pages/registerPage';
 import Login from './pages/loginPage';
 import HomePage from './pages/homepage/homePage.jsx';
-import MainLayout from './components/mainLayout.jsx'; 
+import MainLayout from './components/mainLayout.jsx';
 import TransactionPage from './pages/transactions.jsx';
-import PaymentPage from './pages/paymentPage'; // Your payment page
+import PaymentPage from './pages/paymentPage';
 import AboutUsPage from './pages/aboutUsPage';
-import QrScaner from './pages/qrScanPage'; // Your QR code scanner page
+import QrScaner from './pages/qrScanPage';
 import AnalyticsPage from './pages/analyticsPage.jsx';
 import Settings from './pages/settings.jsx';
+import SubscriptionManager from './pages/subscriptionManager.jsx';
 function App() {
   return (
     <AppProvider>
-      {/* Wrap the entire app with StripeProvider to provide access to stripe */}
       <StripeProvider>
         <Router>
           <Routes>
+            {/* Public routes */}
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
 
-            <Route element={<MainLayout />}>
+            {/* Protected routes */}
+            <Route
+              element={
+                <ProtectedRoute>
+                  <MainLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route path="/" element={<HomePage />} />
               <Route path="/transactions" element={<TransactionPage />} />
               <Route path="/payment" element={<PaymentPage />} />
@@ -31,6 +39,7 @@ function App() {
               <Route path="/qrscan" element={<QrScaner />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/subscription-manager" element={<SubscriptionManager />} />  // Your subscription manager page
             </Route>
           </Routes>
         </Router>
