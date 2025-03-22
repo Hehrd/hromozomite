@@ -14,6 +14,7 @@ import QrScaner from './pages/qrScanPage';
 import AnalyticsPage from './pages/analyticsPage.jsx';
 import Settings from './pages/settings.jsx';
 import SubscriptionManager from './pages/subscriptionManager.jsx';
+import ProtectedRoute from './contexts/protectedRoutes.jsx';
 function App() {
   return (
     <AppProvider>
