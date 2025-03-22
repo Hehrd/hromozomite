@@ -51,4 +51,13 @@ public class UserAccountController {
     public ResponseEntity<String> getUser() {
         return ResponseEntity.ok("User found");
     }
+
+    @RequestMapping(value ="/isloggedin", method = RequestMethod.GET)
+    private ResponseEntity<Boolean> isLoggedIn(@CookieValue(value = "SESSION_STRING") String sessionString) {
+        Boolean isLoggedIn = true;
+        if(sessionString == null) {
+            isLoggedIn = false;
+        }
+        return ResponseEntity.ok(isLoggedIn);
+    }
 }
