@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { AppContext } from "../contexts/appContext.jsx";
 import "./mainLayout.css";
 
@@ -16,6 +16,7 @@ const DropdownMenu = ({ children, show }) => {
 const MainLayout = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { theme, toggleTheme, isLoggedIn, logOut } = useContext(AppContext);
+  const navigate = useNavigate();
 
   // Update the document root's data-theme attribute based on current theme
   useEffect(() => {
@@ -71,19 +72,36 @@ const MainLayout = () => {
             Log Out
           </button>
         ) : (
-          <Link to="/login" className="dropdown-item" onClick={() => setShowDropdown(false)}>
+          <button
+            className="dropdown-item"
+            onClick={() => {
+              navigate("/login");
+              setShowDropdown(false);
+            }}
+          >
             Log In
-          </Link>
+          </button>
         )}
 
-        <Link to="/aboutus" className="dropdown-item" onClick={() => setShowDropdown(false)}>
+        <button
+          className="dropdown-item"
+          onClick={() => {
+            navigate("/aboutus");
+            setShowDropdown(false);
+          }}
+        >
           About Us
-        </Link>
+        </button>
 
-        {/* New Settings Option */}
-        <Link to="/settings" className="dropdown-item" onClick={() => setShowDropdown(false)}>
+        <button
+          className="dropdown-item"
+          onClick={() => {
+            navigate("/settings");
+            setShowDropdown(false);
+          }}
+        >
           Settings
-        </Link>
+        </button>
       </DropdownMenu>
 
       <Outlet />

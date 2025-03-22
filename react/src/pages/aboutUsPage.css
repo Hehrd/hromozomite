@@ -76,7 +76,7 @@
   padding: 20px;
 
   /* Update box background to match the logo icon */
-  background: linear-gradient(135deg, #ff6f61, #ff8e53); /* Replace with the logo's color or gradient */
+  background: linear-gradient(135deg, #16b3ab, #5375ff); /* Replace with the logo's color or gradient */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 
   text-align: center;
