@@ -57,7 +57,7 @@ const QrScaner = () => {
     const paymentData = {
       description,
       date,
-      amount,
+      amount: Number(amount) * 100,
       category,
     };
 
