@@ -25,14 +25,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
 
-            {/* Protected routes */}
-            <Route
-              element={
-                <ProtectedRoute>
-                  <MainLayout />
-                </ProtectedRoute>
-              }
-            >
+            {/* Routes with a shared layout */}
+            <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/transactions" element={<TransactionPage />} />
               <Route path="/payment" element={<PaymentPage />} />
@@ -40,7 +34,7 @@ function App() {
               <Route path="/qrscan" element={<QrScaner />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/subscription-manager" element={<SubscriptionManager />} />  // Your subscription manager page
+              <Route path="/subscription-manager" element={<SubscriptionManager />} />
             </Route>
           </Routes>
         </Router>
