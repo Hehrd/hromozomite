@@ -34,12 +34,9 @@ public class LoadDataService {
     private TransactionRepository transactionRepository;
 
 
-//    public List<SinglePaymentDTO> getPaymentsBetween(Date startDate, Date endDate) {
-//        List<SinglePaymentEntity> payments = loadDataRepository.findByDateBetween(startDate, endDate);
+//    public List<SinglePaymentDTO> getPaymentsBetween(LocalDate startDate, LocalDate endDate) {
+//        List<SinglePaymentEntity> payments = singlePaymentRepository.findByDateBetweenAndUser_Id(startDate, endDate, 5L).orElseThrow(() -> new RuntimeException());
 //
-//        return payments.stream()
-//                .map(payment -> new SinglePaymentDTO(payment.getAmount(), payment.getDate()))
-//                .collect(Collectors.toList());
 //    }
 
     public List<SinglePaymentDTO> getPaymentsByDate(LocalDate date, String sessionString) throws UserNotFoundException {
