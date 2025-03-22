@@ -59,4 +59,11 @@ public class LoadDataController {
                 .status(HttpStatus.OK)
                 .body(loadDataService.getBalance(sessionString));
     }
+    @RequestMapping(value = "/transactions", method = RequestMethod.GET)
+    public ResponseEntity<List<SinglePaymentDTO>> getTransactions(@CookieValue(value = "SESSION_STRING", required = true) String sessionString) throws UserNotFoundException {
+        List<SinglePaymentDTO> singlePaymentDTOS = loadDataService.getTransactions(sessionString);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(singlePaymentDTOS);
+    }
 }
