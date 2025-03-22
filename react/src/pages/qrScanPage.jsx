@@ -4,13 +4,19 @@ import QrReader from 'react-qr-reader';
 import './qrScanPage.css';
 
 const QrScaner = () => {
+  // Get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0]; // Extract only the date part
+  };
+
   // Toggle scanning view & store raw scan result
   const [scanning, setScanning] = useState(true);
   const [scanResult, setScanResult] = useState('');
 
   // Manual form fields (auto-filled from QR when available)
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(getTodayDate()); // Default to today's date
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('Food');
 
@@ -23,8 +29,8 @@ const QrScaner = () => {
       // Example format: 02854258*0278890*2025-03-20*11:56:10*3.30
       const parts = data.split('*');
       if (parts.length >= 5) {
-        const scannedDate = parts[2];    // e.g. "2025-03-20"
-        const scannedAmount = parts[4];  // e.g. "3.30"
+        const scannedDate = parts[2]; // e.g. "2025-03-20"
+        const scannedAmount = parts[4]; // e.g. "3.30"
 
         // Populate form fields
         setDate(scannedDate);
@@ -49,7 +55,7 @@ const QrScaner = () => {
   // Submit data to backend
   const handleAddPayment = () => {
     const paymentData = {
-      // description,
+      description,
       date,
       amount,
       category,

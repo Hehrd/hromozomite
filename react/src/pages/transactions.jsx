@@ -16,7 +16,7 @@ const categories = [
 
 const TransactionTable = () => {
   const [transactions, setTransactions] = useState([]);
-  const [sortConfig, setSortConfig] = useState({ key: "date", direction: "ascending" }); // Default to Date, Ascending
+  const [sortConfig, setSortConfig] = useState({ key: "date", direction: "ascending" });
   const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
@@ -27,9 +27,7 @@ const TransactionTable = () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/transactions`, {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
       const data = await response.json();
       setTransactions(data);
@@ -44,13 +42,16 @@ const TransactionTable = () => {
       direction = "descending";
     }
     setSortConfig({ key, direction });
-
     const sortedTransactions = [...transactions].sort((a, b) => {
       if (a[key] < b[key]) return direction === "ascending" ? -1 : 1;
       if (a[key] > b[key]) return direction === "ascending" ? 1 : -1;
       return 0;
     });
     setTransactions(sortedTransactions);
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
   };
 
   const filteredTransactions = selectedCategory
@@ -61,50 +62,61 @@ const TransactionTable = () => {
     <section className="main-content">
       <div className="container">
         <h1>Transaction History</h1>
-        <table id="transaction-table">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th onClick={() => sortTransactions("date")}>
-                Date
+        <div className="transaction-table">
+          {/* Header Row */}
+          <div className="table-header">
+            <div className="table-row">
+              <div className="table-cell" onClick={() => sortTransactions("description")}>
+                <span>Name</span>
+                {sortConfig.key === "description" && (
+                  <span className={`arrow ${sortConfig.direction === "ascending" ? "up" : "down"}`}></span>
+                )}
+              </div>
+              <div className="table-cell" onClick={() => sortTransactions("date")}>
+                <span>Date</span>
                 {sortConfig.key === "date" && (
                   <span className={`arrow ${sortConfig.direction === "ascending" ? "up" : "down"}`}></span>
                 )}
-              </th>
-              <th onClick={() => sortTransactions("amount")}>
-                Amount
+              </div>
+              <div className="table-cell" onClick={() => sortTransactions("amount")}>
+                <span>Amount</span>
                 {sortConfig.key === "amount" && (
                   <span className={`arrow ${sortConfig.direction === "ascending" ? "up" : "down"}`}></span>
                 )}
-              </th>
-              <th>
-                Category
+              </div>
+              <div className="table-cell" onClick={() => sortTransactions("category")}>
+                {sortConfig.key === "category" && (
+                  <span className={`arrow ${sortConfig.direction === "ascending" ? "up" : "down"}`}></span>
+                )}
                 <select
+                  id="category-filter"
                   value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  onClick={(e) => e.stopPropagation()} // Prevents sort when clicking on the select
+                  onChange={handleCategoryChange}
                   className="category-filter"
                 >
-                  <option value="">All</option>
+                  <option value="">All Categories</option>
                   {categories.map((category) => (
                     <option key={category} value={category}>
                       {category}
                     </option>
                   ))}
                 </select>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+              </div>
+            </div>
+          </div>
+          {/* Body Rows */}
+          <div className="table-body">
             {filteredTransactions.map(transaction => (
-              <tr key={transaction.id}>
-                <td>{transaction.description}</td>
-                <td>{transaction.date}</td>
-                <td>{transaction.amount}</td>
-                <td>{transaction.category}</td>
-              </tr>
+              <div className="table-row" key={transaction.id}>
+                <div className="table-cell">{transaction.description}</div>
+                <div className="table-cell">{transaction.date}</div>
+                <div className="table-cell">{transaction.amount}</div>
+                <div className="table-cell">{transaction.category}</div>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
     </section>
   );
