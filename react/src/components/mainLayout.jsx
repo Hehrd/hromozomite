@@ -39,8 +39,9 @@ const MainLayout = () => {
         </div>
 
         <div className="navbar-center">
-          <Link to="/qrscan" className="navbar-center-element">Enter payment</Link>
+          <Link to="/qrscan" className="navbar-center-element">Enter reciept</Link>
           <Link to="/subscription-manager" className="navbar-center-element">Subscription Management</Link>
+          <Link to="/payment" className="navbar-center-element">Payment account</Link>
         </div>
 
         <div className="navbar-right">

@@ -96,8 +96,9 @@ console.log(balance);
 
       {/* Money Saved - Placeholder content with Balance */}
       <div className="tab-box balance-box">
-        <Link to="/balance" className="tab-link">
-          <h2>Balance</h2>
+        <Link className="tab-link">
+          <h2>Money Saved This Month</h2>
+          <p>Balance: </p> {/* Display balance here */}
           <p className="balance-p">
             ${typeof balance === 'number' ? balance.toFixed(2) / 100 : balance}
           </p>
