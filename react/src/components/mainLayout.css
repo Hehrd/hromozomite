@@ -361,8 +361,19 @@ html {
     color: var(--bg-color);
 }
 
+/* Styling for the Spestissimo text */
 .home-button {
-    font-size: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  background: linear-gradient(to right, #ffffff 50%, #ffa500 50%); /* White to Orange gradient */
+  -webkit-background-clip: text; /* Clip the gradient to the text */
+  -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
+  text-decoration: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.home-button:hover {
+  opacity: 0.8; /* Slight opacity change on hover */
 }
 
 /* ---------------------------------------
