@@ -13,26 +13,39 @@ const BalancePage = () => {
         {/* Current Month Savings Box */}
         <div className="savings-box">
           <h2 className="savings-box-title">This Month</h2>
-          <p className="savings-amount">${currentMonthSavings.toFixed(2)}</p>
+          <p className="savings-amount">
+            ${typeof currentMonthSavings === "number" ? currentMonthSavings.toFixed(2) : "0.00"}
+          </p>
         </div>
 
         {/* Last Month Savings Box */}
         <div className="savings-box">
           <h2 className="savings-box-title">Last Month</h2>
-          <p className="savings-amount">${lastMonthSavings.toFixed(2)}</p>
+          <p className="savings-amount">
+            ${typeof currentMonthSavings === "number" ? currentMonthSavings.toFixed(2) : "0.00"}
+          </p>
         </div>
       </div>
 
       {/* Comparison Message */}
       <div className="comparison-message">
-        {currentMonthSavings > lastMonthSavings ? (
-          <p>You saved <strong>${(currentMonthSavings - lastMonthSavings).toFixed(2)}</strong> more this month compared to last month!</p>
-        ) : currentMonthSavings < lastMonthSavings ? (
-          <p>You saved <strong>${(lastMonthSavings - currentMonthSavings).toFixed(2)}</strong> less this month compared to last month.</p>
+        {typeof currentMonthSavings === 'number' && typeof lastMonthSavings === 'number' ? (
+          currentMonthSavings > lastMonthSavings ? (
+            <p>
+              You saved <strong>${(currentMonthSavings - lastMonthSavings).toFixed(2)}</strong> more this month compared to last month!
+            </p>
+          ) : currentMonthSavings < lastMonthSavings ? (
+            <p>
+              You saved <strong>${(lastMonthSavings - currentMonthSavings).toFixed(2)}</strong> less this month compared to last month.
+            </p>
+          ) : (
+            <p>Your savings are the same as last month!</p>
+          )
         ) : (
-          <p>Your savings are the same as last month!</p>
+          <p>Loading savings data...</p>
         )}
-      </div>    
+      </div>
+
     </div>
   );
 };
