@@ -26,7 +26,9 @@ const Register = () => {
       return;
     }
 
-    if (!captchaToken) {
+    // Bypass reCAPTCHA validation in development mode
+    const isDevelopment = window.location.hostname === 'localhost';
+    if (!isDevelopment && !captchaToken) {
       setError('Please complete the reCAPTCHA.');
       return;
     }
@@ -35,7 +37,7 @@ const Register = () => {
       username,
       email,
       password,
-      captcha: captchaToken,
+      captcha: isDevelopment ? 'bypass-captcha' : captchaToken, // Use a placeholder token in development
     };
 
     fetch(`${import.meta.env.VITE_API_URL}/useraccount/signup`, {
@@ -62,7 +64,6 @@ const Register = () => {
     <div className="register-container">
       <h2>Register</h2>
 
-      {/* Disable autocomplete at the form level */}
       <form
         onSubmit={handleRegister}
         className="register-form"
@@ -72,7 +73,6 @@ const Register = () => {
 
         <div className="form-group">
           <label htmlFor="username">Username:</label>
-          {/* Disable autocomplete for this field */}
           <input
             type="text"
             id="username"
@@ -85,7 +85,6 @@ const Register = () => {
 
         <div className="form-group">
           <label htmlFor="email">Email:</label>
-          {/* Disable autocomplete for this field */}
           <input
             type="email"
             id="email"
@@ -98,7 +97,6 @@ const Register = () => {
 
         <div className="form-group">
           <label htmlFor="password">Password:</label>
-          {/* For password fields, using autoComplete="new-password" is common */}
           <input
             type="password"
             id="password"
@@ -111,7 +109,6 @@ const Register = () => {
 
         <div className="form-group">
           <label htmlFor="confirm-password">Confirm Password:</label>
-          {/* Similarly, you can use new-password here as well */}
           <input
             type="password"
             id="confirm-password"
@@ -122,12 +119,15 @@ const Register = () => {
           />
         </div>
 
-        <div className="form-group">
-          <ReCAPTCHA
-            sitekey={RECAPTCHA_SITE_KEY}
-            onChange={(token) => setCaptchaToken(token)}
-          />
-        </div>
+        {/* Only render reCAPTCHA if not in development mode */}
+        {!window.location.hostname === 'localhost' && (
+          <div className="form-group">
+            <ReCAPTCHA
+              sitekey={RECAPTCHA_SITE_KEY}
+              onChange={(token) => setCaptchaToken(token)}
+            />
+          </div>
+        )}
 
         <button type="submit" className="register-button">
           Register
