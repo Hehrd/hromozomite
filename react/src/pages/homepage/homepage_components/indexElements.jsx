@@ -13,23 +13,23 @@ const IndexElements = () => {
 
   // Fetch balance from the backend
   useEffect(() => {
-    //   const fetchBalance = async () => {
-    //     try {
-    //       const response = await fetch(`${import.meta.env.VITE_API_URL}/useraccount/balance`, {
-    //         method: "GET",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         credentials: "include",
-    //       });
-    //       const data = await response.json();
-    //       setBalance(data.balance); // Assuming the backend sends { balance: <amount> }
-    //     } catch (error) {
-    //       console.error("Error fetching balance:", error);
-    //     }
-    //   };
-    //   fetchBalance();
-
+      const fetchBalance = async () => {
+        try {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/loadData/balance`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          });
+          const data = await response.text();
+          setBalance(Number(data)); // Assuming the backend sends { balance: <amount> }
+        } catch (error) {
+          console.error("Error fetching balance:", error);
+        }
+      };
+      fetchBalance();
+console.log(balance);
     const fetchTransactions = async () => {
       try {
         const response = await fetch(
@@ -83,7 +83,7 @@ const IndexElements = () => {
             <ul>
               {transactions.map((tx, index) => (
                 <li key={index}>
-                  {tx.description} - ${tx.amount}
+                  {tx.description} - ${tx.amount / 100}
                 </li>
               ))}
             </ul>
@@ -96,11 +96,11 @@ const IndexElements = () => {
 
       {/* Money Saved - Placeholder content with Balance */}
       <div className="tab-box balance-box">
-        <Link to="/balance" className="tab-link">
+        <Link className="tab-link">
           <h2>Money Saved This Month</h2>
           <p>Balance: </p> {/* Display balance here */}
           <p className="balance-p">
-            ${typeof balance === 'number' ? balance.toFixed(2) : '0.00'}
+            ${typeof balance === 'number' ? balance.toFixed(2) / 100 : balance}
           </p>
 
         </Link>

@@ -75,8 +75,8 @@
   border-radius: 10px;
   padding: 20px;
 
-  /* Box background uses a gradient (themed) */
-  background: var(--about-us-box-bg);
+  /* Update box background to match the logo icon */
+  background: linear-gradient(135deg, #16b3ab, #5375ff); /* Replace with the logo's color or gradient */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 
   text-align: center;
@@ -100,7 +100,7 @@
 .about-us-box h2 {
   font-size: 1.8rem;
   margin-bottom: 15px;
-  color: var(--about-us-text-color); /* Themed */
+  color: #ffffff; /* Ensure text is readable on the new background */
   min-height: 50px; /* Ensure consistent header space */
   display: flex;
   align-items: center;
@@ -111,13 +111,13 @@
 .about-us-box p {
   font-size: 1.2rem;
   line-height: 1.5;
-  color: var(--about-us-text-color); /* Themed */
+  color: #ffffff; /* Ensure text is readable on the new background */
   flex: 1; /* Paragraph fills remaining box space */
 }
 
 /* Link styling inside the box */
 .about-us-box a {
-  color: var(--about-us-text-color); /* Themed text color */
+  color: #ffffff; /* Ensure link text is readable on the new background */
   text-decoration: underline;
   font-weight: bold;
 }

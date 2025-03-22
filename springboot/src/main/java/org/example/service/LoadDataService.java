@@ -68,6 +68,22 @@ public class LoadDataService {
         return singlePaymentDTOS;
     }
 
+    public List<SinglePaymentDTO> getTransactions(String sessionString) {
+        UserAccountEntity userAccountEntity = userAccountRepository.findBySession_SessionString(sessionString).orElseThrow(() -> new RuntimeException("User not found!"));
+        List<SinglePaymentEntity> singlePaymentEntities = singlePaymentRepository.findLastThreePaymentsByUserId(userAccountEntity.getId());
+        List<SinglePaymentDTO> singlePaymentDTOS = new java.util.ArrayList<>();
+        for (SinglePaymentEntity singlePaymentEntity : singlePaymentEntities) {
+            SinglePaymentDTO singlePaymentDTO = new SinglePaymentDTO();
+            singlePaymentDTO.setAmount(singlePaymentEntity.getAmount());
+            singlePaymentDTO.setDate(singlePaymentEntity.getDate());
+            singlePaymentDTO.setCurrency(singlePaymentEntity.getCurrency());
+            singlePaymentDTO.setCategory(singlePaymentEntity.getDescription());
+            singlePaymentDTOS.add(singlePaymentDTO);
+        }
+
+        return singlePaymentDTOS;
+    }
+
     public Long getBalance(String sessionString) throws UserNotFoundException {
         UserAccountEntity userAccountEntity = userAccountRepository.findBySession_SessionString(sessionString).orElseThrow(() -> new UserNotFoundException("User not found!"));
         List<TransactionEntity> transactionEntities = transactionRepository.findAllByUser_Id(userAccountEntity.getId()).orElseThrow(() -> new RuntimeException("User not found!"));

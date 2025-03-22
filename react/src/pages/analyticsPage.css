@@ -4,7 +4,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start; /* Align content closer to the top */
-  padding: 20px 20px; /* Reduce padding to pull content higher */
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
   background: linear-gradient(
       rgba(13, 13, 13, 0.6),
       rgba(13, 13, 13, 0.6)
@@ -14,6 +17,65 @@
   background-position: center;
   color: #ffffff;
   min-height: 100vh;
+}
+
+/* General container styling */
+.about-us-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-us-container h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Content container styling */
+.about-us-content {
+  display: flex; /* Use flexbox for layout */
+  gap: 20px; /* Add spacing between columns */
+  justify-content: space-between; /* Distribute columns evenly */
+  align-items: stretch; /* Make all columns the same height */
+}
+
+/* Individual box styling */
+.about-us-box {
+  flex: 1; /* Allow each box to take up equal space */
+  background-color: #ffffff; /* White background for boxes */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute content evenly inside the box */
+}
+
+/* Box title styling */
+.about-us-box h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Box paragraph styling */
+.about-us-box p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #333333;
+}
+
+/* Link styling */
+.about-us-box a {
+  color: #007bff; /* Blue color for links */
+  text-decoration: none;
+}
+
+.about-us-box a:hover {
+  text-decoration: underline;
 }
 
 /* Page title styling */
@@ -30,21 +92,38 @@
   min-height: 69px;
 }
 
+/* Grid layout for charts */
+.charts-grid {
+  display: flex; /* Use flexbox for layout */
+  gap: 30px; /* Add more spacing between columns */
+  justify-content: space-between; /* Distribute columns evenly */
+  align-items: stretch; /* Make all charts the same height */
+  width: 100%; /* Ensure the grid takes full width */
+  max-width: 1400px; /* Increase the maximum width for larger charts */
+  margin: 0 auto; /* Center the grid */
+}
+
+/* Column styling */
+.column {
+  flex: 1; /* Allow each column to take up equal space */
+  display: flex;
+  flex-direction: column; /* Stack charts vertically in each column */
+  gap: 30px; /* Add more spacing between charts in the same column */
+}
+
 /* Chart container styling */
 .chart-container {
-  width: 100%;
-  max-width: 800px; /* Limit the width of the chart */
-  height: 400px; /* Set a fixed height for the chart */
-  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  flex: 1; /* Allow the chart to grow and fill available space */
+  background-color: #ffffff; /* White background for charts */
   border: 2px solid #ffffff;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px; /* Add spacing above the chart */
-  animation: slideUp 1s ease-in-out; /* Add slide-up animation */
+  width: 100%; /* Ensure the chart takes full width of the column */
+  height: 400px; /* Increase the height for larger charts */
 }
 
 /* Pie chart container styling */
@@ -152,6 +231,14 @@
 
   .section-content {
     font-size: 1rem; /* Adjust content font size for smaller screens */
+  }
+
+  .charts-grid {
+    flex-direction: column; /* Stack columns vertically on smaller screens */
+  }
+
+  .chart-container {
+    height: auto; /* Adjust height for smaller screens */
   }
 }
 

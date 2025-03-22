@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-
-const categories = [
-  "Food", "Entertainment", "Transport", "Health",
-  "Shopping", "Utilities", "Education", "Rent",
-  "Travel", "Others"
-];
+import {
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+  useStripe,
+  useElements
+} from "@stripe/react-stripe-js";
+import "./paymentPage.css";
 
 function PaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [sum, setSum] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("Food");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -24,74 +22,76 @@ function PaymentForm() {
       setMessage("Stripe has not loaded yet. Please wait.");
       return;
     }
-    if (!sum || !description) {
-      setMessage("Please provide an amount and description.");
+
+    // Ensure a valid amount is entered
+    if (!sum) {
+      setMessage("Please provide an amount.");
       return;
     }
 
     try {
-      // Step 1: Create a PaymentIntent on your backend
+      // 1) Create a PaymentIntent on your backend
       const amountInCents = parseInt(sum, 10) * 100;
-      const intentResponse = await fetch(`${import.meta.env.VITE_API_URL}/stripe/create-payment-intent`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          amount: amountInCents,
-          currency: "usd"
-        }),
-      });
+      const intentResponse = await fetch(
+        `${import.meta.env.VITE_API_URL}/stripe/create-payment-intent`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            amount: amountInCents,
+            currency: "usd"
+          })
+        }
+      );
       const { clientSecret, error } = await intentResponse.json();
       if (error) {
         setMessage(`Server error: ${error}`);
         return;
       }
 
-      // Step 2: Generate a token from the card details
-      const cardElement = elements.getElement(CardElement);
-      const { token, error: tokenError } = await stripe.createToken(cardElement);
+      // 2) Generate a token from the card details
+      const cardNumberElement = elements.getElement(CardNumberElement);
+      const { token, error: tokenError } = await stripe.createToken(cardNumberElement);
       if (tokenError) {
         setMessage(`Token creation failed: ${tokenError.message}`);
         return;
       }
-      
-      // Step 3: Confirm the card payment
+
+      // 3) Confirm the card payment
       const { paymentIntent, error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-          card: cardElement,
+          card: cardNumberElement,
           billing_details: {
-            name: "Test User",
-          },
-        },
+            name: "Test User"
+          }
+        }
       });
 
       if (stripeError) {
         setMessage(`Payment failed: ${stripeError.message}`);
       } else if (paymentIntent && paymentIntent.status === "succeeded") {
-        // Step 4: Prepare the payload according to SinglePaymentDTO
+        // 4) (Optional) Send the payment data to your backend to save
         const payload = {
-          amount: amountInCents,      // long, in cents
-          currency: "usd",            // string currency code
-          date: date,                 // date in YYYY-MM-DD format
-          tokenId: token.id           // the token generated above
+          amount: amountInCents,
+          currency: "usd",
+          tokenId: token.id
         };
-
-        // Send the payment data to your backend
-        const saveResponse = await fetch(`${import.meta.env.VITE_API_URL}/stripe/create-payment-intent`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify(payload),
-        });
+        const saveResponse = await fetch(
+          `${import.meta.env.VITE_API_URL}/stripe/create-payment-intent`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify(payload)
+          }
+        );
 
         if (saveResponse.ok) {
-          setMessage("Payment succeeded and data saved! Thank you for your purchase.");
-          // Reset form fields if needed
+          setMessage("Payment succeeded and data saved!");
           setSum("");
-          setDescription("");
-          setCategory("Food");
         } else {
-          setMessage("Payment succeeded but failed to save payment data.");
+          setMessage("Payment succeeded but saving data failed.");
         }
       }
     } catch (err) {
@@ -101,21 +101,8 @@ function PaymentForm() {
 
   return (
     <div className="payment-container">
-      <h2>Payment with Stripe PaymentIntents</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
-          required
-        />
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-        />
+      <h2>Payment with Stripe</h2>
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <input
           type="number"
           value={sum}
@@ -123,21 +110,29 @@ function PaymentForm() {
           placeholder="Amount (USD)"
           required
         />
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-        <div style={{ margin: "20px 0" }}>
-          <CardElement />
+
+        {/* Split fields for Card Number, Expiry, CVC */}
+        <div className="split-card-element">
+          <div className="form-group">
+            <label>Card Number</label>
+            <CardNumberElement className="stripe-input" />
+          </div>
+          <div className="form-group">
+            <label>Expiry</label>
+            <CardExpiryElement className="stripe-input" />
+          </div>
+          <div className="form-group">
+            <label>CVC</label>
+            <CardCvcElement className="stripe-input" />
+          </div>
         </div>
+
         <button type="submit" disabled={!stripe}>
           Submit Payment
         </button>
       </form>
-      {message && <div style={{ marginTop: "20px" }}>{message}</div>}
+
+      {message && <div className="payment-message">{message}</div>}
     </div>
   );
 }
