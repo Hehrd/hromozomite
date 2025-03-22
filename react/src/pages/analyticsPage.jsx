@@ -1,74 +1,62 @@
-import React from "react";
-import { Line, Pie, Bar } from "react-chartjs-2"; // Import Bar chart
+import React, { useState, useEffect } from "react";
+import { Line, Pie, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
-  BarElement, // Required for Bar chart
+  BarElement,
   Title,
   Tooltip,
   Legend,
-  ArcElement, // Required for Pie chart
+  ArcElement,
 } from "chart.js";
 import "./analyticsPage.css";
 
 // Register Chart.js components
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
 
 const AnalyticsPage = () => {
-  // Sample data for the line chart
+  const [pieData, setPieData] = useState(null);
+
+  // Sample static data for the line chart
   const lineData = {
-    labels: ["2025-03-01", "2025-03-02", "2025-03-03", "2025-03-04", "2025-03-05"], // X-axis labels
+    labels: ["2025-03-01", "2025-03-02", "2025-03-03", "2025-03-04", "2025-03-05"],
     datasets: [
       {
         label: "Transaction Amounts",
-        data: [50, 75, 100, 150, 200], // Y-axis data
-        borderColor: "rgba(75, 192, 192, 1)", // Line color
-        backgroundColor: "rgba(75, 192, 192, 0.2)", // Fill color under the line
-        tension: 0.4, // Smoothness of the line
+        data: [50, 75, 100, 150, 200],
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        tension: 0.4,
       },
     ],
   };
 
-  // Sample data for the pie chart
-  const pieData = {
-    labels: ["Food", "Transport", "Entertainment", "Other"], // Categories
-    datasets: [
-      {
-        label: "Spending Categories",
-        data: [300, 150, 100, 50], // Values for each category
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.6)", // Red
-          "rgba(54, 162, 235, 0.6)", // Blue
-          "rgba(255, 206, 86, 0.6)", // Yellow
-          "rgba(75, 192, 192, 0.6)", // Green
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  // Sample data for the bar chart
+  // Sample static data for the bar chart
   const barData = {
-    labels: ["January", "February", "March", "April", "May"], // X-axis labels
+    labels: ["January", "February", "March", "April", "May"],
     datasets: [
       {
         label: "Monthly Spending",
-        data: [500, 700, 800, 600, 900], // Y-axis data
+        data: [500, 700, 800, 600, 900],
         backgroundColor: [
-          "rgba(255, 99, 132, 0.6)", // Red
-          "rgba(54, 162, 235, 0.6)", // Blue
-          "rgba(255, 206, 86, 0.6)", // Yellow
-          "rgba(75, 192, 192, 0.6)", // Green
-          "rgba(153, 102, 255, 0.6)", // Purple
+          "rgba(255, 99, 132, 0.6)",
+          "rgba(54, 162, 235, 0.6)",
+          "rgba(255, 206, 86, 0.6)",
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(153, 102, 255, 0.6)",
         ],
         borderColor: [
           "rgba(255, 99, 132, 1)",
@@ -88,24 +76,14 @@ const AnalyticsPage = () => {
     plugins: {
       legend: {
         position: "top",
-        labels: {
-          font: {
-            size: 16, // Increase font size for legend labels
-          },
-        },
+        labels: { font: { size: 16 } },
       },
       title: {
         display: true,
         text: "Transaction Trends",
-        font: {
-          size: 24, // Increase font size for the chart title
-        },
+        font: { size: 24 },
       },
-      tooltip: {
-        bodyFont: {
-          size: 14, // Increase font size for tooltips
-        },
-      },
+      tooltip: { bodyFont: { size: 14 } },
     },
   };
 
@@ -114,24 +92,14 @@ const AnalyticsPage = () => {
     plugins: {
       legend: {
         position: "right",
-        labels: {
-          font: {
-            size: 16, // Increase font size for legend labels
-          },
-        },
+        labels: { font: { size: 16 } },
       },
       title: {
         display: true,
         text: "Spending Categories",
-        font: {
-          size: 24, // Increase font size for the chart title
-        },
+        font: { size: 24 },
       },
-      tooltip: {
-        bodyFont: {
-          size: 14, // Increase font size for tooltips
-        },
-      },
+      tooltip: { bodyFont: { size: 14 } },
     },
   };
 
@@ -140,26 +108,51 @@ const AnalyticsPage = () => {
     plugins: {
       legend: {
         position: "top",
-        labels: {
-          font: {
-            size: 16, // Increase font size for legend labels
-          },
-        },
+        labels: { font: { size: 16 } },
       },
       title: {
         display: true,
         text: "Monthly Spending",
-        font: {
-          size: 24, // Increase font size for the chart title
-        },
+        font: { size: 24 },
       },
-      tooltip: {
-        bodyFont: {
-          size: 14, // Increase font size for tooltips
-        },
-      },
+      tooltip: { bodyFont: { size: 14 } },
     },
   };
+
+  // Fetch the pie chart data on component mount
+  useEffect(() => {
+    fetch("http://localhost:6969/loadData/transactions")
+      .then((response) => response.json())
+      .then((data) => {
+        // Assuming the response is a list of JSON objects, for example:
+        // [ { category: "Food", amount: 300 }, { category: "Transport", amount: 150 }, ... ]
+        const labels = data.map((item) => item.category);
+        const amounts = data.map((item) => item.amount);
+        setPieData({
+          labels,
+          datasets: [
+            {
+              label: "Spending Categories",
+              data: amounts,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.6)",
+                "rgba(54, 162, 235, 0.6)",
+                "rgba(255, 206, 86, 0.6)",
+                "rgba(75, 192, 192, 0.6)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        });
+      })
+      .catch((err) => console.error("Error fetching pie chart data:", err));
+  }, []);
 
   return (
     <div className="analytics-container">
@@ -175,7 +168,11 @@ const AnalyticsPage = () => {
         {/* Second Column */}
         <div className="column">
           <div className="chart-container">
-            <Pie data={pieData} options={pieOptions} />
+            {pieData ? (
+              <Pie data={pieData} options={pieOptions} />
+            ) : (
+              <p>Loading pie chart data...</p>
+            )}
           </div>
         </div>
 
