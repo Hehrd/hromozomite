@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller()
+@Controller
 @RequestMapping(value = "/subscription")
 @CrossOrigin(origins = "${host}", allowCredentials = "true")
 public class SubscriptionController {
