@@ -95,7 +95,7 @@ html {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: var(--navbar-bg);
+    background-color: var(--navbar-bg) !important;
     min-height: 60px;
     color: var(--navbar-text);
     display: flex;
@@ -189,7 +189,7 @@ html {
 }
 
 .navbar-center-element:hover {
-  color: #ccc; /* Example hover color */
+  color: #808080; /* Example hover color */
 }
 
 /* Navbar left and right sections */
@@ -361,8 +361,19 @@ html {
     color: var(--bg-color);
 }
 
+/* Styling for the Spestissimo text */
 .home-button {
-    font-size: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  background: linear-gradient(to right, #ffffff 50%, #ffa500 50%); /* White to Orange gradient */
+  -webkit-background-clip: text; /* Clip the gradient to the text */
+  -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
+  text-decoration: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.home-button:hover {
+  opacity: 0.8; /* Slight opacity change on hover */
 }
 
 /* ---------------------------------------
