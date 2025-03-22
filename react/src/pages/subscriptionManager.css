@@ -58,7 +58,6 @@
 
   /* Themed background & shadow */
   background-color: var(--subscription-bg);
-  box-shadow: var(--subscription-container-shadow);
 
   border-radius: 10px;
   color: var(--subscription-text-color);
