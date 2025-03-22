@@ -1,28 +1,85 @@
-/* General container styling */
+/* ------------------------------------------------------------------
+   1) THEME VARIABLES
+      - Dark Mode (default)
+      - Light Mode (data-theme="light")
+------------------------------------------------------------------ */
+:root {
+  /* DARK MODE (default) */
+  --subscription-bg: #1a1a1a;
+  --subscription-text-color: #ffffff;
+  --subscription-container-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+  /* Buttons: Purple gradient (dark mode) */
+  --subscription-button-grad-start: #6f32be;
+  --subscription-button-grad-middle: #8f52de;
+  --subscription-button-grad-hover-start: #8f52de;
+  --subscription-button-grad-hover-end: #ab73ee;
+
+  /* Box background (e.g., for add-subscription-menu) */
+  --subscription-box-bg: #2c2c2c;
+  --subscription-input-bg: #444444;
+  --subscription-input-border: #666666;
+
+  /* Subscription item background */
+  --subscription-item-bg: #3a3a3a;
+  --subscription-cost-color: #d8b6ff; /* e.g., a lighter purple for cost */
+}
+
+:root[data-theme="light"] {
+  /* LIGHT MODE */
+  --subscription-bg: #f9f9f9;
+  --subscription-text-color: #000000;
+  --subscription-container-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  /* Buttons: Keep same purple gradient or choose different */
+  --subscription-button-grad-start: #6f32be;
+  --subscription-button-grad-middle: #8f52de;
+  --subscription-button-grad-hover-start: #8f52de;
+  --subscription-button-grad-hover-end: #ab73ee;
+
+  /* Box background (e.g., for add-subscription-menu) */
+  --subscription-box-bg: #ffffff;
+  --subscription-input-bg: #ffffff;
+  --subscription-input-border: #cccccc;
+
+  /* Subscription item background */
+  --subscription-item-bg: #f1f1f1;
+  --subscription-cost-color: #6f32be; /* Purple text for cost */
+}
+
+/* ------------------------------------------------------------------
+   2) GENERAL CONTAINER STYLING
+------------------------------------------------------------------ */
 .subscription-manager-container {
   padding: 20px;
   max-width: 600px;
   margin: 0 auto;
   text-align: center;
-  background-color: #f9f9f9;
+
+  /* Themed background & shadow */
+  background-color: var(--subscription-bg);
+
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: var(--subscription-text-color);
 }
 
-/* Title styling */
+/* ------------------------------------------------------------------
+   3) TITLE & COUNT STYLING
+------------------------------------------------------------------ */
 .subscription-title {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-/* Subscription count styling */
 .subscription-count {
   font-size: 1.2rem;
   margin-bottom: 20px;
 }
 
-/* Action buttons styling */
+/* ------------------------------------------------------------------
+   4) ACTION BUTTONS STYLING
+------------------------------------------------------------------ */
 .subscription-actions {
   display: flex;
   justify-content: center;
@@ -35,7 +92,13 @@
   font-size: 1rem;
   font-weight: bold;
   color: #ffffff;
-  background: linear-gradient(135deg, #6f32be, #8f52de);
+
+  /* Use themed gradient for background */
+  background: linear-gradient(
+    135deg,
+    var(--subscription-button-grad-start),
+    var(--subscription-button-grad-middle)
+  );
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -43,36 +106,50 @@
 }
 
 .subscription-button:hover {
-  background: linear-gradient(135deg, #8f52de, #ab73ee);
+  background: linear-gradient(
+    135deg,
+    var(--subscription-button-grad-hover-start),
+    var(--subscription-button-grad-hover-end)
+  );
 }
 
-/* Add subscription menu styling */
+/* ------------------------------------------------------------------
+   5) ADD SUBSCRIPTION MENU STYLING
+------------------------------------------------------------------ */
 .add-subscription-menu {
-  background-color: #ffffff;
+  background-color: var(--subscription-box-bg);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--subscription-container-shadow);
   margin-bottom: 20px;
+
+  /* Stack items vertically, center them */
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center align input boxes and buttons */
+  flex-direction: column;
+  align-items: center;
 }
 
 .menu-title {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 15px;
+  color: var(--subscription-text-color);
 }
 
 .menu-input {
-  width: 80%; /* Ensure both input boxes have the same width */
+  width: 80%; 
   padding: 10px;
   margin: 10px 0;
   font-size: 1rem;
-  border: 2px solid #cccccc;
+
+  /* Themed input colors */
+  background-color: var(--subscription-input-bg);
+  color: var(--subscription-text-color);
+  border: 2px solid var(--subscription-input-border);
+
   border-radius: 5px;
   outline: none;
-  box-sizing: border-box; /* Include padding and border in width */
+  box-sizing: border-box;
 }
 
 .menu-button {
@@ -80,7 +157,13 @@
   font-size: 1rem;
   font-weight: bold;
   color: #ffffff;
-  background: linear-gradient(135deg, #6f32be, #8f52de);
+
+  /* Use the same gradient as subscription-button */
+  background: linear-gradient(
+    135deg,
+    var(--subscription-button-grad-start),
+    var(--subscription-button-grad-middle)
+  );
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -89,30 +172,37 @@
 }
 
 .menu-button:hover {
-  background: linear-gradient(135deg, #8f52de, #ab73ee);
+  background: linear-gradient(
+    135deg,
+    var(--subscription-button-grad-hover-start),
+    var(--subscription-button-grad-hover-end)
+  );
 }
 
-/* Subscription list styling */
+/* ------------------------------------------------------------------
+   6) SUBSCRIPTION LIST & ITEM STYLING
+------------------------------------------------------------------ */
 .subscription-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Subscription item styling */
 .subscription-item {
   font-size: 1.2rem;
   margin: 10px 0;
   padding: 10px;
-  background-color: #f1f1f1;
+
+  /* Themed item background + text color */
+  background-color: var(--subscription-item-bg);
+  color: var(--subscription-text-color);
+
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--subscription-container-shadow);
   text-align: left;
-  color: #000000; /* Set text color to black */
 }
 
-/* Subscription cost styling */
 .subscription-cost {
   font-weight: bold;
-  color: #6f32be; /* Purple color for cost */
+  color: var(--subscription-cost-color);
 }

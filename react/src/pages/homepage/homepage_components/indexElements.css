@@ -93,11 +93,11 @@
     transform: translateY(-5px);
     z-index: 1;
   }
-  
   /* Title styling inside each box */
   .tab-box .tab-link h2 {
     font-size: 1.8rem;
     color: var(--box-text-color);
+    min-height: fit-content;
   }
   ul{
     font-size: 2rem;
