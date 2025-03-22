@@ -19,26 +19,25 @@
 /* Savings comparison container */
 .savings-comparison {
   display: flex;
-  justify-content: center; /* Center the boxes horizontally */
-  gap: 20px; /* Add spacing between the boxes */
-  margin-bottom: 30px;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
 /* Savings box styling */
 .savings-box {
-  background-color: #6f32be; /* Purple background */
-  color: #ffffff; /* White text */
-  padding: 20px 30px; /* Adjust padding for dynamic sizing */
-  border-radius: 15px; /* Rounded corners */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Add a stronger shadow */
-  display: inline-block; /* Allow the box to fit its content */
+  background: linear-gradient(135deg, #ff6f61, #ff8e53); /* Match the icon image color */
+  color: #ffffff; /* White text for contrast */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  width: 45%; /* Adjust width for consistent sizing */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .savings-box:hover {
   transform: scale(1.05); /* Slightly enlarge on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .savings-box-title {
@@ -50,7 +49,7 @@
 .savings-amount {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #ffcc00; /* Gold color for the savings amount */
+  color: #ffffff; /* Ensure the amount is readable */
 }
 
 /* Comparison message styling */
