@@ -11,4 +11,5 @@ public class SinglePaymentDTO {
     private Long amount;
     private String currency;
     private LocalDate date;
+    private String category;
 }

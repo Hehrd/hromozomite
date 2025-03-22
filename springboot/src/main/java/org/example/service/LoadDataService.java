@@ -77,6 +77,7 @@ public class LoadDataService {
             singlePaymentDTO.setAmount(singlePaymentEntity.getAmount());
             singlePaymentDTO.setDate(singlePaymentEntity.getDate());
             singlePaymentDTO.setCurrency(singlePaymentEntity.getCurrency());
+            singlePaymentDTO.setCategory(singlePaymentEntity.getDescription());
             singlePaymentDTOS.add(singlePaymentDTO);
         }
 
