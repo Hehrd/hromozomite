@@ -84,6 +84,9 @@ const Settings = () => {
           <div className="modal">
             <div className="modal-header">
               <h2 className="modal-title">Savings Calculator</h2>
+              <button className="modal-exit-button" onClick={closeModal}>
+
+              </button>
             </div>
             <p className="modal-content">Enter your monthly income:</p>
             <input
@@ -120,6 +123,13 @@ const Settings = () => {
                 </p>
               </div>
             )}
+
+            {/* Close Button */}
+            <div className="modal-button-container">
+              <button className="modal-close-button" onClick={closeModal}>
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -130,6 +140,9 @@ const Settings = () => {
           <div className="modal">
             <div className="modal-header">
               <h2 className="modal-title">Eligibility Check</h2>
+              <button className="modal-exit-button" onClick={closeEligibilityModal}>
+                ✖
+              </button>
             </div>
             <p className="modal-content">Select your skill level:</p>
             <div className="radio-group">
@@ -167,6 +180,9 @@ const Settings = () => {
           <div className="modal">
             <div className="modal-header">
               <h2 className="modal-title">Income Type</h2>
+              <button className="modal-exit-button" onClick={closeIncomeTypeModal}>
+                ✖
+              </button>
             </div>
             <p className="modal-content">Select your income type:</p>
             <div className="radio-group">
